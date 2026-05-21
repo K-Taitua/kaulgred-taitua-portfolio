@@ -1,15 +1,17 @@
 import sqlite3
-import pandas as pd
 
 try:
     conn = sqlite3.connect("retail_checkout.db")
+    cursor = conn.cursor()
 
-    query = "SELECT * FROM Products"
-    df_products = pd.read_sql_query(query, conn)
+    cursor.execute("SELECT * FROM Products")
+    products = cursor.fetchall()
 
     print("RETAIL INVENTORY DASHBOARD")
     print("\nCurrent Products:\n")
-    print(df_products)
+
+    for product in products:
+        print(product)
 
     conn.close()
 
