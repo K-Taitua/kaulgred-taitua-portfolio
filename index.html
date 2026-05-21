@@ -17,8 +17,6 @@ body{
     overflow:hidden;
 }
 
-/* LEFT CHECKOUT PANEL */
-
 .checkout-panel{
     width:320px;
     height:100vh;
@@ -98,8 +96,6 @@ body{
     margin-top:8px;
 }
 
-/* MAIN DASHBOARD */
-
 .main{
     flex:1;
     padding:18px;
@@ -117,8 +113,6 @@ body{
     margin:0 0 12px;
     font-size:14px;
 }
-
-/* DASHBOARD CARDS */
 
 .cards{
     display:grid;
@@ -146,8 +140,6 @@ body{
     font-weight:bold;
 }
 
-/* MESSAGE */
-
 .message-box{
     background:#e9f7ef;
     border-left:5px solid #1f9d55;
@@ -157,8 +149,6 @@ body{
     font-weight:bold;
     font-size:14px;
 }
-
-/* SUMMARY PANELS */
 
 .summary-grid{
     display:grid;
@@ -185,8 +175,6 @@ body{
     font-size:14px;
     line-height:1.6;
 }
-
-/* SEARCH + TABLE */
 
 .toolbar{
     background:white;
@@ -234,6 +222,11 @@ th,td{
     font-weight:bold;
 }
 
+.out{
+    color:#222;
+    font-weight:bold;
+}
+
 button{
     background:#1d8cf8;
     color:white;
@@ -255,37 +248,24 @@ button:hover{
 <div class="container">
 
     <div class="checkout-panel">
-
         <h2>Checkout</h2>
-
         <p>Select products to add them to the current sale.</p>
 
         <div id="productList"></div>
 
         <div class="cart-box">
-
             <h3>Current Cart</h3>
-
             <div id="cartItems">No items added.</div>
-
             <h3>Total: $<span id="cartTotal">0.00</span></h3>
-
-            <button class="checkout-button" onclick="completeCheckout()">
-                Complete Checkout
-            </button>
-
+            <button class="checkout-button" onclick="completeCheckout()">Complete Checkout</button>
         </div>
-
     </div>
 
     <div class="main">
-
         <h1>Retail Inventory Dashboard</h1>
-
         <p class="note">Live checkout and inventory tracking dashboard.</p>
 
         <div class="cards">
-
             <div class="card">
                 <h3>Products</h3>
                 <p id="totalProducts">0</p>
@@ -297,8 +277,8 @@ button:hover{
             </div>
 
             <div class="card">
-                <h3>Inventory Value</h3>
-                <p>$<span id="inventoryValue">0</span></p>
+                <h3>Low Stock</h3>
+                <p id="lowStockCount">0</p>
             </div>
 
             <div class="card">
@@ -315,7 +295,6 @@ button:hover{
                 <h3>Total Sales</h3>
                 <p>$<span id="totalSales">0.00</span></p>
             </div>
-
         </div>
 
         <div class="message-box" id="systemMessage">
@@ -323,45 +302,36 @@ button:hover{
         </div>
 
         <div class="summary-grid">
-
             <div class="summary-box">
-
-                <div class="summary-title">CHECKOUT SUMMARY</div>
-
+                <div class="summary-title">CURRENT CHECKOUT</div>
                 <div class="summary-content">
-                    Current Cart Items:
+                    Cart Items:
                     <strong id="cartItemCount">0</strong><br>
 
                     Last Checkout:
                     <strong id="lastCheckout">No sales yet</strong><br>
 
-                    Most Sold Product:
-                    <strong id="mostSoldProduct">None</strong>
+                    Last Sale Value:
+                    <strong>$<span id="lastSaleValue">0.00</span></strong>
                 </div>
-
             </div>
 
             <div class="summary-box">
-
-                <div class="summary-title">INVENTORY SUMMARY</div>
-
+                <div class="summary-title">INVENTORY ALERTS</div>
                 <div class="summary-content">
-                    Highest Value Product:
-                    <strong id="highestValueProduct"></strong><br>
-
                     Lowest Stock Product:
                     <strong id="lowestStockProduct"></strong><br>
+
+                    Out of Stock Products:
+                    <strong id="outOfStockCount">0</strong><br>
 
                     Products Available:
                     <strong id="productsAvailable"></strong>
                 </div>
-
             </div>
-
         </div>
 
         <div class="toolbar">
-
             <strong>Inventory Product List</strong>
 
             <input
@@ -370,13 +340,10 @@ button:hover{
                 placeholder="Search products..."
                 onkeyup="searchProducts(this.value)"
             >
-
         </div>
 
         <div class="table-panel">
-
             <table>
-
                 <thead>
                     <tr>
                         <th>Product</th>
@@ -388,11 +355,8 @@ button:hover{
                 </thead>
 
                 <tbody id="inventoryTable"></tbody>
-
             </table>
-
         </div>
-
     </div>
 
 </div>
@@ -410,6 +374,7 @@ let cart = [];
 let totalSales = 0;
 let salesCompleted = 0;
 let lastCheckout = "No sales yet";
+let lastSaleValue = 0;
 
 function loadDashboard(){
     loadProducts();
@@ -446,9 +411,15 @@ function loadTable(filteredProducts = products){
     table.innerHTML = "";
 
     filteredProducts.forEach(product=>{
-        let status = product.stock <= 2
-            ? "<span class='low'>Low Stock</span>"
-            : "<span class='ok'>In Stock</span>";
+        let status = "";
+
+        if(product.stock === 0){
+            status = "<span class='out'>Out of Stock</span>";
+        }else if(product.stock <= 5){
+            status = "<span class='low'>Low Stock</span>";
+        }else{
+            status = "<span class='ok'>In Stock</span>";
+        }
 
         table.innerHTML += `
         <tr>
@@ -516,28 +487,27 @@ function updateCart(){
 function updateCards(){
     let totalProducts = products.length;
     let totalStock = products.reduce((sum,p)=>sum+p.stock,0);
-    let inventoryValue = products.reduce((sum,p)=>sum+(p.price*p.stock),0);
+    let lowStock = products.filter(p=>p.stock > 0 && p.stock <= 5).length;
 
     document.getElementById("totalProducts").textContent = totalProducts;
     document.getElementById("totalStock").textContent = totalStock;
-    document.getElementById("inventoryValue").textContent = inventoryValue.toLocaleString();
+    document.getElementById("lowStockCount").textContent = lowStock;
     document.getElementById("salesCompleted").textContent = salesCompleted;
     document.getElementById("totalSales").textContent = totalSales.toFixed(2);
 }
 
 function updateSummary(){
-    document.getElementById("cartItemCount").textContent = cart.length;
-    document.getElementById("lastCheckout").textContent = lastCheckout;
-
-    let highest = [...products].sort((a,b)=>b.price-a.price)[0];
+    let cartItemTotal = cart.reduce((sum,item)=>sum+item.quantity,0);
     let lowest = [...products].sort((a,b)=>a.stock-b.stock)[0];
     let available = products.filter(p=>p.stock > 0).length;
-    let mostSold = [...products].sort((a,b)=>b.sold-a.sold)[0];
+    let outOfStock = products.filter(p=>p.stock === 0).length;
 
-    document.getElementById("highestValueProduct").textContent = highest.name;
+    document.getElementById("cartItemCount").textContent = cartItemTotal;
+    document.getElementById("lastCheckout").textContent = lastCheckout;
+    document.getElementById("lastSaleValue").textContent = lastSaleValue.toFixed(2);
     document.getElementById("lowestStockProduct").textContent = lowest.name;
     document.getElementById("productsAvailable").textContent = available;
-    document.getElementById("mostSoldProduct").textContent = mostSold.sold > 0 ? mostSold.name : "None";
+    document.getElementById("outOfStockCount").textContent = outOfStock;
 }
 
 function completeCheckout(){
@@ -550,6 +520,7 @@ function completeCheckout(){
 
     totalSales += saleTotal;
     salesCompleted++;
+    lastSaleValue = saleTotal;
     lastCheckout = new Date().toLocaleTimeString();
 
     cart = [];
