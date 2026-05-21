@@ -2,15 +2,45 @@
 <html>
 <head>
   <title>Kaulgred Taitua Portfolio</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f4f6f8; }
+    .sidebar { width: 230px; height: 100vh; background: #162435; color: white; position: fixed; padding: 25px; }
+    .sidebar h2 { color: #6ec6e8; }
+    .main { margin-left: 280px; padding: 30px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px; }
+    .card, .project { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 1px 4px #ccc; }
+    .section-title { background: #6ec6e8; padding: 12px; border-radius: 10px 10px 0 0; font-weight: bold; }
+    .project { border-radius: 0 0 10px 10px; }
+    a { color: #0366d6; font-weight: bold; text-decoration: none; }
+  </style>
 </head>
 <body>
-  <h1>Kaulgred Taitua</h1>
-  <p>Information Technology | Cloud Computing | Cybersecurity</p>
+  <div class="sidebar">
+    <h2>Kaulgred Taitua</h2>
+    <p>Information Technology</p>
+    <p>Cloud Computing</p>
+    <p>Cybersecurity</p>
+  </div>
 
-  <h2>Projects</h2>
+  <div class="main">
+    <h1>IT Project Portfolio</h1>
 
-  <h3>KiwiSaver Lump Sum Investment Calculator</h3>
-  <p>A Python programme that calculates projected KiwiSaver growth using compound interest.</p>
-  <a href="kiwisaver-calculator/">View Project</a>
+    <div class="cards">
+      <div class="card"><strong>Total Projects:</strong><br>1</div>
+      <div class="card"><strong>Focus:</strong><br>Programming</div>
+      <div class="card"><strong>Status:</strong><br>In Progress</div>
+    </div>
+
+    <div class="section-title">PROJECT OVERVIEW</div>
+    <div class="project">
+      <h3>KiwiSaver Lump Sum Investment Calculator</h3>
+      <p>A Python programme that calculates projected KiwiSaver growth using compound interest.</p>
+      <p><strong>Skills:</strong> Python, input validation, loops, conditions, testing, documentation</p>
+      <p>
+        <a href="kiwisaver-calculator/">View Project README</a> |
+        <a href="https://github.com/K-Taitua/kaulgred-taitua-portfolio/tree/main/kiwisaver-calculator">View Code on GitHub</a>
+      </p>
+    </div>
+  </div>
 </body>
 </html>
