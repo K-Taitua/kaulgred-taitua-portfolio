@@ -16,126 +16,144 @@ body {
   min-height: 100vh;
 }
 
-.sidebar {
-  width: 300px;
+.checkout-panel {
+  width: 330px;
   background: #10233f;
   color: white;
-  padding: 25px;
+  padding: 20px;
 }
 
-.sidebar h2 {
+.checkout-panel h2 {
   color: #69c9ff;
-  margin-bottom: 10px;
+  margin-top: 0;
 }
 
-.product-button {
+.product-card {
   background: white;
   color: #111;
   padding: 12px;
   border-radius: 10px;
-  margin: 10px 0;
+  margin-bottom: 10px;
 }
 
-.product-button button {
-  margin-top: 8px;
-  width: 100%;
+.product-card strong {
+  font-size: 16px;
 }
 
-.main {
-  flex: 1;
-  padding: 30px;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-  margin-bottom: 25px;
-}
-
-.card, .panel {
-  background: white;
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-}
-
-.card h3 {
-  margin: 0;
+.product-card small {
   color: #555;
-}
-
-.card p {
-  font-size: 30px;
-  font-weight: bold;
-  margin: 10px 0 0;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  margin-bottom: 25px;
-}
-
-.section-title {
-  background: #69c9ff;
-  padding: 12px;
-  font-weight: bold;
-  border-radius: 12px 12px 0 0;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th, td {
-  padding: 12px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
 }
 
 button {
   background: #1d8cf8;
   color: white;
   border: none;
-  padding: 9px 14px;
-  border-radius: 7px;
+  padding: 8px 10px;
+  border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
 }
 
-button:hover {
-  background: #0f6fc7;
+.product-card button {
+  width: 100%;
+  margin-top: 8px;
 }
 
-.checkout {
+.checkout-button {
   background: #1f9d55;
   width: 100%;
-  margin-top: 15px;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.cart-box {
+  background: white;
+  color: #111;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 18px;
 }
 
 .cart-item {
   border-bottom: 1px solid #ddd;
-  padding: 10px 0;
+  padding: 7px 0;
+  font-size: 14px;
 }
 
-.bar-bg {
-  background: #e9eef5;
-  border-radius: 8px;
-  margin: 10px 0 16px;
+.main {
+  flex: 1;
+  padding: 25px;
 }
 
-.bar {
+.main h1 {
+  margin-top: 0;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 7px rgba(0,0,0,0.12);
+}
+
+.card h3 {
+  margin: 0;
+  color: #555;
+  font-size: 15px;
+}
+
+.card p {
+  font-size: 26px;
+  font-weight: bold;
+  margin: 8px 0 0;
+}
+
+.section-title {
   background: #69c9ff;
-  height: 18px;
-  border-radius: 8px;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 10px 10px 0 0;
+}
+
+.panel {
+  background: white;
+  padding: 16px;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 7px rgba(0,0,0,0.12);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
 }
 
 .low {
   color: #d9534f;
   font-weight: bold;
+}
+
+.ok {
+  color: #1f9d55;
+  font-weight: bold;
+}
+
+.note {
+  font-size: 14px;
+  color: #555;
 }
 </style>
 </head>
@@ -144,52 +162,47 @@ button:hover {
 
 <div class="container">
 
-  <div class="sidebar">
+  <div class="checkout-panel">
     <h2>Checkout Product List</h2>
-    <p>Select products to add them to the current checkout cart.</p>
-    <div id="quickProducts"></div>
+    <p>Select products to add them to the current cart.</p>
+
+    <div id="productList"></div>
+
+    <div class="cart-box">
+      <h3>Current Cart</h3>
+      <div id="cartItems">No items added.</div>
+      <h3>Total: $<span id="cartTotal">0.00</span></h3>
+      <button class="checkout-button" onclick="completeCheckout()">Complete Checkout</button>
+    </div>
   </div>
 
   <div class="main">
     <h1>Retail Inventory Dashboard</h1>
-    <p>Products can be added to the cart, stock levels update live, and completed sales are tracked.</p>
+    <p class="note">This dashboard shows live inventory, cart totals, and completed checkout activity.</p>
 
     <div class="cards">
       <div class="card">
         <h3>Total Products</h3>
         <p id="totalProducts">0</p>
       </div>
+
       <div class="card">
         <h3>Total Stock</h3>
         <p id="totalStock">0</p>
       </div>
+
       <div class="card">
         <h3>Cart Total</h3>
         <p>$<span id="cartTotalCard">0.00</span></p>
       </div>
+
       <div class="card">
         <h3>Sales Completed</h3>
         <p id="salesCompleted">0</p>
       </div>
     </div>
 
-    <div class="grid">
-      <div>
-        <div class="section-title">CHECKOUT CART</div>
-        <div class="panel">
-          <div id="cartItems">No items added.</div>
-          <h2>Total: $<span id="cartTotal">0.00</span></h2>
-          <button class="checkout" onclick="checkout()">Complete Checkout</button>
-        </div>
-      </div>
-
-      <div>
-        <div class="section-title">STOCK LEVEL OVERVIEW</div>
-        <div class="panel" id="stockChart"></div>
-      </div>
-    </div>
-
-    <div class="section-title">INVENTORY TABLE</div>
+    <div class="section-title">INVENTORY SUMMARY</div>
     <div class="panel">
       <table>
         <thead>
@@ -204,43 +217,40 @@ button:hover {
         <tbody id="inventoryTable"></tbody>
       </table>
     </div>
-
   </div>
+
 </div>
 
 <script>
 let products = [
-  { name: "USB-C Charger", category: "Accessories", price: 29.99, stock: 12 },
-  { name: "Wireless Mouse", category: "Accessories", price: 24.50, stock: 15 },
+  { name: "USB-C Charger", category: "Accessories", price: 29.99, stock: 10 },
+  { name: "Wireless Mouse", category: "Accessories", price: 24.50, stock: 12 },
   { name: "Bluetooth Keyboard", category: "Accessories", price: 49.99, stock: 8 },
-  { name: "HDMI Cable", category: "Cables", price: 14.99, stock: 20 },
-  { name: "Laptop Sleeve", category: "Bags", price: 34.00, stock: 6 },
-  { name: "Power Bank", category: "Portable Power", price: 59.99, stock: 10 },
-  { name: "Webcam", category: "Computer Accessories", price: 79.00, stock: 5 },
-  { name: "USB Flash Drive", category: "Storage", price: 18.99, stock: 25 }
+  { name: "HDMI Cable", category: "Cables", price: 14.99, stock: 15 },
+  { name: "Power Bank", category: "Portable Power", price: 59.99, stock: 6 }
 ];
 
 let cart = [];
 let salesCompleted = 0;
 
 function loadDashboard() {
-  loadQuickProducts();
+  loadProductList();
   loadInventoryTable();
-  loadStockChart();
-  updateCards();
   updateCart();
+  updateCards();
 }
 
-function loadQuickProducts() {
-  let area = document.getElementById("quickProducts");
-  area.innerHTML = "";
+function loadProductList() {
+  let productList = document.getElementById("productList");
+  productList.innerHTML = "";
 
   products.forEach((product, index) => {
-    area.innerHTML += `
-      <div class="product-button">
+    productList.innerHTML += `
+      <div class="product-card">
         <strong>${product.name}</strong><br>
-        $${product.price.toFixed(2)}<br>
-        Stock: ${product.stock}
+        <small>${product.category}</small><br>
+        Price: $${product.price.toFixed(2)}<br>
+        Stock: ${product.stock}<br>
         <button onclick="addToCart(${index})">Add to Cart</button>
       </div>
     `;
@@ -252,7 +262,9 @@ function loadInventoryTable() {
   table.innerHTML = "";
 
   products.forEach(product => {
-    let status = product.stock <= 5 ? "<span class='low'>Low Stock</span>" : "In Stock";
+    let status = product.stock <= 5
+      ? "<span class='low'>Low Stock</span>"
+      : "<span class='ok'>In Stock</span>";
 
     table.innerHTML += `
       <tr>
@@ -264,33 +276,6 @@ function loadInventoryTable() {
       </tr>
     `;
   });
-}
-
-function loadStockChart() {
-  let chart = document.getElementById("stockChart");
-  chart.innerHTML = "";
-
-  products.forEach(product => {
-    let width = product.stock * 4;
-
-    chart.innerHTML += `
-      <strong>${product.name} (${product.stock})</strong>
-      <div class="bar-bg">
-        <div class="bar" style="width:${width}px"></div>
-      </div>
-    `;
-  });
-}
-
-function updateCards() {
-  let totalProducts = products.length;
-  let totalStock = products.reduce((sum, product) => sum + product.stock, 0);
-  let cartTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-  document.getElementById("totalProducts").textContent = totalProducts;
-  document.getElementById("totalStock").textContent = totalStock;
-  document.getElementById("cartTotalCard").textContent = cartTotal.toFixed(2);
-  document.getElementById("salesCompleted").textContent = salesCompleted;
 }
 
 function addToCart(index) {
@@ -332,17 +317,26 @@ function updateCart() {
       cartArea.innerHTML += `
         <div class="cart-item">
           <strong>${item.name}</strong><br>
-          Quantity: ${item.quantity}<br>
-          Line Total: $${lineTotal.toFixed(2)}
+          Qty: ${item.quantity} | $${lineTotal.toFixed(2)}
         </div>
       `;
     });
   }
 
   document.getElementById("cartTotal").textContent = total.toFixed(2);
+  document.getElementById("cartTotalCard").textContent = total.toFixed(2);
 }
 
-function checkout() {
+function updateCards() {
+  let totalProducts = products.length;
+  let totalStock = products.reduce((sum, product) => sum + product.stock, 0);
+
+  document.getElementById("totalProducts").textContent = totalProducts;
+  document.getElementById("totalStock").textContent = totalStock;
+  document.getElementById("salesCompleted").textContent = salesCompleted;
+}
+
+function completeCheckout() {
   if (cart.length === 0) {
     alert("No items in the cart.");
     return;
@@ -352,7 +346,7 @@ function checkout() {
   cart = [];
   loadDashboard();
 
-  alert("Checkout completed. Stock and dashboard totals have been updated.");
+  alert("Checkout completed. Inventory and sales totals have been updated.");
 }
 
 loadDashboard();
