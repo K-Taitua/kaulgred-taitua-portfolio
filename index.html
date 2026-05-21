@@ -5,179 +5,238 @@
 <title>Retail Inventory Dashboard</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
 }
 
-.container {
-  display: flex;
-  height: 100vh;
+.container{
+    display:flex;
+    height:100vh;
 }
 
-.checkout-panel {
-  width: 300px;
-  background: #10233f;
-  color: white;
-  padding: 18px;
-  box-sizing: border-box;
+/* LEFT PANEL */
+
+.checkout-panel{
+    width:320px;
+    background:#10233f;
+    color:white;
+    padding:18px;
+    box-sizing:border-box;
 }
 
-.checkout-panel h2 {
-  color: #69c9ff;
-  margin: 0 0 8px;
+.checkout-panel h2{
+    color:#69c9ff;
+    margin-top:0;
 }
 
-.checkout-panel p {
-  font-size: 14px;
-  margin-bottom: 12px;
+.checkout-panel p{
+    font-size:14px;
+    margin-bottom:12px;
 }
 
-.product-row {
-  background: white;
-  color: #111;
-  padding: 9px;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 8px;
-  align-items: center;
-  font-size: 14px;
+.product-row{
+    background:white;
+    color:#111;
+    border-radius:8px;
+    padding:10px;
+    margin-bottom:8px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:10px;
+    align-items:center;
 }
 
-.product-row strong {
-  font-size: 15px;
+.product-row strong{
+    font-size:15px;
 }
 
-.product-row small {
-  color: #555;
+.product-row small{
+    color:#666;
 }
 
-button {
-  background: #1d8cf8;
-  color: white;
-  border: none;
-  padding: 7px 9px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
+.product-row button{
+    width:42px;
+    height:42px;
+    font-size:18px;
 }
 
-.checkout-button {
-  background: #1f9d55;
-  width: 100%;
-  margin-top: 8px;
-  padding: 9px;
+.cart-box{
+    background:white;
+    color:#111;
+    padding:12px;
+    border-radius:8px;
+    margin-top:12px;
 }
 
-.cart-box {
-  background: white;
-  color: #111;
-  padding: 10px;
-  border-radius: 8px;
-  margin-top: 12px;
-  font-size: 14px;
+.cart-box h3{
+    margin-top:0;
 }
 
-.cart-box h3 {
-  margin: 0 0 8px;
+.cart-item{
+    border-bottom:1px solid #ddd;
+    padding:6px 0;
+    font-size:14px;
 }
 
-.cart-item {
-  border-bottom: 1px solid #ddd;
-  padding: 5px 0;
+.checkout-button{
+    width:100%;
+    background:#1f9d55;
+    margin-top:10px;
 }
 
-.main {
-  flex: 1;
-  padding: 22px;
-  box-sizing: border-box;
+/* MAIN AREA */
+
+.main{
+    flex:1;
+    padding:20px;
+    box-sizing:border-box;
 }
 
-.main h1 {
-  margin: 0;
-  font-size: 34px;
+.main h1{
+    margin-top:0;
+    margin-bottom:6px;
+    font-size:42px;
 }
 
-.note {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 14px;
+.note{
+    color:#555;
+    margin-bottom:16px;
 }
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
-  margin-bottom: 14px;
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:12px;
+    margin-bottom:16px;
 }
 
-.card {
-  background: white;
-  padding: 14px;
-  border-radius: 10px;
-  box-shadow: 0 2px 7px rgba(0,0,0,0.12);
+.card{
+    background:white;
+    padding:14px;
+    border-radius:10px;
+    box-shadow:0 2px 7px rgba(0,0,0,0.1);
 }
 
-.card h3 {
-  margin: 0;
-  color: #555;
-  font-size: 14px;
+.card h3{
+    margin:0;
+    color:#666;
+    font-size:14px;
 }
 
-.card p {
-  font-size: 24px;
-  font-weight: bold;
-  margin: 6px 0 0;
+.card p{
+    margin:8px 0 0;
+    font-size:24px;
+    font-weight:bold;
 }
 
-.message-box {
-  background: #e9f7ef;
-  border-left: 5px solid #1f9d55;
-  padding: 10px;
-  margin-bottom: 12px;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 14px;
+/* MESSAGE */
+
+.message-box{
+    background:#e9f7ef;
+    border-left:5px solid #1f9d55;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:14px;
+    font-weight:bold;
 }
 
-.section-title {
-  background: #69c9ff;
-  padding: 9px;
-  font-weight: bold;
-  border-radius: 9px 9px 0 0;
+/* SUMMARY PANELS */
+
+.summary-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-bottom:14px;
 }
 
-.panel {
-  background: white;
-  padding: 12px;
-  border-radius: 0 0 9px 9px;
-  box-shadow: 0 2px 7px rgba(0,0,0,0.12);
+.summary-box{
+    background:white;
+    border-radius:10px;
+    box-shadow:0 2px 7px rgba(0,0,0,0.1);
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
+.summary-title{
+    background:#69c9ff;
+    padding:10px;
+    font-weight:bold;
+    border-radius:10px 10px 0 0;
 }
 
-th, td {
-  padding: 9px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
+.summary-content{
+    padding:14px;
+    font-size:15px;
+    line-height:1.7;
 }
 
-.low {
-  color: #d9534f;
-  font-weight: bold;
+/* SEARCH BAR */
+
+.toolbar{
+    background:white;
+    padding:12px;
+    border-radius:10px 10px 0 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 7px rgba(0,0,0,0.1);
 }
 
-.ok {
-  color: #1f9d55;
-  font-weight: bold;
+.search-box{
+    padding:8px;
+    width:240px;
+    border:1px solid #ccc;
+    border-radius:6px;
 }
+
+/* TABLE */
+
+.table-panel{
+    background:white;
+    padding:12px;
+    border-radius:0 0 10px 10px;
+    box-shadow:0 2px 7px rgba(0,0,0,0.1);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+    font-size:14px;
+}
+
+.low{
+    color:#d9534f;
+    font-weight:bold;
+}
+
+.ok{
+    color:#1f9d55;
+    font-weight:bold;
+}
+
+button{
+    background:#1d8cf8;
+    color:white;
+    border:none;
+    padding:8px 10px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#0f6fc7;
+}
+
 </style>
 </head>
 
@@ -185,216 +244,488 @@ th, td {
 
 <div class="container">
 
-  <div class="checkout-panel">
-    <h2>Checkout</h2>
-    <p>Select products to add them to the current sale.</p>
+    <!-- LEFT PANEL -->
 
-    <div id="productList"></div>
+    <div class="checkout-panel">
 
-    <div class="cart-box">
-      <h3>Current Cart</h3>
-      <div id="cartItems">No items added.</div>
-      <h3>Total: $<span id="cartTotal">0.00</span></h3>
-      <button class="checkout-button" onclick="completeCheckout()">Complete Checkout</button>
-    </div>
-  </div>
+        <h2>Checkout</h2>
 
-  <div class="main">
-    <h1>Retail Inventory Dashboard</h1>
-    <p class="note">Live checkout and inventory tracking dashboard.</p>
+        <p>Select products to add them to the current sale.</p>
 
-    <div class="cards">
-      <div class="card">
-        <h3>Products</h3>
-        <p id="totalProducts">0</p>
-      </div>
+        <div id="productList"></div>
 
-      <div class="card">
-        <h3>Total Stock</h3>
-        <p id="totalStock">0</p>
-      </div>
+        <div class="cart-box">
 
-      <div class="card">
-        <h3>Cart Total</h3>
-        <p>$<span id="cartTotalCard">0.00</span></p>
-      </div>
+            <h3>Current Cart</h3>
 
-      <div class="card">
-        <h3>Items Sold</h3>
-        <p id="itemsSold">0</p>
-      </div>
+            <div id="cartItems">No items added.</div>
 
-      <div class="card">
-        <h3>Total Sales</h3>
-        <p>$<span id="totalSales">0.00</span></p>
-      </div>
+            <h3>Total: $<span id="cartTotal">0.00</span></h3>
+
+            <button class="checkout-button" onclick="completeCheckout()">
+                Complete Checkout
+            </button>
+
+        </div>
+
     </div>
 
-    <div class="message-box" id="systemMessage">
-      Ready for checkout.
-    </div>
+    <!-- MAIN AREA -->
 
-    <div class="section-title">INVENTORY SUMMARY</div>
-    <div class="panel">
-      <table>
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="inventoryTable"></tbody>
-      </table>
+    <div class="main">
+
+        <h1>Retail Inventory Dashboard</h1>
+
+        <p class="note">
+            Live checkout and inventory tracking dashboard.
+        </p>
+
+        <!-- DASHBOARD CARDS -->
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Products</h3>
+                <p id="totalProducts">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Stock</h3>
+                <p id="totalStock">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Inventory Value</h3>
+                <p>$<span id="inventoryValue">0</span></p>
+            </div>
+
+            <div class="card">
+                <h3>Cart Total</h3>
+                <p>$<span id="cartTotalCard">0.00</span></p>
+            </div>
+
+            <div class="card">
+                <h3>Sales Completed</h3>
+                <p id="salesCompleted">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Sales</h3>
+                <p>$<span id="totalSales">0.00</span></p>
+            </div>
+
+        </div>
+
+        <!-- MESSAGE -->
+
+        <div class="message-box" id="systemMessage">
+            Ready for checkout.
+        </div>
+
+        <!-- SUMMARY PANELS -->
+
+        <div class="summary-grid">
+
+            <div class="summary-box">
+
+                <div class="summary-title">
+                    CHECKOUT SUMMARY
+                </div>
+
+                <div class="summary-content">
+
+                    Current Cart Items:
+                    <strong id="cartItemCount">0</strong><br>
+
+                    Last Checkout:
+                    <strong id="lastCheckout">No sales yet</strong><br>
+
+                    Most Sold Product:
+                    <strong id="mostSoldProduct">None</strong>
+
+                </div>
+
+            </div>
+
+            <div class="summary-box">
+
+                <div class="summary-title">
+                    INVENTORY SUMMARY
+                </div>
+
+                <div class="summary-content">
+
+                    Highest Value Product:
+                    <strong id="highestValueProduct"></strong><br>
+
+                    Lowest Stock Product:
+                    <strong id="lowestStockProduct"></strong><br>
+
+                    Products Available:
+                    <strong id="productsAvailable"></strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SEARCH BAR -->
+
+        <div class="toolbar">
+
+            <strong>Inventory Product List</strong>
+
+            <div>
+                <input
+                    type="text"
+                    class="search-box"
+                    placeholder="Search products..."
+                    onkeyup="searchProducts(this.value)"
+                >
+            </div>
+
+        </div>
+
+        <!-- TABLE -->
+
+        <div class="table-panel">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="inventoryTable"></tbody>
+
+            </table>
+
+        </div>
+
     </div>
-  </div>
 
 </div>
 
 <script>
+
 let products = [
-  { name: "USB-C Charger", category: "Accessories", price: 29.99, stock: 10 },
-  { name: "Wireless Mouse", category: "Accessories", price: 24.50, stock: 12 },
-  { name: "Bluetooth Keyboard", category: "Accessories", price: 49.99, stock: 8 },
-  { name: "HDMI Cable", category: "Cables", price: 14.99, stock: 15 },
-  { name: "Power Bank", category: "Portable Power", price: 59.99, stock: 6 }
+    {
+        name:"MacBook Pro 14",
+        category:"Laptops",
+        price:3499,
+        stock:4,
+        sold:0
+    },
+    {
+        name:"iPhone 16 Pro",
+        category:"Phones",
+        price:2199,
+        stock:7,
+        sold:0
+    },
+    {
+        name:"Samsung Galaxy S25",
+        category:"Phones",
+        price:1899,
+        stock:6,
+        sold:0
+    },
+    {
+        name:"Sony XM5 Headphones",
+        category:"Audio",
+        price:699,
+        stock:10,
+        sold:0
+    },
+    {
+        name:"Nintendo Switch OLED",
+        category:"Gaming",
+        price:649,
+        stock:5,
+        sold:0
+    }
 ];
 
 let cart = [];
-let itemsSold = 0;
+
 let totalSales = 0;
+let salesCompleted = 0;
+let lastCheckout = "No sales yet";
 
-function loadDashboard() {
-  loadProductList();
-  loadInventoryTable();
-  updateCart();
-  updateCards();
+function loadDashboard(){
+
+    loadProducts();
+    loadTable();
+    updateCards();
+    updateCart();
+    updateSummary();
+
 }
 
-function showMessage(message) {
-  document.getElementById("systemMessage").textContent = message;
+function showMessage(message){
+
+    document.getElementById("systemMessage").textContent = message;
+
 }
 
-function loadProductList() {
-  let productList = document.getElementById("productList");
-  productList.innerHTML = "";
+function loadProducts(){
 
-  products.forEach((product, index) => {
-    productList.innerHTML += `
-      <div class="product-row">
-        <div>
-          <strong>${product.name}</strong><br>
-          <small>${product.category}</small><br>
-          $${product.price.toFixed(2)} | Stock: ${product.stock}
+    let area = document.getElementById("productList");
+
+    area.innerHTML = "";
+
+    products.forEach((product,index)=>{
+
+        area.innerHTML += `
+        <div class="product-row">
+
+            <div>
+
+                <strong>${product.name}</strong><br>
+
+                <small>${product.category}</small><br>
+
+                $${product.price} | Stock: ${product.stock}
+
+            </div>
+
+            <button onclick="addToCart(${index})">+</button>
+
         </div>
-        <button onclick="addToCart(${index})">+</button>
-      </div>
-    `;
-  });
-}
+        `;
 
-function loadInventoryTable() {
-  let table = document.getElementById("inventoryTable");
-  table.innerHTML = "";
-
-  products.forEach(product => {
-    let status = product.stock <= 5
-      ? "<span class='low'>Low Stock</span>"
-      : "<span class='ok'>In Stock</span>";
-
-    table.innerHTML += `
-      <tr>
-        <td>${product.name}</td>
-        <td>${product.category}</td>
-        <td>$${product.price.toFixed(2)}</td>
-        <td>${product.stock}</td>
-        <td>${status}</td>
-      </tr>
-    `;
-  });
-}
-
-function addToCart(index) {
-  if (products[index].stock <= 0) {
-    showMessage("This product is out of stock.");
-    return;
-  }
-
-  products[index].stock--;
-
-  let existingItem = cart.find(item => item.name === products[index].name);
-
-  if (existingItem) {
-    existingItem.quantity++;
-  } else {
-    cart.push({
-      name: products[index].name,
-      price: products[index].price,
-      quantity: 1
     });
-  }
 
-  showMessage(products[index].name + " added to cart.");
-  loadDashboard();
 }
 
-function updateCart() {
-  let cartArea = document.getElementById("cartItems");
-  let total = 0;
+function loadTable(filteredProducts = products){
 
-  if (cart.length === 0) {
-    cartArea.innerHTML = "No items added.";
-  } else {
-    cartArea.innerHTML = "";
+    let table = document.getElementById("inventoryTable");
 
-    cart.forEach(item => {
-      let lineTotal = item.price * item.quantity;
-      total += lineTotal;
+    table.innerHTML = "";
 
-      cartArea.innerHTML += `
-        <div class="cart-item">
-          <strong>${item.name}</strong><br>
-          Qty: ${item.quantity} | $${lineTotal.toFixed(2)}
-        </div>
-      `;
+    filteredProducts.forEach(product=>{
+
+        let status =
+            product.stock <= 2
+            ? "<span class='low'>Low Stock</span>"
+            : "<span class='ok'>In Stock</span>";
+
+        table.innerHTML += `
+        <tr>
+
+            <td>${product.name}</td>
+            <td>${product.category}</td>
+            <td>$${product.price}</td>
+            <td>${product.stock}</td>
+            <td>${status}</td>
+
+        </tr>
+        `;
+
     });
-  }
 
-  document.getElementById("cartTotal").textContent = total.toFixed(2);
-  document.getElementById("cartTotalCard").textContent = total.toFixed(2);
 }
 
-function updateCards() {
-  let totalProducts = products.length;
-  let totalStock = products.reduce((sum, product) => sum + product.stock, 0);
+function addToCart(index){
 
-  document.getElementById("totalProducts").textContent = totalProducts;
-  document.getElementById("totalStock").textContent = totalStock;
-  document.getElementById("itemsSold").textContent = itemsSold;
-  document.getElementById("totalSales").textContent = totalSales.toFixed(2);
+    if(products[index].stock <= 0){
+
+        showMessage("This product is out of stock.");
+
+        return;
+
+    }
+
+    products[index].stock--;
+
+    products[index].sold++;
+
+    let existing = cart.find(
+        item => item.name === products[index].name
+    );
+
+    if(existing){
+
+        existing.quantity++;
+
+    }else{
+
+        cart.push({
+            name:products[index].name,
+            price:products[index].price,
+            quantity:1
+        });
+
+    }
+
+    showMessage(products[index].name + " added to cart.");
+
+    loadDashboard();
+
 }
 
-function completeCheckout() {
-  if (cart.length === 0) {
-    showMessage("No items are currently in the cart.");
-    return;
-  }
+function updateCart(){
 
-  let saleTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  let saleItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    let area = document.getElementById("cartItems");
 
-  itemsSold += saleItems;
-  totalSales += saleTotal;
+    let total = 0;
 
-  cart = [];
-  loadDashboard();
+    if(cart.length === 0){
 
-  showMessage("Checkout completed. Sales and inventory totals updated.");
+        area.innerHTML = "No items added.";
+
+    }else{
+
+        area.innerHTML = "";
+
+        cart.forEach(item=>{
+
+            let lineTotal = item.price * item.quantity;
+
+            total += lineTotal;
+
+            area.innerHTML += `
+            <div class="cart-item">
+
+                <strong>${item.name}</strong><br>
+
+                Qty: ${item.quantity} |
+                $${lineTotal.toFixed(2)}
+
+            </div>
+            `;
+
+        });
+
+    }
+
+    document.getElementById("cartTotal").textContent =
+        total.toFixed(2);
+
+    document.getElementById("cartTotalCard").textContent =
+        total.toFixed(2);
+
+}
+
+function updateCards(){
+
+    let totalProducts = products.length;
+
+    let totalStock =
+        products.reduce((sum,p)=>sum+p.stock,0);
+
+    let inventoryValue =
+        products.reduce((sum,p)=>sum+(p.price*p.stock),0);
+
+    document.getElementById("totalProducts").textContent =
+        totalProducts;
+
+    document.getElementById("totalStock").textContent =
+        totalStock;
+
+    document.getElementById("inventoryValue").textContent =
+        inventoryValue.toLocaleString();
+
+    document.getElementById("salesCompleted").textContent =
+        salesCompleted;
+
+    document.getElementById("totalSales").textContent =
+        totalSales.toFixed(2);
+
+}
+
+function updateSummary(){
+
+    document.getElementById("cartItemCount").textContent =
+        cart.length;
+
+    document.getElementById("lastCheckout").textContent =
+        lastCheckout;
+
+    let highest =
+        [...products].sort((a,b)=>b.price-a.price)[0];
+
+    let lowest =
+        [...products].sort((a,b)=>a.stock-b.stock)[0];
+
+    let available =
+        products.filter(p=>p.stock > 0).length;
+
+    let mostSold =
+        [...products].sort((a,b)=>b.sold-a.sold)[0];
+
+    document.getElementById("highestValueProduct").textContent =
+        highest.name;
+
+    document.getElementById("lowestStockProduct").textContent =
+        lowest.name;
+
+    document.getElementById("productsAvailable").textContent =
+        available;
+
+    document.getElementById("mostSoldProduct").textContent =
+        mostSold.sold > 0
+        ? mostSold.name
+        : "None";
+
+}
+
+function completeCheckout(){
+
+    if(cart.length === 0){
+
+        showMessage("No items in the cart.");
+
+        return;
+
+    }
+
+    let saleTotal =
+        cart.reduce((sum,item)=>
+            sum + (item.price * item.quantity),0);
+
+    totalSales += saleTotal;
+
+    salesCompleted++;
+
+    lastCheckout =
+        new Date().toLocaleTimeString();
+
+    cart = [];
+
+    showMessage(
+        "Checkout completed. Sales and inventory totals updated."
+    );
+
+    loadDashboard();
+
+}
+
+function searchProducts(value){
+
+    let filtered =
+        products.filter(product=>
+
+            product.name
+            .toLowerCase()
+            .includes(value.toLowerCase())
+
+        );
+
+    loadTable(filtered);
+
 }
 
 loadDashboard();
+
 </script>
 
 </body>
