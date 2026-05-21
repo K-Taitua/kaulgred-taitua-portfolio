@@ -13,34 +13,45 @@ body {
 
 .container {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .checkout-panel {
-  width: 330px;
+  width: 300px;
   background: #10233f;
   color: white;
-  padding: 20px;
+  padding: 18px;
+  box-sizing: border-box;
 }
 
 .checkout-panel h2 {
   color: #69c9ff;
-  margin-top: 0;
+  margin: 0 0 8px;
 }
 
-.product-card {
+.checkout-panel p {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.product-row {
   background: white;
   color: #111;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  padding: 9px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
 }
 
-.product-card strong {
-  font-size: 16px;
+.product-row strong {
+  font-size: 15px;
 }
 
-.product-card small {
+.product-row small {
   color: #555;
 }
 
@@ -48,104 +59,112 @@ button {
   background: #1d8cf8;
   color: white;
   border: none;
-  padding: 8px 10px;
+  padding: 7px 9px;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
 }
 
-.product-card button {
-  width: 100%;
-  margin-top: 8px;
-}
-
 .checkout-button {
   background: #1f9d55;
   width: 100%;
-  margin-top: 10px;
-  padding: 10px;
+  margin-top: 8px;
+  padding: 9px;
 }
 
 .cart-box {
   background: white;
   color: #111;
-  padding: 12px;
-  border-radius: 10px;
-  margin-top: 18px;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.cart-box h3 {
+  margin: 0 0 8px;
 }
 
 .cart-item {
   border-bottom: 1px solid #ddd;
-  padding: 7px 0;
-  font-size: 14px;
+  padding: 5px 0;
 }
 
 .main {
   flex: 1;
-  padding: 25px;
+  padding: 22px;
+  box-sizing: border-box;
 }
 
 .main h1 {
-  margin-top: 0;
+  margin: 0;
+  font-size: 34px;
+}
+
+.note {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 14px;
 }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-bottom: 18px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
 .card {
   background: white;
-  padding: 16px;
-  border-radius: 12px;
+  padding: 14px;
+  border-radius: 10px;
   box-shadow: 0 2px 7px rgba(0,0,0,0.12);
 }
 
 .card h3 {
   margin: 0;
   color: #555;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .card p {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: bold;
-  margin: 8px 0 0;
+  margin: 6px 0 0;
 }
 
 .message-box {
   background: #e9f7ef;
   border-left: 5px solid #1f9d55;
-  padding: 12px;
-  margin-bottom: 15px;
+  padding: 10px;
+  margin-bottom: 12px;
   border-radius: 8px;
   font-weight: bold;
+  font-size: 14px;
 }
 
 .section-title {
   background: #69c9ff;
-  padding: 10px;
+  padding: 9px;
   font-weight: bold;
-  border-radius: 10px 10px 0 0;
+  border-radius: 9px 9px 0 0;
 }
 
 .panel {
   background: white;
-  padding: 16px;
-  border-radius: 0 0 10px 10px;
+  padding: 12px;
+  border-radius: 0 0 9px 9px;
   box-shadow: 0 2px 7px rgba(0,0,0,0.12);
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 th, td {
-  padding: 10px;
+  padding: 9px;
   border-bottom: 1px solid #ddd;
   text-align: left;
 }
@@ -159,11 +178,6 @@ th, td {
   color: #1f9d55;
   font-weight: bold;
 }
-
-.note {
-  font-size: 14px;
-  color: #555;
-}
 </style>
 </head>
 
@@ -172,8 +186,8 @@ th, td {
 <div class="container">
 
   <div class="checkout-panel">
-    <h2>Checkout Product List</h2>
-    <p>Select products to add them to the current cart.</p>
+    <h2>Checkout</h2>
+    <p>Select products to add them to the current sale.</p>
 
     <div id="productList"></div>
 
@@ -187,11 +201,11 @@ th, td {
 
   <div class="main">
     <h1>Retail Inventory Dashboard</h1>
-    <p class="note">This dashboard shows live inventory, cart totals, and completed checkout activity.</p>
+    <p class="note">Live checkout and inventory tracking dashboard.</p>
 
     <div class="cards">
       <div class="card">
-        <h3>Total Products</h3>
+        <h3>Products</h3>
         <p id="totalProducts">0</p>
       </div>
 
@@ -206,8 +220,13 @@ th, td {
       </div>
 
       <div class="card">
-        <h3>Sales Completed</h3>
-        <p id="salesCompleted">0</p>
+        <h3>Items Sold</h3>
+        <p id="itemsSold">0</p>
+      </div>
+
+      <div class="card">
+        <h3>Total Sales</h3>
+        <p>$<span id="totalSales">0.00</span></p>
       </div>
     </div>
 
@@ -244,7 +263,8 @@ let products = [
 ];
 
 let cart = [];
-let salesCompleted = 0;
+let itemsSold = 0;
+let totalSales = 0;
 
 function loadDashboard() {
   loadProductList();
@@ -263,12 +283,13 @@ function loadProductList() {
 
   products.forEach((product, index) => {
     productList.innerHTML += `
-      <div class="product-card">
-        <strong>${product.name}</strong><br>
-        <small>${product.category}</small><br>
-        Price: $${product.price.toFixed(2)}<br>
-        Stock: ${product.stock}<br>
-        <button onclick="addToCart(${index})">Add to Cart</button>
+      <div class="product-row">
+        <div>
+          <strong>${product.name}</strong><br>
+          <small>${product.category}</small><br>
+          $${product.price.toFixed(2)} | Stock: ${product.stock}
+        </div>
+        <button onclick="addToCart(${index})">+</button>
       </div>
     `;
   });
@@ -315,7 +336,7 @@ function addToCart(index) {
     });
   }
 
-  showMessage(products[index].name + " added to cart. Stock has been updated.");
+  showMessage(products[index].name + " added to cart.");
   loadDashboard();
 }
 
@@ -351,7 +372,8 @@ function updateCards() {
 
   document.getElementById("totalProducts").textContent = totalProducts;
   document.getElementById("totalStock").textContent = totalStock;
-  document.getElementById("salesCompleted").textContent = salesCompleted;
+  document.getElementById("itemsSold").textContent = itemsSold;
+  document.getElementById("totalSales").textContent = totalSales.toFixed(2);
 }
 
 function completeCheckout() {
@@ -360,11 +382,16 @@ function completeCheckout() {
     return;
   }
 
-  salesCompleted++;
+  let saleTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  let saleItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  itemsSold += saleItems;
+  totalSales += saleTotal;
+
   cart = [];
   loadDashboard();
 
-  showMessage("Checkout completed. Inventory and sales totals have been updated.");
+  showMessage("Checkout completed. Sales and inventory totals updated.");
 }
 
 loadDashboard();
