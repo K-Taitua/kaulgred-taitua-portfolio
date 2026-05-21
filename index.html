@@ -2,243 +2,107 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Retail Inventory Dashboard</title>
+<title>Kaulgred Taitua Portfolio</title>
 
 <style>
 body{
     margin:0;
-    font-family:Arial,sans-serif;
+    font-family:Arial, sans-serif;
     background:#f4f6f9;
 }
 
 .container{
     display:flex;
-    height:100vh;
-    overflow:hidden;
+    min-height:100vh;
 }
 
-.checkout-panel{
+.sidebar{
     width:320px;
-    height:100vh;
     background:#10233f;
     color:white;
-    padding:14px;
+    padding:55px 30px;
     box-sizing:border-box;
-    display:flex;
-    flex-direction:column;
 }
 
-.checkout-panel h2{
+.sidebar h1{
     color:#69c9ff;
-    margin:0 0 6px;
+    font-size:32px;
+    margin-bottom:35px;
 }
 
-.checkout-panel p{
-    font-size:13px;
-    margin:0 0 10px;
-}
-
-#productList{
-    flex:1;
-    overflow:hidden;
-}
-
-.product-row{
-    background:white;
-    color:#111;
-    border-radius:8px;
-    padding:7px;
-    margin-bottom:6px;
-    display:grid;
-    grid-template-columns:1fr auto;
-    gap:8px;
-    align-items:center;
-}
-
-.product-row strong{
-    font-size:14px;
-}
-
-.product-row small{
-    color:#666;
-    font-size:12px;
-}
-
-.product-row button{
-    width:34px;
-    height:34px;
-    font-size:17px;
-}
-
-.cart-box{
-    background:white;
-    color:#111;
-    padding:9px;
-    border-radius:8px;
-    margin-top:8px;
-    max-height:230px;
-    overflow-y:auto;
-}
-
-.cart-box h3{
-    margin:0 0 6px;
-}
-
-.cart-item{
-    border-bottom:1px solid #ddd;
-    padding:4px 0;
-    font-size:13px;
-}
-
-.checkout-button{
-    width:100%;
-    background:#1f9d55;
-    margin-top:8px;
+.sidebar p{
+    font-size:20px;
+    margin:28px 0;
 }
 
 .main{
     flex:1;
-    padding:18px;
+    padding:65px 55px;
     box-sizing:border-box;
-    overflow:hidden;
 }
 
 .main h1{
-    margin:0 0 4px;
-    font-size:36px;
-}
-
-.note{
-    color:#555;
-    margin:0 0 12px;
-    font-size:14px;
+    font-size:44px;
+    margin:0 0 35px;
 }
 
 .cards{
     display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:10px;
-    margin-bottom:12px;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+    margin-bottom:35px;
 }
 
 .card{
     background:white;
-    padding:12px;
-    border-radius:10px;
-    box-shadow:0 2px 7px rgba(0,0,0,0.1);
-}
-
-.card h3{
-    margin:0;
-    color:#666;
-    font-size:13px;
-}
-
-.card p{
-    margin:6px 0 0;
+    padding:28px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
     font-size:22px;
-    font-weight:bold;
 }
 
-.message-box{
-    background:#e9f7ef;
-    border-left:5px solid #1f9d55;
-    padding:9px;
-    border-radius:8px;
-    margin-bottom:12px;
-    font-weight:bold;
-    font-size:14px;
+.card strong{
+    font-size:24px;
 }
 
-.summary-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-    margin-bottom:12px;
-}
-
-.summary-box{
+.project-section{
     background:white;
-    border-radius:10px;
-    box-shadow:0 2px 7px rgba(0,0,0,0.1);
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    margin-bottom:30px;
+    overflow:hidden;
 }
 
-.summary-title{
+.project-header{
     background:#69c9ff;
-    padding:9px;
-    font-weight:bold;
-    border-radius:10px 10px 0 0;
-}
-
-.summary-content{
-    padding:11px;
-    font-size:14px;
-    line-height:1.6;
-}
-
-.toolbar{
-    background:white;
-    padding:10px;
-    border-radius:10px 10px 0 0;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    box-shadow:0 2px 7px rgba(0,0,0,0.1);
-}
-
-.search-box{
-    padding:7px;
-    width:230px;
-    border:1px solid #ccc;
-    border-radius:6px;
-}
-
-.table-panel{
-    background:white;
-    padding:10px;
-    border-radius:0 0 10px 10px;
-    box-shadow:0 2px 7px rgba(0,0,0,0.1);
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-th,td{
-    padding:8px;
-    border-bottom:1px solid #ddd;
-    text-align:left;
-    font-size:13px;
-}
-
-.low{
-    color:#d9534f;
+    padding:18px 22px;
+    font-size:24px;
     font-weight:bold;
 }
 
-.ok{
-    color:#1f9d55;
-    font-weight:bold;
+.project-content{
+    padding:35px;
 }
 
-.out{
-    color:#222;
-    font-weight:bold;
+.project-content h2{
+    font-size:28px;
+    margin-top:0;
 }
 
-button{
-    background:#1d8cf8;
-    color:white;
-    border:none;
-    padding:7px 10px;
-    border-radius:6px;
-    cursor:pointer;
-    font-weight:bold;
+.project-content p{
+    font-size:22px;
+    line-height:1.5;
 }
 
-button:hover{
-    background:#0f6fc7;
+.project-content a{
+    color:#006bd6;
+    font-weight:bold;
+    font-size:22px;
+    text-decoration:none;
+}
+
+.project-content a:hover{
+    text-decoration:underline;
 }
 </style>
 </head>
@@ -247,298 +111,72 @@ button:hover{
 
 <div class="container">
 
-    <div class="checkout-panel">
-        <h2>Checkout</h2>
-        <p>Select products to add them to the current sale.</p>
-
-        <div id="productList"></div>
-
-        <div class="cart-box">
-            <h3>Current Cart</h3>
-            <div id="cartItems">No items added.</div>
-            <h3>Total: $<span id="cartTotal">0.00</span></h3>
-            <button class="checkout-button" onclick="completeCheckout()">Complete Checkout</button>
-        </div>
+    <div class="sidebar">
+        <h1>Kaulgred Taitua</h1>
+        <p>Information Technology</p>
+        <p>Cloud Computing</p>
+        <p>Cybersecurity</p>
     </div>
 
     <div class="main">
-        <h1>Retail Inventory Dashboard</h1>
-        <p class="note">Live checkout and inventory tracking dashboard.</p>
+        <h1>IT Project Portfolio</h1>
 
         <div class="cards">
             <div class="card">
-                <h3>Products</h3>
-                <p id="totalProducts">0</p>
+                <strong>Total Projects:</strong><br>
+                2
             </div>
 
             <div class="card">
-                <h3>Total Stock</h3>
-                <p id="totalStock">0</p>
+                <strong>Focus:</strong><br>
+                Programming
             </div>
 
             <div class="card">
-                <h3>Low Stock</h3>
-                <p id="lowStockCount">0</p>
-            </div>
-
-            <div class="card">
-                <h3>Cart Total</h3>
-                <p>$<span id="cartTotalCard">0.00</span></p>
-            </div>
-
-            <div class="card">
-                <h3>Sales Completed</h3>
-                <p id="salesCompleted">0</p>
-            </div>
-
-            <div class="card">
-                <h3>Total Sales</h3>
-                <p>$<span id="totalSales">0.00</span></p>
+                <strong>Status:</strong><br>
+                In Progress
             </div>
         </div>
 
-        <div class="message-box" id="systemMessage">
-            Ready for checkout.
-        </div>
+        <div class="project-section">
+            <div class="project-header">PROJECT OVERVIEW</div>
 
-        <div class="summary-grid">
-            <div class="summary-box">
-                <div class="summary-title">CURRENT CHECKOUT</div>
-                <div class="summary-content">
-                    Cart Items:
-                    <strong id="cartItemCount">0</strong><br>
+            <div class="project-content">
+                <h2>KiwiSaver Lump Sum Investment Calculator</h2>
 
-                    Last Checkout:
-                    <strong id="lastCheckout">No sales yet</strong><br>
+                <p>
+                    A Python programme that calculates projected KiwiSaver growth using compound interest.
+                </p>
 
-                    Last Sale Value:
-                    <strong>$<span id="lastSaleValue">0.00</span></strong>
-                </div>
-            </div>
+                <p>
+                    <strong>Skills:</strong> Python, input validation, loops, conditions, testing, and documentation
+                </p>
 
-            <div class="summary-box">
-                <div class="summary-title">INVENTORY ALERTS</div>
-                <div class="summary-content">
-                    Lowest Stock Product:
-                    <strong id="lowestStockProduct"></strong><br>
-
-                    Out of Stock Products:
-                    <strong id="outOfStockCount">0</strong><br>
-
-                    Products Available:
-                    <strong id="productsAvailable"></strong>
-                </div>
+                <a href="https://github.com/k-taitua" target="_blank">View Project on GitHub</a>
             </div>
         </div>
 
-        <div class="toolbar">
-            <strong>Inventory Product List</strong>
+        <div class="project-section">
+            <div class="project-header">PROJECT OVERVIEW</div>
 
-            <input
-                type="text"
-                class="search-box"
-                placeholder="Search products..."
-                onkeyup="searchProducts(this.value)"
-            >
+            <div class="project-content">
+                <h2>Retail Inventory Dashboard</h2>
+
+                <p>
+                    A web-based retail dashboard that tracks product stock, checkout activity, sales totals, and inventory status.
+                </p>
+
+                <p>
+                    <strong>Skills:</strong> HTML, CSS, JavaScript, arrays, functions, events, search filtering, and dashboard design
+                </p>
+
+                <a href="retail-dashboard.html">View Retail Dashboard</a>
+            </div>
         </div>
 
-        <div class="table-panel">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Stock</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-
-                <tbody id="inventoryTable"></tbody>
-            </table>
-        </div>
     </div>
 
 </div>
-
-<script>
-let products = [
-    {name:"MacBook Pro 14", category:"Laptops", price:3499, stock:4, sold:0},
-    {name:"iPhone 16 Pro", category:"Phones", price:2199, stock:7, sold:0},
-    {name:"Samsung Galaxy S25", category:"Phones", price:1899, stock:6, sold:0},
-    {name:"Sony XM5 Headphones", category:"Audio", price:699, stock:10, sold:0},
-    {name:"Nintendo Switch OLED", category:"Gaming", price:649, stock:5, sold:0}
-];
-
-let cart = [];
-let totalSales = 0;
-let salesCompleted = 0;
-let lastCheckout = "No sales yet";
-let lastSaleValue = 0;
-
-function loadDashboard(){
-    loadProducts();
-    loadTable();
-    updateCards();
-    updateCart();
-    updateSummary();
-}
-
-function showMessage(message){
-    document.getElementById("systemMessage").textContent = message;
-}
-
-function loadProducts(){
-    let area = document.getElementById("productList");
-    area.innerHTML = "";
-
-    products.forEach((product,index)=>{
-        area.innerHTML += `
-        <div class="product-row">
-            <div>
-                <strong>${product.name}</strong><br>
-                <small>${product.category}</small><br>
-                $${product.price} | Stock: ${product.stock}
-            </div>
-            <button onclick="addToCart(${index})">+</button>
-        </div>
-        `;
-    });
-}
-
-function loadTable(filteredProducts = products){
-    let table = document.getElementById("inventoryTable");
-    table.innerHTML = "";
-
-    filteredProducts.forEach(product=>{
-        let status = "";
-
-        if(product.stock === 0){
-            status = "<span class='out'>Out of Stock</span>";
-        }else if(product.stock <= 5){
-            status = "<span class='low'>Low Stock</span>";
-        }else{
-            status = "<span class='ok'>In Stock</span>";
-        }
-
-        table.innerHTML += `
-        <tr>
-            <td>${product.name}</td>
-            <td>${product.category}</td>
-            <td>$${product.price}</td>
-            <td>${product.stock}</td>
-            <td>${status}</td>
-        </tr>
-        `;
-    });
-}
-
-function addToCart(index){
-    if(products[index].stock <= 0){
-        showMessage("This product is out of stock.");
-        return;
-    }
-
-    products[index].stock--;
-    products[index].sold++;
-
-    let existing = cart.find(item => item.name === products[index].name);
-
-    if(existing){
-        existing.quantity++;
-    }else{
-        cart.push({
-            name:products[index].name,
-            price:products[index].price,
-            quantity:1
-        });
-    }
-
-    showMessage(products[index].name + " added to cart.");
-    loadDashboard();
-}
-
-function updateCart(){
-    let area = document.getElementById("cartItems");
-    let total = 0;
-
-    if(cart.length === 0){
-        area.innerHTML = "No items added.";
-    }else{
-        area.innerHTML = "";
-
-        cart.forEach(item=>{
-            let lineTotal = item.price * item.quantity;
-            total += lineTotal;
-
-            area.innerHTML += `
-            <div class="cart-item">
-                <strong>${item.name}</strong><br>
-                Qty: ${item.quantity} | $${lineTotal.toFixed(2)}
-            </div>
-            `;
-        });
-    }
-
-    document.getElementById("cartTotal").textContent = total.toFixed(2);
-    document.getElementById("cartTotalCard").textContent = total.toFixed(2);
-}
-
-function updateCards(){
-    let totalProducts = products.length;
-    let totalStock = products.reduce((sum,p)=>sum+p.stock,0);
-    let lowStock = products.filter(p=>p.stock > 0 && p.stock <= 5).length;
-
-    document.getElementById("totalProducts").textContent = totalProducts;
-    document.getElementById("totalStock").textContent = totalStock;
-    document.getElementById("lowStockCount").textContent = lowStock;
-    document.getElementById("salesCompleted").textContent = salesCompleted;
-    document.getElementById("totalSales").textContent = totalSales.toFixed(2);
-}
-
-function updateSummary(){
-    let cartItemTotal = cart.reduce((sum,item)=>sum+item.quantity,0);
-    let lowest = [...products].sort((a,b)=>a.stock-b.stock)[0];
-    let available = products.filter(p=>p.stock > 0).length;
-    let outOfStock = products.filter(p=>p.stock === 0).length;
-
-    document.getElementById("cartItemCount").textContent = cartItemTotal;
-    document.getElementById("lastCheckout").textContent = lastCheckout;
-    document.getElementById("lastSaleValue").textContent = lastSaleValue.toFixed(2);
-    document.getElementById("lowestStockProduct").textContent = lowest.name;
-    document.getElementById("productsAvailable").textContent = available;
-    document.getElementById("outOfStockCount").textContent = outOfStock;
-}
-
-function completeCheckout(){
-    if(cart.length === 0){
-        showMessage("No items in the cart.");
-        return;
-    }
-
-    let saleTotal = cart.reduce((sum,item)=>sum + (item.price * item.quantity),0);
-
-    totalSales += saleTotal;
-    salesCompleted++;
-    lastSaleValue = saleTotal;
-    lastCheckout = new Date().toLocaleTimeString();
-
-    cart = [];
-
-    showMessage("Checkout completed. Sales and inventory totals updated.");
-    loadDashboard();
-}
-
-function searchProducts(value){
-    let filtered = products.filter(product =>
-        product.name.toLowerCase().includes(value.toLowerCase())
-    );
-
-    loadTable(filtered);
-}
-
-loadDashboard();
-</script>
 
 </body>
 </html>
