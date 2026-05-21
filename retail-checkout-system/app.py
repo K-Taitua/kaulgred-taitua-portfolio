@@ -1,4 +1,4 @@
-import sqlite3
+ import sqlite3
 
 try:
     conn = sqlite3.connect("retail_checkout.db")
