@@ -115,6 +115,15 @@ button {
   margin: 8px 0 0;
 }
 
+.message-box {
+  background: #e9f7ef;
+  border-left: 5px solid #1f9d55;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
 .section-title {
   background: #69c9ff;
   padding: 10px;
@@ -202,6 +211,10 @@ th, td {
       </div>
     </div>
 
+    <div class="message-box" id="systemMessage">
+      Ready for checkout.
+    </div>
+
     <div class="section-title">INVENTORY SUMMARY</div>
     <div class="panel">
       <table>
@@ -238,6 +251,10 @@ function loadDashboard() {
   loadInventoryTable();
   updateCart();
   updateCards();
+}
+
+function showMessage(message) {
+  document.getElementById("systemMessage").textContent = message;
 }
 
 function loadProductList() {
@@ -280,7 +297,7 @@ function loadInventoryTable() {
 
 function addToCart(index) {
   if (products[index].stock <= 0) {
-    alert("This product is out of stock.");
+    showMessage("This product is out of stock.");
     return;
   }
 
@@ -298,6 +315,7 @@ function addToCart(index) {
     });
   }
 
+  showMessage(products[index].name + " added to cart. Stock has been updated.");
   loadDashboard();
 }
 
@@ -338,7 +356,7 @@ function updateCards() {
 
 function completeCheckout() {
   if (cart.length === 0) {
-    alert("No items in the cart.");
+    showMessage("No items are currently in the cart.");
     return;
   }
 
@@ -346,7 +364,7 @@ function completeCheckout() {
   cart = [];
   loadDashboard();
 
-  alert("Checkout completed. Inventory and sales totals have been updated.");
+  showMessage("Checkout completed. Inventory and sales totals have been updated.");
 }
 
 loadDashboard();
