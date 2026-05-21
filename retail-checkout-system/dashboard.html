@@ -1,1 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retail Inventory Dashboard</title>
 
+<style>
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f6f9;
+}
+
+.container{
+    display:flex;
+    height:100vh;
+}
+
+.sidebar{
+    width:220px;
+    background:#10233f;
+    color:white;
+    padding:20px;
+}
+
+.sidebar h2{
+    color:#69c9ff;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding:0;
+}
+
+.sidebar li{
+    padding:12px 0;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.main{
+    flex:1;
+    padding:20px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card h3{
+    margin:0;
+    color:#666;
+}
+
+.card p{
+    font-size:28px;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+.section{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+.section h2{
+    margin-top:0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+table th,
+table td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+}
+
+button{
+    background:#1d8cf8;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.chart-box{
+    height:200px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#eef4ff;
+    border-radius:10px;
+    color:#555;
+    font-size:18px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="sidebar">
+        <h2>Retail Dashboard</h2>
+
+        <ul>
+            <li>Dashboard</li>
+            <li>Inventory</li>
+            <li>Checkout</li>
+            <li>Sales</li>
+            <li>Reports</li>
+            <li>Settings</li>
+        </ul>
+    </div>
+
+    <div class="main">
+
+        <h1>Retail Inventory Dashboard</h1>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Products</h3>
+                <p>8</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Stock</h3>
+                <p>138</p>
+            </div>
+
+            <div class="card">
+                <h3>Low Stock Items</h3>
+                <p>2</p>
+            </div>
+
+            <div class="card">
+                <h3>Sales Today</h3>
+                <p>12</p>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h2>Sales Overview</h2>
+
+            <div class="chart-box">
+                Sales Chart Placeholder
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Product Inventory</h2>
+
+            <table>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Action</th>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td>Milk 2L</td>
+                    <td>Dairy</td>
+                    <td>$4.50</td>
+                    <td>20</td>
+                    <td><button>Add to Cart</button></td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Bread Loaf</td>
+                    <td>Bakery</td>
+                    <td>$3.20</td>
+                    <td>15</td>
+                    <td><button>Add to Cart</button></td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>Eggs 12 Pack</td>
+                    <td>Dairy</td>
+                    <td>$8.00</td>
+                    <td>10</td>
+                    <td><button>Add to Cart</button></td>
+                </tr>
+
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
