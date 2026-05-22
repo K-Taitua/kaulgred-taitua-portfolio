@@ -24,7 +24,7 @@ body{
     height:100vh;
     background:#10233f;
     color:white;
-    padding:12px;
+    padding:10px 12px;
     box-sizing:border-box;
     display:flex;
     flex-direction:column;
@@ -33,18 +33,17 @@ body{
 
 .checkout-panel h2{
     color:#69c9ff;
-    margin:0 0 4px;
-    font-size:28px;
+    margin:0 0 3px;
+    font-size:27px;
 }
 
 .checkout-panel p{
-    font-size:13px;
-    margin:0 0 8px;
+    font-size:12px;
+    margin:0 0 7px;
 }
 
 #productList{
     flex-shrink:0;
-    overflow:visible;
 }
 
 .product-row{
@@ -53,7 +52,7 @@ body{
     border-radius:8px;
     padding:5px 7px;
     margin-bottom:5px;
-    height:56px;
+    height:55px;
     display:grid;
     grid-template-columns:1fr auto;
     gap:6px;
@@ -71,7 +70,7 @@ body{
 
 .product-row div{
     font-size:12px;
-    line-height:1.2;
+    line-height:1.15;
 }
 
 .product-row button{
@@ -86,41 +85,42 @@ body{
 .cart-box{
     background:white;
     color:#111;
-    padding:10px;
+    padding:9px;
     border-radius:8px;
     margin-top:6px;
     flex:1;
-    min-height:230px;
+    min-height:0;
     display:flex;
     flex-direction:column;
     overflow:hidden;
 }
 
 .cart-box h3{
-    margin:0 0 6px;
-    font-size:20px;
+    margin:0 0 5px;
+    font-size:18px;
 }
 
 #cartItems{
     flex:1;
+    min-height:0;
     overflow-y:auto;
-    font-size:13px;
+    font-size:12px;
     padding-right:4px;
 }
 
 .cart-item{
     border-bottom:1px solid #ddd;
-    padding:4px 0;
-    font-size:13px;
+    padding:3px 0;
+    font-size:12px;
 }
 
 .cart-item strong{
-    font-size:14px;
+    font-size:13px;
 }
 
 .cart-total{
-    margin:8px 0;
-    font-size:20px;
+    margin:6px 0;
+    font-size:18px;
     font-weight:bold;
     flex-shrink:0;
 }
@@ -128,7 +128,7 @@ body{
 .checkout-button{
     width:100%;
     background:#1f9d55;
-    margin-top:5px;
+    margin-top:4px;
     flex-shrink:0;
 }
 
