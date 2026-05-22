@@ -2,107 +2,242 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Kaulgred Taitua Portfolio</title>
+<title>Retail Inventory Dashboard</title>
 
 <style>
 body{
     margin:0;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
     background:#f4f6f9;
 }
 
 .container{
     display:flex;
-    min-height:100vh;
+    height:100vh;
+    overflow:hidden;
 }
 
-.sidebar{
+/* LEFT CHECKOUT PANEL */
+
+.checkout-panel{
     width:320px;
+    height:100vh;
     background:#10233f;
     color:white;
-    padding:55px 30px;
+    padding:12px;
     box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
 }
 
-.sidebar h1{
+.checkout-panel h2{
     color:#69c9ff;
-    font-size:32px;
-    margin-bottom:35px;
+    margin:0 0 4px;
+    font-size:28px;
 }
 
-.sidebar p{
-    font-size:20px;
-    margin:28px 0;
+.checkout-panel p{
+    font-size:13px;
+    margin:0 0 8px;
 }
+
+#productList{
+    flex-shrink:0;
+}
+
+.product-row{
+    background:white;
+    color:#111;
+    border-radius:8px;
+    padding:5px 7px;
+    margin-bottom:5px;
+    min-height:54px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:6px;
+    align-items:center;
+}
+
+.product-row strong{
+    font-size:13px;
+}
+
+.product-row small{
+    color:#666;
+    font-size:11px;
+}
+
+.product-row div{
+    font-size:12px;
+    line-height:1.2;
+}
+
+.product-row button{
+    width:30px;
+    height:30px;
+    font-size:16px;
+    padding:0;
+}
+
+.cart-box{
+    background:white;
+    color:#111;
+    padding:8px;
+    border-radius:8px;
+    margin-top:6px;
+    flex:1;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+}
+
+.cart-box h3{
+    margin:0 0 4px;
+    font-size:17px;
+}
+
+#cartItems{
+    flex:1;
+    min-height:0;
+    overflow-y:auto;
+    font-size:12px;
+}
+
+.cart-item{
+    border-bottom:1px solid #ddd;
+    padding:2px 0;
+    font-size:12px;
+}
+
+.cart-total{
+    margin:5px 0;
+    font-size:17px;
+    font-weight:bold;
+}
+
+.checkout-button{
+    width:100%;
+    background:#1f9d55;
+    margin-top:5px;
+}
+
+/* MAIN DASHBOARD */
 
 .main{
     flex:1;
-    padding:65px 55px;
+    padding:18px;
     box-sizing:border-box;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
 }
 
 .main h1{
-    font-size:44px;
-    margin:0 0 35px;
+    margin:0 0 4px;
+    font-size:36px;
+}
+
+.note{
+    color:#555;
+    margin:0 0 12px;
+    font-size:14px;
 }
 
 .cards{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:25px;
-    margin-bottom:35px;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+    margin-bottom:12px;
 }
 
 .card{
     background:white;
-    padding:28px;
-    border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    padding:12px;
+    border-radius:10px;
+    box-shadow:0 2px 7px rgba(0,0,0,0.1);
+}
+
+.card h3{
+    margin:0;
+    color:#666;
+    font-size:13px;
+}
+
+.card p{
+    margin:6px 0 0;
     font-size:22px;
+    font-weight:bold;
 }
 
-.card strong{
-    font-size:24px;
+.message-box{
+    background:#e9f7ef;
+    border-left:5px solid #1f9d55;
+    padding:9px;
+    border-radius:8px;
+    margin-bottom:12px;
+    font-weight:bold;
+    font-size:14px;
 }
 
-.project-section{
+.inventory-section{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+}
+
+.toolbar{
     background:white;
-    border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.15);
-    margin-bottom:30px;
-    overflow:hidden;
+    padding:10px;
+    border-radius:10px 10px 0 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 7px rgba(0,0,0,0.1);
 }
 
-.project-header{
-    background:#69c9ff;
-    padding:18px 22px;
-    font-size:24px;
+.search-box{
+    padding:7px;
+    width:230px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+.table-panel{
+    background:white;
+    padding:10px;
+    border-radius:0 0 10px 10px;
+    box-shadow:0 2px 7px rgba(0,0,0,0.1);
+    flex:1;
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:8px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+    font-size:13px;
+}
+
+.low{ color:#d9534f; font-weight:bold; }
+.ok{ color:#1f9d55; font-weight:bold; }
+.out{ color:#777; font-weight:bold; }
+
+button{
+    background:#1d8cf8;
+    color:white;
+    border:none;
+    padding:7px 10px;
+    border-radius:6px;
+    cursor:pointer;
     font-weight:bold;
-}
-
-.project-content{
-    padding:35px;
-}
-
-.project-content h2{
-    font-size:28px;
-    margin-top:0;
-}
-
-.project-content p{
-    font-size:22px;
-    line-height:1.5;
-}
-
-.project-content a{
-    color:#006bd6;
-    font-weight:bold;
-    font-size:22px;
-    text-decoration:none;
-}
-
-.project-content a:hover{
-    text-decoration:underline;
 }
 </style>
 </head>
@@ -111,72 +246,210 @@ body{
 
 <div class="container">
 
-    <div class="sidebar">
-        <h1>Kaulgred Taitua</h1>
-        <p>Information Technology</p>
-        <p>Cloud Computing</p>
-        <p>Cybersecurity</p>
+    <div class="checkout-panel">
+        <h2>Checkout</h2>
+        <p>Select products to add them to the current sale.</p>
+
+        <div id="productList"></div>
+
+        <div class="cart-box">
+            <h3>Current Cart</h3>
+            <div id="cartItems">No items added.</div>
+            <div class="cart-total">Total: $<span id="cartTotal">0.00</span></div>
+            <button class="checkout-button" onclick="completeCheckout()">Complete Checkout</button>
+        </div>
     </div>
 
     <div class="main">
-        <h1>IT Project Portfolio</h1>
+        <h1>Retail Inventory Dashboard</h1>
+        <p class="note">Live checkout and inventory tracking dashboard.</p>
 
         <div class="cards">
-            <div class="card">
-                <strong>Total Projects:</strong><br>
-                2
-            </div>
-
-            <div class="card">
-                <strong>Focus:</strong><br>
-                Programming
-            </div>
-
-            <div class="card">
-                <strong>Status:</strong><br>
-                In Progress
-            </div>
+            <div class="card"><h3>Products</h3><p id="totalProducts">0</p></div>
+            <div class="card"><h3>Total Stock</h3><p id="totalStock">0</p></div>
+            <div class="card"><h3>Inventory Value</h3><p>$<span id="inventoryValue">0</span></p></div>
+            <div class="card"><h3>Sales Completed</h3><p id="salesCompleted">0</p></div>
+            <div class="card"><h3>Total Sales</h3><p>$<span id="totalSales">0.00</span></p></div>
         </div>
 
-        <div class="project-section">
-            <div class="project-header">PROJECT OVERVIEW</div>
+        <div class="message-box" id="systemMessage">Ready for checkout.</div>
 
-            <div class="project-content">
-                <h2>KiwiSaver Lump Sum Investment Calculator</h2>
+        <div class="inventory-section">
+            <div class="toolbar">
+                <strong>Inventory Product List</strong>
+                <input type="text" class="search-box" placeholder="Search products..." onkeyup="searchProducts(this.value)">
+            </div>
 
-                <p>
-                    A Python programme that calculates projected KiwiSaver growth using compound interest.
-                </p>
-
-                <p>
-                    <strong>Skills:</strong> Python, input validation, loops, conditions, testing, and documentation
-                </p>
-
-                <a href="https://github.com/k-taitua" target="_blank">View Project on GitHub</a>
+            <div class="table-panel">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTable"></tbody>
+                </table>
             </div>
         </div>
-
-        <div class="project-section">
-            <div class="project-header">PROJECT OVERVIEW</div>
-
-            <div class="project-content">
-                <h2>Retail Inventory Dashboard</h2>
-
-                <p>
-                    A web-based retail dashboard that tracks product stock, checkout activity, sales totals, and inventory status.
-                </p>
-
-                <p>
-                    <strong>Skills:</strong> HTML, CSS, JavaScript, arrays, functions, events, search filtering, and dashboard design
-                </p>
-
-                <a href="retail-dashboard.html">View Retail Dashboard</a>
-            </div>
-        </div>
-
     </div>
 
 </div>
+
+<script>
+let products = [
+    {name:"MacBook Pro 14", category:"Laptops", price:3499, stock:4, sold:0},
+    {name:"iPhone 16 Pro", category:"Phones", price:2199, stock:7, sold:0},
+    {name:"Samsung Galaxy S25", category:"Phones", price:1899, stock:6, sold:0},
+    {name:"Sony XM5 Headphones", category:"Audio", price:699, stock:10, sold:0},
+    {name:"Nintendo Switch OLED", category:"Gaming", price:649, stock:5, sold:0}
+];
+
+let cart = [];
+let totalSales = 0;
+let salesCompleted = 0;
+
+function loadDashboard(){
+    loadProducts();
+    loadTable();
+    updateCards();
+    updateCart();
+}
+
+function showMessage(message){
+    document.getElementById("systemMessage").textContent = message;
+}
+
+function loadProducts(){
+    let area = document.getElementById("productList");
+    area.innerHTML = "";
+
+    products.forEach((product,index)=>{
+        area.innerHTML += `
+        <div class="product-row">
+            <div>
+                <strong>${product.name}</strong><br>
+                <small>${product.category}</small><br>
+                $${product.price} | Stock: ${product.stock}
+            </div>
+            <button onclick="addToCart(${index})">+</button>
+        </div>`;
+    });
+}
+
+function loadTable(filteredProducts = products){
+    let table = document.getElementById("inventoryTable");
+    table.innerHTML = "";
+
+    filteredProducts.forEach(product=>{
+        let status = product.stock === 0
+            ? "<span class='out'>Out of Stock</span>"
+            : product.stock <= 2
+            ? "<span class='low'>Low Stock</span>"
+            : "<span class='ok'>In Stock</span>";
+
+        table.innerHTML += `
+        <tr>
+            <td>${product.name}</td>
+            <td>${product.category}</td>
+            <td>$${product.price}</td>
+            <td>${product.stock}</td>
+            <td>${status}</td>
+        </tr>`;
+    });
+}
+
+function addToCart(index){
+    if(products[index].stock <= 0){
+        showMessage("This product is out of stock.");
+        return;
+    }
+
+    products[index].stock--;
+    products[index].sold++;
+
+    let existing = cart.find(item => item.name === products[index].name);
+
+    if(existing){
+        existing.quantity++;
+    }else{
+        cart.push({
+            name:products[index].name,
+            price:products[index].price,
+            quantity:1
+        });
+    }
+
+    showMessage(products[index].name + " added to cart.");
+    loadDashboard();
+}
+
+function updateCart(){
+    let area = document.getElementById("cartItems");
+    let total = 0;
+
+    if(cart.length === 0){
+        area.innerHTML = "No items added.";
+    }else{
+        area.innerHTML = "";
+
+        cart.forEach(item=>{
+            let lineTotal = item.price * item.quantity;
+            total += lineTotal;
+
+            area.innerHTML += `
+            <div class="cart-item">
+                <strong>${item.name}</strong><br>
+                Qty: ${item.quantity} | $${lineTotal.toFixed(2)}
+            </div>`;
+        });
+    }
+
+    document.getElementById("cartTotal").textContent = total.toFixed(2);
+}
+
+function updateCards(){
+    let totalProducts = products.length;
+    let totalStock = products.reduce((sum,p)=>sum+p.stock,0);
+    let inventoryValue = products.reduce((sum,p)=>sum+(p.price*p.stock),0);
+
+    document.getElementById("totalProducts").textContent = totalProducts;
+    document.getElementById("totalStock").textContent = totalStock;
+    document.getElementById("inventoryValue").textContent = inventoryValue.toLocaleString();
+    document.getElementById("salesCompleted").textContent = salesCompleted;
+    document.getElementById("totalSales").textContent = totalSales.toFixed(2);
+}
+
+function completeCheckout(){
+    if(cart.length === 0){
+        showMessage("No items in the cart.");
+        return;
+    }
+
+    let saleTotal = cart.reduce((sum,item)=>sum + (item.price * item.quantity),0);
+
+    totalSales += saleTotal;
+    salesCompleted++;
+    cart = [];
+
+    showMessage("Checkout completed. Sales and inventory totals updated.");
+    loadDashboard();
+}
+
+function searchProducts(value){
+    let filtered = products.filter(product =>
+        product.name.toLowerCase().includes(value.toLowerCase()) ||
+        product.category.toLowerCase().includes(value.toLowerCase())
+    );
+
+    loadTable(filtered);
+}
+
+loadDashboard();
+</script>
 
 </body>
 </html>
