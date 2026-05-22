@@ -5,7 +5,9 @@
 <title>Retail Inventory Dashboard</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
@@ -43,8 +45,10 @@ body{
     margin:0 0 8px;
 }
 
+/* PRODUCT CARDS */
+
 #productList{
-    flex:0 0 auto;
+    flex-shrink:0;
 }
 
 .product-row{
@@ -94,14 +98,14 @@ body{
     font-size:18px;
 }
 
-/* CART */
+/* CURRENT CART */
 
 .cart-box{
     background:white;
     color:#111;
     border-radius:8px;
     padding:10px;
-    margin-top:6px;
+    margin-top:8px;
     height:220px;
     display:flex;
     flex-direction:column;
@@ -114,36 +118,40 @@ body{
 }
 
 #cartItems{
-    flex:1;
+    height:85px;
     overflow-y:auto;
-    min-height:0;
     padding-right:4px;
+    border-bottom:1px solid #ddd;
+}
+
+#cartItems::-webkit-scrollbar{
+    width:6px;
+}
+
+#cartItems::-webkit-scrollbar-thumb{
+    background:#bbb;
+    border-radius:10px;
 }
 
 .cart-item{
-    border-bottom:1px solid #ddd;
-    padding:5px 0;
-    display:grid;
-    grid-template-columns:1fr auto;
-    gap:8px;
-    align-items:center;
+    padding:4px 0;
+    font-size:13px;
 }
 
-.cart-name{
-    font-weight:bold;
+.cart-item strong{
+    display:block;
     font-size:13px;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
 }
 
-.cart-detail{
+.cart-item span{
     font-size:12px;
-    white-space:nowrap;
 }
 
 .cart-total{
-    margin:7px 0;
+    margin:8px 0;
     font-size:19px;
     font-weight:bold;
 }
@@ -255,9 +263,20 @@ th,td{
     font-size:13px;
 }
 
-.low{color:#d9534f;font-weight:bold}
-.ok{color:#1f9d55;font-weight:bold}
-.out{color:#777;font-weight:bold}
+.low{
+    color:#d9534f;
+    font-weight:bold;
+}
+
+.ok{
+    color:#1f9d55;
+    font-weight:bold;
+}
+
+.out{
+    color:#777;
+    font-weight:bold;
+}
 
 button{
     background:#1d8cf8;
@@ -294,19 +313,45 @@ button{
         <p class="note">Live checkout and inventory tracking dashboard.</p>
 
         <div class="cards">
-            <div class="card"><h3>Products</h3><p id="totalProducts">0</p></div>
-            <div class="card"><h3>Total Stock</h3><p id="totalStock">0</p></div>
-            <div class="card"><h3>Inventory Value</h3><p>$<span id="inventoryValue">0</span></p></div>
-            <div class="card"><h3>Sales Completed</h3><p id="salesCompleted">0</p></div>
-            <div class="card"><h3>Total Sales</h3><p>$<span id="totalSales">0.00</span></p></div>
+            <div class="card">
+                <h3>Products</h3>
+                <p id="totalProducts">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Stock</h3>
+                <p id="totalStock">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Inventory Value</h3>
+                <p>$<span id="inventoryValue">0</span></p>
+            </div>
+
+            <div class="card">
+                <h3>Sales Completed</h3>
+                <p id="salesCompleted">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Sales</h3>
+                <p>$<span id="totalSales">0.00</span></p>
+            </div>
         </div>
 
-        <div class="message-box" id="systemMessage">Ready for checkout.</div>
+        <div class="message-box" id="systemMessage">
+            Ready for checkout.
+        </div>
 
         <div class="inventory-section">
             <div class="toolbar">
                 <strong>Inventory Product List</strong>
-                <input type="text" class="search-box" placeholder="Search products..." onkeyup="searchProducts(this.value)">
+                <input
+                    type="text"
+                    class="search-box"
+                    placeholder="Search products..."
+                    onkeyup="searchProducts(this.value)"
+                >
             </div>
 
             <div class="table-panel">
@@ -320,6 +365,7 @@ button{
                             <th>Status</th>
                         </tr>
                     </thead>
+
                     <tbody id="inventoryTable"></tbody>
                 </table>
             </div>
@@ -363,12 +409,15 @@ function loadProducts(){
                 <div class="product-name">${product.name}</div>
                 <div class="product-category">${product.category}</div>
             </div>
+
             <div class="product-info">
                 <div class="product-price">$${product.price}</div>
                 <div class="product-stock">Stock: ${product.stock}</div>
             </div>
+
             <button onclick="addToCart(${index})">+</button>
-        </div>`;
+        </div>
+        `;
     });
 }
 
@@ -377,11 +426,15 @@ function loadTable(filteredProducts = products){
     table.innerHTML = "";
 
     filteredProducts.forEach(product=>{
-        let status = product.stock === 0
-            ? "<span class='out'>Out of Stock</span>"
-            : product.stock <= 2
-            ? "<span class='low'>Low Stock</span>"
-            : "<span class='ok'>In Stock</span>";
+        let status = "";
+
+        if(product.stock === 0){
+            status = "<span class='out'>Out of Stock</span>";
+        }else if(product.stock <= 2){
+            status = "<span class='low'>Low Stock</span>";
+        }else{
+            status = "<span class='ok'>In Stock</span>";
+        }
 
         table.innerHTML += `
         <tr>
@@ -390,7 +443,8 @@ function loadTable(filteredProducts = products){
             <td>$${product.price}</td>
             <td>${product.stock}</td>
             <td>${status}</td>
-        </tr>`;
+        </tr>
+        `;
     });
 }
 
@@ -432,10 +486,11 @@ function updateCart(){
             total += lineTotal;
 
             area.innerHTML += `
-            <div class="cart-item">
-                <span class="cart-name">${item.name}</span>
-                <span class="cart-detail">x${item.quantity} | $${lineTotal.toFixed(2)}</span>
-            </div>`;
+                <div class="cart-item">
+                    <strong>${item.name}</strong>
+                    <span>Qty: ${item.quantity} | $${lineTotal.toFixed(2)}</span>
+                </div>
+            `;
         });
     }
 
