@@ -5,6 +5,10 @@
 <title>Retail Inventory Dashboard</title>
 
 <style>
+*{
+    box-sizing:border-box;
+}
+
 body{
     margin:0;
     font-family:Arial,sans-serif;
@@ -17,7 +21,7 @@ body{
     overflow:hidden;
 }
 
-/* LEFT CHECKOUT PANEL */
+/* LEFT CHECKOUT */
 
 .checkout-panel{
     width:320px;
@@ -25,7 +29,6 @@ body{
     background:#10233f;
     color:white;
     padding:12px;
-    box-sizing:border-box;
     display:flex;
     flex-direction:column;
     overflow:hidden;
@@ -42,8 +45,6 @@ body{
     margin:0 0 8px;
 }
 
-/* PRODUCTS */
-
 #productList{
     flex-shrink:0;
 }
@@ -52,9 +53,9 @@ body{
     background:white;
     color:#111;
     border-radius:8px;
-    padding:7px 9px;
+    padding:6px 8px;
     margin-bottom:6px;
-    height:60px;
+    height:62px;
     display:grid;
     grid-template-columns:1fr 70px 34px;
     gap:8px;
@@ -75,7 +76,7 @@ body{
 .product-info{
     text-align:right;
     font-size:12px;
-    line-height:1.3;
+    line-height:1.25;
 }
 
 .product-price{
@@ -93,36 +94,43 @@ body{
     padding:0;
 }
 
-/* CART */
+/* CART FIXED */
 
 .cart-box{
     background:white;
     color:#111;
-    padding:10px;
     border-radius:8px;
-    margin-top:7px;
-    flex:1;
-    min-height:0;
+    padding:10px;
+    margin-top:8px;
+    height:205px;
+    flex-shrink:0;
     display:flex;
     flex-direction:column;
-    overflow:hidden;
 }
 
 .cart-box h3{
-    margin:0 0 6px;
+    margin:0 0 7px;
     font-size:20px;
 }
 
 #cartItems{
     flex:1;
-    min-height:0;
-    overflow:hidden;
-    font-size:12px;
+    overflow-y:auto;
+    padding-right:4px;
+}
+
+#cartItems::-webkit-scrollbar{
+    width:6px;
+}
+
+#cartItems::-webkit-scrollbar-thumb{
+    background:#bbb;
+    border-radius:10px;
 }
 
 .cart-empty{
-    color:#333;
     font-size:13px;
+    color:#333;
 }
 
 .cart-item{
@@ -148,25 +156,21 @@ body{
 }
 
 .cart-total{
-    margin:8px 0 7px;
-    font-size:20px;
+    margin:7px 0;
+    font-size:19px;
     font-weight:bold;
-    flex-shrink:0;
 }
 
 .checkout-button{
     width:100%;
     background:#1f9d55;
-    margin-top:4px;
-    flex-shrink:0;
 }
 
-/* MAIN DASHBOARD */
+/* RIGHT DASHBOARD */
 
 .main{
     flex:1;
     padding:18px;
-    box-sizing:border-box;
     overflow:hidden;
     display:flex;
     flex-direction:column;
