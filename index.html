@@ -3,18 +3,73 @@
 <head>
   <title>Kaulgred Taitua Portfolio</title>
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #f4f6f8; }
-    .sidebar { width: 230px; height: 100vh; background: #162435; color: white; position: fixed; padding: 25px; }
-    .sidebar h2 { color: #6ec6e8; }
-    .main { margin-left: 280px; padding: 30px; }
-    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px; }
-    .card, .project { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 1px 4px #ccc; }
-    .section-title { background: #6ec6e8; padding: 12px; border-radius: 10px 10px 0 0; font-weight: bold; }
-    .project { border-radius: 0; }
-    .project:last-child { border-radius: 0 0 10px 10px; }
-    a { color: #0366d6; font-weight: bold; text-decoration: none; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+    }
+
+    .sidebar {
+      width: 230px;
+      height: 100vh;
+      background: #162435;
+      color: white;
+      position: fixed;
+      padding: 25px;
+    }
+
+    .sidebar h2 {
+      color: #6ec6e8;
+    }
+
+    .sidebar p {
+      font-size: 18px;
+      margin: 22px 0;
+    }
+
+    .main {
+      margin-left: 280px;
+      padding: 30px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .card,
+    .project {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 1px 4px #ccc;
+    }
+
+    .section-title {
+      background: #6ec6e8;
+      padding: 12px;
+      border-radius: 10px 10px 0 0;
+      font-weight: bold;
+    }
+
+    .project {
+      border-radius: 0;
+    }
+
+    .project:last-child {
+      border-radius: 0 0 10px 10px;
+    }
+
+    a {
+      color: #0366d6;
+      font-weight: bold;
+      text-decoration: none;
+    }
   </style>
 </head>
+
 <body>
   <div class="sidebar">
     <h2>Kaulgred Taitua</h2>
@@ -27,17 +82,32 @@
     <h1>IT Project Portfolio</h1>
 
     <div class="cards">
-      <div class="card"><strong>Total Projects:</strong><br>2</div>
-      <div class="card"><strong>Focus:</strong><br>Programming and Databases</div>
-      <div class="card"><strong>Status:</strong><br>In Progress</div>
+      <div class="card">
+        <strong>Total Projects:</strong><br>
+        2
+      </div>
+
+      <div class="card">
+        <strong>Focus:</strong><br>
+        Programming and Databases
+      </div>
+
+      <div class="card">
+        <strong>Status:</strong><br>
+        In Progress
+      </div>
     </div>
 
     <div class="section-title">PROJECT OVERVIEW</div>
 
     <div class="project">
       <h3>KiwiSaver Lump Sum Investment Calculator</h3>
-      <p>A Python programme that calculates projected KiwiSaver growth using compound interest.</p>
-      <p><strong>Skills:</strong> Python, input validation, loops, conditions, testing, and documentation</p>
+      <p>
+        A Python programme that calculates projected KiwiSaver growth using compound interest.
+      </p>
+      <p>
+        <strong>Skills:</strong> Python, input validation, loops, conditions, testing, and documentation
+      </p>
       <p>
         <a href="https://github.com/K-Taitua/kaulgred-taitua-portfolio/tree/main/kiwisaver-calculator" target="_blank">
           View Project on GitHub
@@ -47,15 +117,16 @@
 
     <div class="project">
       <h3>Retail Checkout Management System</h3>
-      <p>A retail checkout and inventory dashboard that allows products to be added to a cart, updates stock values, tracks completed sales, and displays inventory information.</p>
-      <p><strong>Skills:</strong> HTML, CSS, JavaScript, Python, SQLite, database design, and dashboard development</p>
+      <p>
+        A retail checkout and inventory dashboard that allows products to be added to a cart,
+        updates stock values, tracks completed sales, and displays inventory information.
+      </p>
+      <p>
+        <strong>Skills:</strong> HTML, CSS, JavaScript, Python, SQLite, database design, and dashboard development
+      </p>
       <p>
         <a href="retail-checkout-system/retail-dashboard.html" target="_blank">
-          View Dashboard
-        </a>
-        |
-        <a href="https://github.com/K-Taitua/kaulgred-taitua-portfolio/tree/main/retail-checkout-system" target="_blank">
-          View Code on GitHub
+          View Project
         </a>
       </p>
     </div>
