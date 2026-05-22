@@ -5,9 +5,7 @@
 <title>Retail Inventory Dashboard</title>
 
 <style>
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
     margin:0;
@@ -28,7 +26,7 @@ body{
     height:100vh;
     background:#10233f;
     color:white;
-    padding:12px;
+    padding:10px;
     display:flex;
     flex-direction:column;
     overflow:hidden;
@@ -46,7 +44,7 @@ body{
 }
 
 #productList{
-    flex-shrink:0;
+    flex:0 0 auto;
 }
 
 .product-row{
@@ -55,28 +53,30 @@ body{
     border-radius:8px;
     padding:6px 8px;
     margin-bottom:6px;
-    height:62px;
+    height:58px;
     display:grid;
-    grid-template-columns:1fr 70px 34px;
-    gap:8px;
+    grid-template-columns:1fr 65px 34px;
+    gap:6px;
     align-items:center;
 }
 
 .product-name{
     font-weight:bold;
     font-size:13px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .product-category{
     color:#666;
     font-size:11px;
-    margin-top:2px;
 }
 
 .product-info{
     text-align:right;
     font-size:12px;
-    line-height:1.25;
+    line-height:1.2;
 }
 
 .product-price{
@@ -90,52 +90,39 @@ body{
 .product-row button{
     width:32px;
     height:32px;
-    font-size:17px;
     padding:0;
+    font-size:18px;
 }
 
-/* CART FIXED */
+/* CART */
 
 .cart-box{
     background:white;
     color:#111;
     border-radius:8px;
     padding:10px;
-    margin-top:8px;
-    height:205px;
-    flex-shrink:0;
+    margin-top:6px;
+    height:220px;
     display:flex;
     flex-direction:column;
+    overflow:hidden;
 }
 
 .cart-box h3{
-    margin:0 0 7px;
+    margin:0 0 6px;
     font-size:20px;
 }
 
 #cartItems{
     flex:1;
     overflow-y:auto;
+    min-height:0;
     padding-right:4px;
-}
-
-#cartItems::-webkit-scrollbar{
-    width:6px;
-}
-
-#cartItems::-webkit-scrollbar-thumb{
-    background:#bbb;
-    border-radius:10px;
-}
-
-.cart-empty{
-    font-size:13px;
-    color:#333;
 }
 
 .cart-item{
     border-bottom:1px solid #ddd;
-    padding:4px 0;
+    padding:5px 0;
     display:grid;
     grid-template-columns:1fr auto;
     gap:8px;
@@ -144,7 +131,7 @@ body{
 
 .cart-name{
     font-weight:bold;
-    font-size:12px;
+    font-size:13px;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
@@ -268,9 +255,9 @@ th,td{
     font-size:13px;
 }
 
-.low{ color:#d9534f; font-weight:bold; }
-.ok{ color:#1f9d55; font-weight:bold; }
-.out{ color:#777; font-weight:bold; }
+.low{color:#d9534f;font-weight:bold}
+.ok{color:#1f9d55;font-weight:bold}
+.out{color:#777;font-weight:bold}
 
 button{
     background:#1d8cf8;
@@ -376,12 +363,10 @@ function loadProducts(){
                 <div class="product-name">${product.name}</div>
                 <div class="product-category">${product.category}</div>
             </div>
-
             <div class="product-info">
                 <div class="product-price">$${product.price}</div>
                 <div class="product-stock">Stock: ${product.stock}</div>
             </div>
-
             <button onclick="addToCart(${index})">+</button>
         </div>`;
     });
@@ -438,7 +423,7 @@ function updateCart(){
     let total = 0;
 
     if(cart.length === 0){
-        area.innerHTML = "<div class='cart-empty'>No items added.</div>";
+        area.innerHTML = "No items added.";
     }else{
         area.innerHTML = "";
 
