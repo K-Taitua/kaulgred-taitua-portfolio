@@ -5,6 +5,7 @@
 <title>Kaulgred Taitua Portfolio</title>
 
 <style>
+
 body{
     margin:0;
     font-family:Arial, sans-serif;
@@ -20,7 +21,7 @@ body{
     width:320px;
     background:#10233f;
     color:white;
-    padding:55px 30px;
+    padding:45px 30px;
     box-sizing:border-box;
 }
 
@@ -37,19 +38,20 @@ body{
 
 .main{
     flex:1;
-    padding:65px 55px;
+    padding:55px;
     box-sizing:border-box;
 }
 
 .main h1{
-    font-size:44px;
-    margin:0 0 35px;
+    font-size:48px;
+    margin-top:0;
+    margin-bottom:35px;
 }
 
 .cards{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:25px;
+    gap:22px;
     margin-bottom:35px;
 }
 
@@ -57,26 +59,30 @@ body{
     background:white;
     padding:28px;
     border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.15);
-    font-size:22px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.12);
 }
 
 .card strong{
-    font-size:24px;
+    font-size:20px;
+}
+
+.card p{
+    margin-top:10px;
+    font-size:20px;
 }
 
 .project-section{
     background:white;
     border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.15);
-    margin-bottom:30px;
     overflow:hidden;
+    margin-bottom:30px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.12);
 }
 
 .project-header{
     background:#69c9ff;
     padding:18px 22px;
-    font-size:24px;
+    font-size:22px;
     font-weight:bold;
 }
 
@@ -85,25 +91,26 @@ body{
 }
 
 .project-content h2{
-    font-size:28px;
+    font-size:32px;
     margin-top:0;
 }
 
 .project-content p{
-    font-size:22px;
-    line-height:1.5;
+    font-size:20px;
+    line-height:1.6;
 }
 
 .project-content a{
     color:#006bd6;
+    font-size:20px;
     font-weight:bold;
-    font-size:22px;
     text-decoration:none;
 }
 
 .project-content a:hover{
     text-decoration:underline;
 }
+
 </style>
 </head>
 
@@ -113,35 +120,43 @@ body{
 
     <div class="sidebar">
         <h1>Kaulgred Taitua</h1>
+
         <p>Information Technology</p>
         <p>Cloud Computing</p>
         <p>Cybersecurity</p>
     </div>
 
     <div class="main">
+
         <h1>IT Project Portfolio</h1>
 
         <div class="cards">
+
             <div class="card">
-                <strong>Total Projects:</strong><br>
-                2
+                <strong>Total Projects:</strong>
+                <p>2</p>
             </div>
 
             <div class="card">
-                <strong>Focus:</strong><br>
-                Programming
+                <strong>Focus:</strong>
+                <p>Programming</p>
             </div>
 
             <div class="card">
-                <strong>Status:</strong><br>
-                In Progress
+                <strong>Status:</strong>
+                <p>In Progress</p>
             </div>
+
         </div>
 
         <div class="project-section">
-            <div class="project-header">PROJECT OVERVIEW</div>
+
+            <div class="project-header">
+                PROJECT OVERVIEW
+            </div>
 
             <div class="project-content">
+
                 <h2>KiwiSaver Lump Sum Investment Calculator</h2>
 
                 <p>
@@ -155,13 +170,19 @@ body{
                 <a href="https://github.com/k-taitua" target="_blank">
                     View Project on GitHub
                 </a>
+
             </div>
+
         </div>
 
         <div class="project-section">
-            <div class="project-header">PROJECT OVERVIEW</div>
+
+            <div class="project-header">
+                PROJECT OVERVIEW
+            </div>
 
             <div class="project-content">
+
                 <h2>Retail Inventory Dashboard</h2>
 
                 <p>
@@ -175,7 +196,9 @@ body{
                 <a href="retail-dashboard.html">
                     View Retail Dashboard
                 </a>
+
             </div>
+
         </div>
 
     </div>
