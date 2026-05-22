@@ -1,491 +1,511 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Retail Inventory Dashboard</title>
+<meta charset="UTF-8">
+<title>Retail Inventory Dashboard</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f1f3f6;
-      color: #000;
-      overflow: hidden;
-    }
+.container{
+    display:flex;
+    height:100vh;
+    overflow:hidden;
+}
 
-    .dashboard {
-      display: grid;
-      grid-template-columns: 360px 1fr;
-      height: 100vh;
-    }
+/* LEFT CHECKOUT PANEL */
 
-    .checkout {
-      background: #102743;
-      color: white;
-      padding: 18px;
-      overflow: hidden;
-    }
+.checkout-panel{
+    width:320px;
+    height:100vh;
+    background:#10233f;
+    color:white;
+    padding:14px;
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+}
 
-    .checkout h1 {
-      margin: 0 0 8px;
-      font-size: 34px;
-      color: #5ec2ff;
-    }
+.checkout-panel h2{
+    color:#69c9ff;
+    margin:0 0 6px;
+    font-size:30px;
+}
 
-    .checkout p {
-      margin: 0 0 14px;
-      font-size: 16px;
-    }
+.checkout-panel p{
+    font-size:13px;
+    margin:0 0 10px;
+}
 
-    .product-list {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-    }
+#productList{
+    flex:1;
+    overflow:hidden;
+}
 
-    .product-card {
-      background: white;
-      color: black;
-      border-radius: 10px;
-      padding: 10px 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      min-height: 72px;
-    }
+.product-row{
+    background:white;
+    color:#111;
+    border-radius:8px;
+    padding:7px;
+    margin-bottom:6px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:8px;
+    align-items:center;
+}
 
-    .product-card h3 {
-      margin: 0;
-      font-size: 17px;
-    }
+.product-row strong{
+    font-size:14px;
+}
 
-    .product-card .category {
-      color: #555;
-      font-size: 14px;
-      margin: 3px 0;
-    }
+.product-row small{
+    color:#666;
+    font-size:12px;
+}
 
-    .product-card .price-stock {
-      font-size: 18px;
-    }
+.product-row button{
+    width:34px;
+    height:34px;
+    font-size:17px;
+}
 
-    .product-card button {
-      width: 42px;
-      height: 42px;
-      border: none;
-      border-radius: 8px;
-      background: #1e8df2;
-      color: white;
-      font-size: 24px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.cart-box{
+    background:white;
+    color:#111;
+    padding:9px;
+    border-radius:8px;
+    margin-top:8px;
+    max-height:210px;
+    overflow-y:auto;
+}
 
-    .product-card button:disabled {
-      background: #aaa;
-      cursor: not-allowed;
-    }
+.cart-box h3{
+    margin:0 0 6px;
+}
 
-    .cart {
-      background: white;
-      color: black;
-      margin-top: 12px;
-      border-radius: 10px;
-      padding: 14px;
-    }
+.cart-item{
+    border-bottom:1px solid #ddd;
+    padding:4px 0;
+    font-size:13px;
+}
 
-    .cart h2 {
-      margin: 0 0 8px;
-      font-size: 24px;
-    }
+.checkout-button{
+    width:100%;
+    background:#1f9d55;
+    margin-top:8px;
+}
 
-    #cartItems {
-      min-height: 45px;
-      max-height: 90px;
-      overflow-y: auto;
-      font-size: 15px;
-    }
+/* MAIN DASHBOARD */
 
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid #eee;
-      padding: 4px 0;
-    }
+.main{
+    flex:1;
+    padding:18px;
+    box-sizing:border-box;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+}
 
-    .cart-total {
-      margin: 8px 0 12px;
-      font-size: 23px;
-      font-weight: bold;
-    }
+.main h1{
+    margin:0 0 4px;
+    font-size:36px;
+}
 
-    .checkout-btn {
-      width: 100%;
-      border: none;
-      background: #25a45a;
-      color: white;
-      padding: 11px;
-      border-radius: 7px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.note{
+    color:#555;
+    margin:0 0 12px;
+    font-size:14px;
+}
 
-    .main {
-      padding: 24px 28px;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      overflow: hidden;
-    }
+/* DASHBOARD CARDS */
 
-    .main h1 {
-      margin: 0;
-      font-size: 44px;
-    }
+.cards{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+    margin-bottom:12px;
+}
 
-    .subtitle {
-      margin: 6px 0 14px;
-      font-size: 19px;
-      color: #444;
-    }
+.card{
+    background:white;
+    padding:12px;
+    border-radius:10px;
+    box-shadow:0 2px 7px rgba(0,0,0,0.1);
+}
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 14px;
-      margin-bottom: 14px;
-    }
+.card h3{
+    margin:0;
+    color:#666;
+    font-size:13px;
+}
 
-    .stat-card {
-      background: white;
-      padding: 16px 18px;
-      border-radius: 12px;
-      min-height: 96px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
-    }
+.card p{
+    margin:6px 0 0;
+    font-size:22px;
+    font-weight:bold;
+}
 
-    .stat-card h3 {
-      margin: 0 0 10px;
-      font-size: 17px;
-      color: #666;
-    }
+/* MESSAGE */
 
-    .stat-card p {
-      margin: 0;
-      font-size: 27px;
-      font-weight: bold;
-    }
+.message-box{
+    background:#e9f7ef;
+    border-left:5px solid #1f9d55;
+    padding:9px;
+    border-radius:8px;
+    margin-bottom:12px;
+    font-weight:bold;
+    font-size:14px;
+}
 
-    .status-message {
-      background: #e5f7ed;
-      border-left: 7px solid #22a75a;
-      padding: 13px 18px;
-      border-radius: 10px;
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 14px;
-    }
+/* SEARCH + TABLE */
 
-    .table-box {
-      background: white;
-      border-radius: 14px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
+.inventory-section{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+}
 
-    .table-header {
-      padding: 16px 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.toolbar{
+    background:white;
+    padding:10px;
+    border-radius:10px 10px 0 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 7px rgba(0,0,0,0.1);
+}
 
-    .table-header h2 {
-      margin: 0;
-      font-size: 24px;
-    }
+.search-box{
+    padding:7px;
+    width:230px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
 
-    .table-header input {
-      width: 320px;
-      padding: 11px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 9px;
-    }
+.table-panel{
+    background:white;
+    padding:10px;
+    border-radius:0 0 10px 10px;
+    box-shadow:0 2px 7px rgba(0,0,0,0.1);
+    flex:1;
+    overflow:auto;
+}
 
-    .table-wrapper {
-      flex: 1;
-      overflow-y: auto;
-    }
+table{
+    width:100%;
+    border-collapse:collapse;
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+th,td{
+    padding:8px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+    font-size:13px;
+}
 
-    th,
-    td {
-      padding: 13px 18px;
-      border-top: 1px solid #ddd;
-      text-align: left;
-      font-size: 17px;
-    }
+.low{
+    color:#d9534f;
+    font-weight:bold;
+}
 
-    th {
-      background: #fafafa;
-      position: sticky;
-      top: 0;
-    }
+.ok{
+    color:#1f9d55;
+    font-weight:bold;
+}
 
-    .in-stock {
-      color: #159947;
-      font-weight: bold;
-    }
+.out{
+    color:#777;
+    font-weight:bold;
+}
 
-    .low-stock {
-      color: #e04848;
-      font-weight: bold;
-    }
+button{
+    background:#1d8cf8;
+    color:white;
+    border:none;
+    padding:7px 10px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
 
-    .out-stock {
-      color: #777;
-      font-weight: bold;
-    }
-  </style>
+button:hover{
+    background:#0f6fc7;
+}
+</style>
 </head>
 
 <body>
-  <div class="dashboard">
 
-    <aside class="checkout">
-      <h1>Checkout</h1>
-      <p>Select products to add them to the current sale.</p>
+<div class="container">
 
-      <div class="product-list" id="checkoutProductList"></div>
+    <div class="checkout-panel">
 
-      <div class="cart">
-        <h2>Current Cart</h2>
-        <div id="cartItems">No items added.</div>
-        <div class="cart-total">Total: $<span id="cartTotal">0.00</span></div>
-        <button class="checkout-btn" onclick="completeCheckout()">Complete Checkout</button>
-      </div>
-    </aside>
+        <h2>Checkout</h2>
 
-    <main class="main">
-      <h1>Retail Inventory Dashboard</h1>
-      <p class="subtitle">Live inventory management and product tracking dashboard.</p>
+        <p>Select products to add them to the current sale.</p>
 
-      <section class="stats">
-        <div class="stat-card">
-          <h3>Products</h3>
-          <p id="totalProducts">0</p>
+        <div id="productList"></div>
+
+        <div class="cart-box">
+
+            <h3>Current Cart</h3>
+
+            <div id="cartItems">No items added.</div>
+
+            <h3>Total: $<span id="cartTotal">0.00</span></h3>
+
+            <button class="checkout-button" onclick="completeCheckout()">
+                Complete Checkout
+            </button>
+
         </div>
 
-        <div class="stat-card">
-          <h3>Total Stock</h3>
-          <p id="totalStock">0</p>
-        </div>
+    </div>
 
-        <div class="stat-card">
-          <h3>Categories</h3>
-          <p id="totalCategories">0</p>
-        </div>
+    <div class="main">
 
-        <div class="stat-card">
-          <h3>Inventory Value</h3>
-          <p>$<span id="inventoryValue">0.00</span></p>
-        </div>
+        <h1>Retail Inventory Dashboard</h1>
 
-        <div class="stat-card">
-          <h3>Sales Completed</h3>
-          <p id="salesCompleted">0</p>
-        </div>
+        <p class="note">Live checkout and inventory tracking dashboard.</p>
 
-        <div class="stat-card">
-          <h3>Total Sales</h3>
-          <p>$<span id="totalSales">0.00</span></p>
-        </div>
-      </section>
+        <div class="cards">
 
-      <div class="status-message" id="statusMessage">Ready for checkout.</div>
-
-      <section class="table-box">
-        <div class="table-header">
-          <h2>Inventory Product List</h2>
-          <input type="text" id="searchInput" placeholder="Search products..." onkeyup="renderTable()" />
-        </div>
-
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="productTable"></tbody>
-          </table>
-        </div>
-      </section>
-    </main>
-
-  </div>
-
-  <script>
-    const products = [
-      { name: "MacBook Pro 14", category: "Laptops", price: 3499, stock: 4 },
-      { name: "iPhone 16 Pro", category: "Phones", price: 2199, stock: 7 },
-      { name: "Samsung Galaxy S25", category: "Phones", price: 1899, stock: 6 },
-      { name: "Sony XM5 Headphones", category: "Audio", price: 699, stock: 10 },
-      { name: "Apple Watch Ultra", category: "Wearables", price: 1299, stock: 5 }
-    ];
-
-    let cart = [];
-    let salesCompleted = 0;
-    let totalSales = 0;
-
-    function renderCheckoutProducts() {
-      const productList = document.getElementById("checkoutProductList");
-      productList.innerHTML = "";
-
-      products.forEach((product, index) => {
-        productList.innerHTML += `
-          <div class="product-card">
-            <div>
-              <h3>${product.name}</h3>
-              <div class="category">${product.category}</div>
-              <div class="price-stock">$${product.price} | Stock: ${product.stock}</div>
+            <div class="card">
+                <h3>Products</h3>
+                <p id="totalProducts">0</p>
             </div>
-            <button onclick="addToCart(${index})" ${product.stock === 0 ? "disabled" : ""}>+</button>
-          </div>
+
+            <div class="card">
+                <h3>Total Stock</h3>
+                <p id="totalStock">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Inventory Value</h3>
+                <p>$<span id="inventoryValue">0</span></p>
+            </div>
+
+            <div class="card">
+                <h3>Sales Completed</h3>
+                <p id="salesCompleted">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Sales</h3>
+                <p>$<span id="totalSales">0.00</span></p>
+            </div>
+
+        </div>
+
+        <div class="message-box" id="systemMessage">
+            Ready for checkout.
+        </div>
+
+        <div class="inventory-section">
+
+            <div class="toolbar">
+
+                <strong>Inventory Product List</strong>
+
+                <input
+                    type="text"
+                    class="search-box"
+                    placeholder="Search products..."
+                    onkeyup="searchProducts(this.value)"
+                >
+
+            </div>
+
+            <div class="table-panel">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="inventoryTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+let products = [
+    {name:"MacBook Pro 14", category:"Laptops", price:3499, stock:4, sold:0},
+    {name:"iPhone 16 Pro", category:"Phones", price:2199, stock:7, sold:0},
+    {name:"Samsung Galaxy S25", category:"Phones", price:1899, stock:6, sold:0},
+    {name:"Sony XM5 Headphones", category:"Audio", price:699, stock:10, sold:0},
+    {name:"Nintendo Switch OLED", category:"Gaming", price:649, stock:5, sold:0}
+];
+
+let cart = [];
+let totalSales = 0;
+let salesCompleted = 0;
+
+function loadDashboard(){
+    loadProducts();
+    loadTable();
+    updateCards();
+    updateCart();
+}
+
+function showMessage(message){
+    document.getElementById("systemMessage").textContent = message;
+}
+
+function loadProducts(){
+    let area = document.getElementById("productList");
+    area.innerHTML = "";
+
+    products.forEach((product,index)=>{
+        area.innerHTML += `
+        <div class="product-row">
+            <div>
+                <strong>${product.name}</strong><br>
+                <small>${product.category}</small><br>
+                $${product.price} | Stock: ${product.stock}
+            </div>
+            <button onclick="addToCart(${index})">+</button>
+        </div>
         `;
-      });
+    });
+}
+
+function loadTable(filteredProducts = products){
+    let table = document.getElementById("inventoryTable");
+    table.innerHTML = "";
+
+    filteredProducts.forEach(product=>{
+        let status = "";
+
+        if(product.stock === 0){
+            status = "<span class='out'>Out of Stock</span>";
+        }else if(product.stock <= 2){
+            status = "<span class='low'>Low Stock</span>";
+        }else{
+            status = "<span class='ok'>In Stock</span>";
+        }
+
+        table.innerHTML += `
+        <tr>
+            <td>${product.name}</td>
+            <td>${product.category}</td>
+            <td>$${product.price}</td>
+            <td>${product.stock}</td>
+            <td>${status}</td>
+        </tr>
+        `;
+    });
+}
+
+function addToCart(index){
+    if(products[index].stock <= 0){
+        showMessage("This product is out of stock.");
+        return;
     }
 
-    function renderTable() {
-      const table = document.getElementById("productTable");
-      const search = document.getElementById("searchInput").value.toLowerCase();
+    products[index].stock--;
+    products[index].sold++;
 
-      table.innerHTML = "";
+    let existing = cart.find(item => item.name === products[index].name);
 
-      products
-        .filter(product =>
-          product.name.toLowerCase().includes(search) ||
-          product.category.toLowerCase().includes(search)
-        )
-        .forEach(product => {
-          let status = "In Stock";
-          let statusClass = "in-stock";
-
-          if (product.stock === 0) {
-            status = "Out of Stock";
-            statusClass = "out-stock";
-          } else if (product.stock <= 4) {
-            status = "Low Stock";
-            statusClass = "low-stock";
-          }
-
-          table.innerHTML += `
-            <tr>
-              <td>${product.name}</td>
-              <td>${product.category}</td>
-              <td>$${product.price}</td>
-              <td>${product.stock}</td>
-              <td class="${statusClass}">${status}</td>
-            </tr>
-          `;
+    if(existing){
+        existing.quantity++;
+    }else{
+        cart.push({
+            name:products[index].name,
+            price:products[index].price,
+            quantity:1
         });
     }
 
-    function updateStats() {
-      const totalProducts = products.length;
-      const totalStock = products.reduce((sum, product) => sum + product.stock, 0);
-      const totalCategories = new Set(products.map(product => product.category)).size;
-      const inventoryValue = products.reduce((sum, product) => sum + product.price * product.stock, 0);
+    showMessage(products[index].name + " added to cart.");
+    loadDashboard();
+}
 
-      document.getElementById("totalProducts").textContent = totalProducts;
-      document.getElementById("totalStock").textContent = totalStock;
-      document.getElementById("totalCategories").textContent = totalCategories;
-      document.getElementById("inventoryValue").textContent = inventoryValue.toFixed(2);
-      document.getElementById("salesCompleted").textContent = salesCompleted;
-      document.getElementById("totalSales").textContent = totalSales.toFixed(2);
+function updateCart(){
+    let area = document.getElementById("cartItems");
+    let total = 0;
+
+    if(cart.length === 0){
+        area.innerHTML = "No items added.";
+    }else{
+        area.innerHTML = "";
+
+        cart.forEach(item=>{
+            let lineTotal = item.price * item.quantity;
+            total += lineTotal;
+
+            area.innerHTML += `
+            <div class="cart-item">
+                <strong>${item.name}</strong><br>
+                Qty: ${item.quantity} | $${lineTotal.toFixed(2)}
+            </div>
+            `;
+        });
     }
 
-    function updateCart() {
-      const cartItems = document.getElementById("cartItems");
-      const cartTotal = document.getElementById("cartTotal");
+    document.getElementById("cartTotal").textContent = total.toFixed(2);
+}
 
-      if (cart.length === 0) {
-        cartItems.textContent = "No items added.";
-        cartTotal.textContent = "0.00";
+function updateCards(){
+    let totalProducts = products.length;
+    let totalStock = products.reduce((sum,p)=>sum+p.stock,0);
+    let inventoryValue = products.reduce((sum,p)=>sum+(p.price*p.stock),0);
+
+    document.getElementById("totalProducts").textContent = totalProducts;
+    document.getElementById("totalStock").textContent = totalStock;
+    document.getElementById("inventoryValue").textContent = inventoryValue.toLocaleString();
+    document.getElementById("salesCompleted").textContent = salesCompleted;
+    document.getElementById("totalSales").textContent = totalSales.toFixed(2);
+}
+
+function completeCheckout(){
+    if(cart.length === 0){
+        showMessage("No items in the cart.");
         return;
-      }
-
-      cartItems.innerHTML = cart.map(item => `
-        <div class="cart-item">
-          <span>${item.name}</span>
-          <span>$${item.price}</span>
-        </div>
-      `).join("");
-
-      const total = cart.reduce((sum, item) => sum + item.price, 0);
-      cartTotal.textContent = total.toFixed(2);
     }
 
-    function addToCart(index) {
-      if (products[index].stock <= 0) {
-        document.getElementById("statusMessage").textContent = "This product is out of stock.";
-        return;
-      }
+    let saleTotal = cart.reduce((sum,item)=>sum + (item.price * item.quantity),0);
 
-      cart.push(products[index]);
-      products[index].stock--;
+    totalSales += saleTotal;
+    salesCompleted++;
 
-      document.getElementById("statusMessage").textContent =
-        `${products[index].name} added to cart.`;
+    cart = [];
 
-      updateCart();
-      renderCheckoutProducts();
-      renderTable();
-      updateStats();
-    }
+    showMessage("Checkout completed. Sales and inventory totals updated.");
+    loadDashboard();
+}
 
-    function completeCheckout() {
-      if (cart.length === 0) {
-        document.getElementById("statusMessage").textContent = "No items in cart.";
-        return;
-      }
+function searchProducts(value){
+    let filtered = products.filter(product =>
+        product.name.toLowerCase().includes(value.toLowerCase()) ||
+        product.category.toLowerCase().includes(value.toLowerCase())
+    );
 
-      const saleTotal = cart.reduce((sum, item) => sum + item.price, 0);
+    loadTable(filtered);
+}
 
-      salesCompleted++;
-      totalSales += saleTotal;
-      cart = [];
+loadDashboard();
+</script>
 
-      document.getElementById("statusMessage").textContent =
-        `Checkout complete. Sale value: $${saleTotal.toFixed(2)}`;
-
-      updateCart();
-      renderCheckoutProducts();
-      renderTable();
-      updateStats();
-    }
-
-    renderCheckoutProducts();
-    renderTable();
-    updateStats();
-  </script>
 </body>
 </html>
