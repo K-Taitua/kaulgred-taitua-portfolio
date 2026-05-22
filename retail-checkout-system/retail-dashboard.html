@@ -24,7 +24,7 @@ body{
     height:100vh;
     background:#10233f;
     color:white;
-    padding:10px 12px;
+    padding:12px;
     box-sizing:border-box;
     display:flex;
     flex-direction:column;
@@ -33,53 +33,50 @@ body{
 
 .checkout-panel h2{
     color:#69c9ff;
-    margin:0 0 3px;
-    font-size:27px;
+    margin:0 0 4px;
+    font-size:28px;
 }
 
 .checkout-panel p{
-    font-size:12px;
-    margin:0 0 7px;
+    font-size:13px;
+    margin:0 0 8px;
 }
-
-/* PRODUCT LIST - NO SCROLL */
 
 #productList{
     flex-shrink:0;
-    overflow:visible;
 }
 
 .product-row{
     background:white;
     color:#111;
     border-radius:8px;
-    padding:4px 7px;
+    padding:5px 8px;
     margin-bottom:5px;
-    height:47px;
+    height:58px;
     display:grid;
     grid-template-columns:1fr auto;
-    gap:6px;
+    gap:8px;
     align-items:center;
 }
 
 .product-row strong{
-    font-size:12px;
+    font-size:13px;
 }
 
 .product-row small{
     color:#666;
-    font-size:10px;
+    font-size:11px;
 }
 
 .product-row div{
-    font-size:11px;
-    line-height:1.15;
+    font-size:12px;
+    line-height:1.18;
 }
 
 .product-row button{
-    width:28px;
-    height:28px;
-    font-size:15px;
+    width:31px;
+    height:31px;
+    font-size:16px;
     padding:0;
 }
 
@@ -88,7 +85,7 @@ body{
 .cart-box{
     background:white;
     color:#111;
-    padding:9px;
+    padding:10px;
     border-radius:8px;
     margin-top:7px;
     flex:1;
@@ -99,31 +96,40 @@ body{
 }
 
 .cart-box h3{
-    margin:0 0 6px;
+    margin:0 0 7px;
     font-size:20px;
 }
 
 #cartItems{
     flex:1;
-    min-height:0;
     overflow-y:auto;
-    font-size:13px;
+    min-height:0;
     padding-right:4px;
+    font-size:12px;
 }
 
 .cart-item{
     border-bottom:1px solid #ddd;
     padding:4px 0;
-    font-size:13px;
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+    align-items:center;
 }
 
-.cart-item strong{
-    font-size:14px;
+.cart-name{
+    font-weight:bold;
+    font-size:12px;
+}
+
+.cart-detail{
+    font-size:12px;
+    white-space:nowrap;
 }
 
 .cart-total{
-    margin:8px 0;
-    font-size:21px;
+    margin:8px 0 7px;
+    font-size:19px;
     font-weight:bold;
     flex-shrink:0;
 }
@@ -381,7 +387,6 @@ function addToCart(index){
     }
 
     products[index].stock--;
-    products[index].sold++;
 
     let existing = cart.find(item => item.name === products[index].name);
 
@@ -414,8 +419,8 @@ function updateCart(){
 
             area.innerHTML += `
             <div class="cart-item">
-                <strong>${item.name}</strong><br>
-                Qty: ${item.quantity} | $${lineTotal.toFixed(2)}
+                <span class="cart-name">${item.name}</span>
+                <span class="cart-detail">x${item.quantity} | $${lineTotal.toFixed(2)}</span>
             </div>`;
         });
     }
