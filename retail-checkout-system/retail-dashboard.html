@@ -43,7 +43,9 @@ body{
 
 #productList{
     flex:1;
-    overflow:hidden;
+    overflow-y:auto;
+    min-height:0;
+    padding-right:3px;
 }
 
 .product-row{
@@ -79,18 +81,20 @@ body{
     padding:9px;
     border-radius:8px;
     margin-top:8px;
-    max-height:210px;
+    max-height:260px;
     overflow-y:auto;
+    flex-shrink:0;
 }
 
 .cart-box h3{
-    margin:0 0 6px;
+    margin:0 0 5px;
+    font-size:18px;
 }
 
 .cart-item{
     border-bottom:1px solid #ddd;
-    padding:4px 0;
-    font-size:13px;
+    padding:3px 0;
+    font-size:12px;
 }
 
 .checkout-button{
