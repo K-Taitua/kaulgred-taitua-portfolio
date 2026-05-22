@@ -5,9 +5,7 @@
 <title>Retail Inventory Dashboard</title>
 
 <style>
-*{
-    box-sizing:border-box;
-}
+*{ box-sizing:border-box; }
 
 body{
     margin:0;
@@ -36,16 +34,16 @@ body{
 
 .checkout-panel h2{
     color:#69c9ff;
-    margin:0 0 4px;
+    margin:0 0 3px;
     font-size:28px;
 }
 
 .checkout-panel p{
     font-size:13px;
-    margin:0 0 8px;
+    margin:0 0 7px;
 }
 
-/* PRODUCT CARDS */
+/* PRODUCTS */
 
 #productList{
     flex-shrink:0;
@@ -55,18 +53,18 @@ body{
     background:white;
     color:#111;
     border-radius:8px;
-    padding:6px 8px;
-    margin-bottom:6px;
-    height:58px;
+    padding:5px 8px;
+    margin-bottom:5px;
+    height:50px;
     display:grid;
-    grid-template-columns:1fr 65px 34px;
+    grid-template-columns:1fr 65px 32px;
     gap:6px;
     align-items:center;
 }
 
 .product-name{
     font-weight:bold;
-    font-size:13px;
+    font-size:12px;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
@@ -74,13 +72,13 @@ body{
 
 .product-category{
     color:#666;
-    font-size:11px;
+    font-size:10px;
 }
 
 .product-info{
     text-align:right;
-    font-size:12px;
-    line-height:1.2;
+    font-size:11px;
+    line-height:1.15;
 }
 
 .product-price{
@@ -92,10 +90,10 @@ body{
 }
 
 .product-row button{
-    width:32px;
-    height:32px;
+    width:30px;
+    height:30px;
     padding:0;
-    font-size:18px;
+    font-size:17px;
 }
 
 /* CURRENT CART */
@@ -106,7 +104,8 @@ body{
     border-radius:8px;
     padding:10px;
     margin-top:8px;
-    height:220px;
+    flex:1;
+    min-height:0;
     display:flex;
     flex-direction:column;
     overflow:hidden;
@@ -118,24 +117,31 @@ body{
 }
 
 #cartItems{
-    height:85px;
+    flex:1;
+    min-height:0;
     overflow-y:auto;
-    padding-right:4px;
-    border-bottom:1px solid #ddd;
+    padding-right:5px;
+    border-top:1px solid #eee;
+    border-bottom:1px solid #eee;
 }
 
 #cartItems::-webkit-scrollbar{
-    width:6px;
+    width:7px;
+}
+
+#cartItems::-webkit-scrollbar-track{
+    background:#eee;
+    border-radius:10px;
 }
 
 #cartItems::-webkit-scrollbar-thumb{
-    background:#bbb;
+    background:#aaa;
     border-radius:10px;
 }
 
 .cart-item{
-    padding:4px 0;
-    font-size:13px;
+    padding:5px 0;
+    border-bottom:1px solid #ddd;
 }
 
 .cart-item strong{
@@ -151,14 +157,16 @@ body{
 }
 
 .cart-total{
-    margin:8px 0;
+    margin:7px 0;
     font-size:19px;
     font-weight:bold;
+    flex-shrink:0;
 }
 
 .checkout-button{
     width:100%;
     background:#1f9d55;
+    flex-shrink:0;
 }
 
 /* RIGHT DASHBOARD */
@@ -263,20 +271,9 @@ th,td{
     font-size:13px;
 }
 
-.low{
-    color:#d9534f;
-    font-weight:bold;
-}
-
-.ok{
-    color:#1f9d55;
-    font-weight:bold;
-}
-
-.out{
-    color:#777;
-    font-weight:bold;
-}
+.low{ color:#d9534f; font-weight:bold; }
+.ok{ color:#1f9d55; font-weight:bold; }
+.out{ color:#777; font-weight:bold; }
 
 button{
     background:#1d8cf8;
@@ -313,45 +310,19 @@ button{
         <p class="note">Live checkout and inventory tracking dashboard.</p>
 
         <div class="cards">
-            <div class="card">
-                <h3>Products</h3>
-                <p id="totalProducts">0</p>
-            </div>
-
-            <div class="card">
-                <h3>Total Stock</h3>
-                <p id="totalStock">0</p>
-            </div>
-
-            <div class="card">
-                <h3>Inventory Value</h3>
-                <p>$<span id="inventoryValue">0</span></p>
-            </div>
-
-            <div class="card">
-                <h3>Sales Completed</h3>
-                <p id="salesCompleted">0</p>
-            </div>
-
-            <div class="card">
-                <h3>Total Sales</h3>
-                <p>$<span id="totalSales">0.00</span></p>
-            </div>
+            <div class="card"><h3>Products</h3><p id="totalProducts">0</p></div>
+            <div class="card"><h3>Total Stock</h3><p id="totalStock">0</p></div>
+            <div class="card"><h3>Inventory Value</h3><p>$<span id="inventoryValue">0</span></p></div>
+            <div class="card"><h3>Sales Completed</h3><p id="salesCompleted">0</p></div>
+            <div class="card"><h3>Total Sales</h3><p>$<span id="totalSales">0.00</span></p></div>
         </div>
 
-        <div class="message-box" id="systemMessage">
-            Ready for checkout.
-        </div>
+        <div class="message-box" id="systemMessage">Ready for checkout.</div>
 
         <div class="inventory-section">
             <div class="toolbar">
                 <strong>Inventory Product List</strong>
-                <input
-                    type="text"
-                    class="search-box"
-                    placeholder="Search products..."
-                    onkeyup="searchProducts(this.value)"
-                >
+                <input type="text" class="search-box" placeholder="Search products..." onkeyup="searchProducts(this.value)">
             </div>
 
             <div class="table-panel">
@@ -365,7 +336,6 @@ button{
                             <th>Status</th>
                         </tr>
                     </thead>
-
                     <tbody id="inventoryTable"></tbody>
                 </table>
             </div>
@@ -416,8 +386,7 @@ function loadProducts(){
             </div>
 
             <button onclick="addToCart(${index})">+</button>
-        </div>
-        `;
+        </div>`;
     });
 }
 
@@ -426,15 +395,11 @@ function loadTable(filteredProducts = products){
     table.innerHTML = "";
 
     filteredProducts.forEach(product=>{
-        let status = "";
-
-        if(product.stock === 0){
-            status = "<span class='out'>Out of Stock</span>";
-        }else if(product.stock <= 2){
-            status = "<span class='low'>Low Stock</span>";
-        }else{
-            status = "<span class='ok'>In Stock</span>";
-        }
+        let status = product.stock === 0
+            ? "<span class='out'>Out of Stock</span>"
+            : product.stock <= 2
+            ? "<span class='low'>Low Stock</span>"
+            : "<span class='ok'>In Stock</span>";
 
         table.innerHTML += `
         <tr>
@@ -443,8 +408,7 @@ function loadTable(filteredProducts = products){
             <td>$${product.price}</td>
             <td>${product.stock}</td>
             <td>${status}</td>
-        </tr>
-        `;
+        </tr>`;
     });
 }
 
