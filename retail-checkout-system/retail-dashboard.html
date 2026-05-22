@@ -24,7 +24,7 @@ body{
     height:100vh;
     background:#10233f;
     color:white;
-    padding:14px;
+    padding:12px;
     box-sizing:border-box;
     display:flex;
     flex-direction:column;
@@ -33,20 +33,18 @@ body{
 
 .checkout-panel h2{
     color:#69c9ff;
-    margin:0 0 6px;
-    font-size:30px;
+    margin:0 0 4px;
+    font-size:28px;
 }
 
 .checkout-panel p{
     font-size:13px;
-    margin:0 0 10px;
+    margin:0 0 8px;
 }
 
 #productList{
-    height:300px;
-    overflow-y:auto;
-    padding-right:4px;
     flex-shrink:0;
+    overflow:visible;
 }
 
 .product-row{
@@ -55,10 +53,10 @@ body{
     border-radius:8px;
     padding:5px 7px;
     margin-bottom:5px;
-    min-height:58px;
+    height:56px;
     display:grid;
     grid-template-columns:1fr auto;
-    gap:8px;
+    gap:6px;
     align-items:center;
 }
 
@@ -73,48 +71,56 @@ body{
 
 .product-row div{
     font-size:12px;
-    line-height:1.25;
+    line-height:1.2;
 }
 
 .product-row button{
     width:30px;
     height:30px;
     font-size:16px;
+    padding:0;
 }
+
+/* CART */
 
 .cart-box{
     background:white;
     color:#111;
-    padding:9px;
+    padding:10px;
     border-radius:8px;
-    margin-top:8px;
+    margin-top:6px;
     flex:1;
-    min-height:0;
+    min-height:230px;
     display:flex;
     flex-direction:column;
+    overflow:hidden;
 }
 
 .cart-box h3{
-    margin:0 0 5px;
-    font-size:18px;
+    margin:0 0 6px;
+    font-size:20px;
 }
 
 #cartItems{
     flex:1;
     overflow-y:auto;
-    min-height:0;
+    font-size:13px;
     padding-right:4px;
 }
 
 .cart-item{
     border-bottom:1px solid #ddd;
-    padding:3px 0;
-    font-size:12px;
+    padding:4px 0;
+    font-size:13px;
+}
+
+.cart-item strong{
+    font-size:14px;
 }
 
 .cart-total{
-    margin:6px 0;
-    font-size:18px;
+    margin:8px 0;
+    font-size:20px;
     font-weight:bold;
     flex-shrink:0;
 }
@@ -122,7 +128,7 @@ body{
 .checkout-button{
     width:100%;
     background:#1f9d55;
-    margin-top:6px;
+    margin-top:5px;
     flex-shrink:0;
 }
 
@@ -229,20 +235,9 @@ th,td{
     font-size:13px;
 }
 
-.low{
-    color:#d9534f;
-    font-weight:bold;
-}
-
-.ok{
-    color:#1f9d55;
-    font-weight:bold;
-}
-
-.out{
-    color:#777;
-    font-weight:bold;
-}
+.low{ color:#d9534f; font-weight:bold; }
+.ok{ color:#1f9d55; font-weight:bold; }
+.out{ color:#777; font-weight:bold; }
 
 button{
     background:#1d8cf8;
@@ -253,10 +248,6 @@ button{
     cursor:pointer;
     font-weight:bold;
 }
-
-button:hover{
-    background:#0f6fc7;
-}
 </style>
 </head>
 
@@ -265,87 +256,41 @@ button:hover{
 <div class="container">
 
     <div class="checkout-panel">
-
         <h2>Checkout</h2>
-
         <p>Select products to add them to the current sale.</p>
 
         <div id="productList"></div>
 
         <div class="cart-box">
-
             <h3>Current Cart</h3>
-
             <div id="cartItems">No items added.</div>
-
             <div class="cart-total">Total: $<span id="cartTotal">0.00</span></div>
-
-            <button class="checkout-button" onclick="completeCheckout()">
-                Complete Checkout
-            </button>
-
+            <button class="checkout-button" onclick="completeCheckout()">Complete Checkout</button>
         </div>
-
     </div>
 
     <div class="main">
-
         <h1>Retail Inventory Dashboard</h1>
-
         <p class="note">Live checkout and inventory tracking dashboard.</p>
 
         <div class="cards">
-
-            <div class="card">
-                <h3>Products</h3>
-                <p id="totalProducts">0</p>
-            </div>
-
-            <div class="card">
-                <h3>Total Stock</h3>
-                <p id="totalStock">0</p>
-            </div>
-
-            <div class="card">
-                <h3>Inventory Value</h3>
-                <p>$<span id="inventoryValue">0</span></p>
-            </div>
-
-            <div class="card">
-                <h3>Sales Completed</h3>
-                <p id="salesCompleted">0</p>
-            </div>
-
-            <div class="card">
-                <h3>Total Sales</h3>
-                <p>$<span id="totalSales">0.00</span></p>
-            </div>
-
+            <div class="card"><h3>Products</h3><p id="totalProducts">0</p></div>
+            <div class="card"><h3>Total Stock</h3><p id="totalStock">0</p></div>
+            <div class="card"><h3>Inventory Value</h3><p>$<span id="inventoryValue">0</span></p></div>
+            <div class="card"><h3>Sales Completed</h3><p id="salesCompleted">0</p></div>
+            <div class="card"><h3>Total Sales</h3><p>$<span id="totalSales">0.00</span></p></div>
         </div>
 
-        <div class="message-box" id="systemMessage">
-            Ready for checkout.
-        </div>
+        <div class="message-box" id="systemMessage">Ready for checkout.</div>
 
         <div class="inventory-section">
-
             <div class="toolbar">
-
                 <strong>Inventory Product List</strong>
-
-                <input
-                    type="text"
-                    class="search-box"
-                    placeholder="Search products..."
-                    onkeyup="searchProducts(this.value)"
-                >
-
+                <input type="text" class="search-box" placeholder="Search products..." onkeyup="searchProducts(this.value)">
             </div>
 
             <div class="table-panel">
-
                 <table>
-
                     <thead>
                         <tr>
                             <th>Product</th>
@@ -355,15 +300,10 @@ button:hover{
                             <th>Status</th>
                         </tr>
                     </thead>
-
                     <tbody id="inventoryTable"></tbody>
-
                 </table>
-
             </div>
-
         </div>
-
     </div>
 
 </div>
@@ -405,8 +345,7 @@ function loadProducts(){
                 $${product.price} | Stock: ${product.stock}
             </div>
             <button onclick="addToCart(${index})">+</button>
-        </div>
-        `;
+        </div>`;
     });
 }
 
@@ -415,15 +354,11 @@ function loadTable(filteredProducts = products){
     table.innerHTML = "";
 
     filteredProducts.forEach(product=>{
-        let status = "";
-
-        if(product.stock === 0){
-            status = "<span class='out'>Out of Stock</span>";
-        }else if(product.stock <= 2){
-            status = "<span class='low'>Low Stock</span>";
-        }else{
-            status = "<span class='ok'>In Stock</span>";
-        }
+        let status = product.stock === 0
+            ? "<span class='out'>Out of Stock</span>"
+            : product.stock <= 2
+            ? "<span class='low'>Low Stock</span>"
+            : "<span class='ok'>In Stock</span>";
 
         table.innerHTML += `
         <tr>
@@ -432,8 +367,7 @@ function loadTable(filteredProducts = products){
             <td>$${product.price}</td>
             <td>${product.stock}</td>
             <td>${status}</td>
-        </tr>
-        `;
+        </tr>`;
     });
 }
 
@@ -479,8 +413,7 @@ function updateCart(){
             <div class="cart-item">
                 <strong>${item.name}</strong><br>
                 Qty: ${item.quantity} | $${lineTotal.toFixed(2)}
-            </div>
-            `;
+            </div>`;
         });
     }
 
@@ -509,7 +442,6 @@ function completeCheckout(){
 
     totalSales += saleTotal;
     salesCompleted++;
-
     cart = [];
 
     showMessage("Checkout completed. Sales and inventory totals updated.");
