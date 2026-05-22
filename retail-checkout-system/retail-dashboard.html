@@ -4,79 +4,331 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Retail Inventory Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
 
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      color: #111;
+    }
+
+    .dashboard {
+      height: 100vh;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+    }
+
+    /* LEFT CHECKOUT */
+
+    .checkout {
+      background: #102743;
+      color: white;
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    .checkout h1 {
+      margin: 0;
+      font-size: 36px;
+      color: #51bfff;
+    }
+
+    .checkout-subtitle {
+      margin: 6px 0 14px;
+      font-size: 16px;
+      color: #d7e7f5;
+    }
+
+    .checkout-products {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .checkout-card {
+      background: white;
+      color: #111;
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 73px;
+    }
+
+    .checkout-card h3 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .checkout-card p {
+      margin: 3px 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .checkout-card strong {
+      font-size: 17px;
+    }
+
+    .checkout-card button {
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 8px;
+      background: #188df2;
+      color: white;
+      font-size: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .checkout-card button:disabled {
+      background: #999;
+      cursor: not-allowed;
+    }
+
+    .cart-box {
+      background: white;
+      color: #111;
+      margin-top: 12px;
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .cart-box h2 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+
+    .cart-items {
+      min-height: 48px;
+      max-height: 95px;
+      overflow-y: auto;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .cart-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+      padding: 4px 0;
+    }
+
+    .cart-total {
+      font-size: 23px;
+      font-weight: bold;
+      margin: 8px 0 12px;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      padding: 11px;
+      background: #20a85a;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* RIGHT INVENTORY */
+
+    .main {
+      height: 100vh;
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .main h1 {
+      margin: 0;
+      font-size: 44px;
+    }
+
+    .main-subtitle {
+      margin: 6px 0 14px;
+      font-size: 19px;
+      color: #444;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .summary-card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px 18px;
+      min-height: 96px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    }
+
+    .summary-card h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+      color: #666;
+    }
+
+    .summary-card p {
+      margin: 0;
+      font-size: 27px;
+      font-weight: bold;
+    }
+
+    .status-bar {
+      background: #e5f7ed;
+      border-left: 7px solid #22a75a;
+      padding: 13px 18px;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+
+    .table-box {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .table-top {
+      padding: 16px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .table-top h2 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .table-top input {
+      width: 320px;
+      padding: 11px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 9px;
+    }
+
+    .table-wrapper {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 13px 18px;
+      border-top: 1px solid #ddd;
+      text-align: left;
+      font-size: 17px;
+    }
+
+    th {
+      background: #fafafa;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .status-in {
+      color: #149947;
+      font-weight: bold;
+    }
+
+    .status-low {
+      color: #e04848;
+      font-weight: bold;
+    }
+
+    .status-out {
+      color: #777;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
   <div class="dashboard">
 
-    <!-- LEFT CHECKOUT SIDE -->
-    <aside class="checkout-panel">
+    <aside class="checkout">
       <h1>Checkout</h1>
-      <p>Select products to add them to the current sale.</p>
+      <p class="checkout-subtitle">Select products to add them to the current sale.</p>
 
-      <div id="checkoutProducts" class="checkout-products"></div>
+      <div class="checkout-products" id="checkoutProducts"></div>
 
       <div class="cart-box">
         <h2>Current Cart</h2>
-        <div id="cartItems">No items added.</div>
-        <h3>Total: $<span id="cartTotal">0.00</span></h3>
-        <button onclick="completeCheckout()">Complete Checkout</button>
+        <div class="cart-items" id="cartItems">No items added.</div>
+        <div class="cart-total">Total: $<span id="cartTotal">0.00</span></div>
+        <button class="checkout-btn" onclick="completeCheckout()">Complete Checkout</button>
       </div>
     </aside>
 
-    <!-- RIGHT INVENTORY SIDE -->
-    <main class="inventory-panel">
-      <header>
-        <h1>Retail Inventory Dashboard</h1>
-        <p>Inventory management and product tracking dashboard.</p>
-      </header>
+    <main class="main">
+      <h1>Retail Inventory Dashboard</h1>
+      <p class="main-subtitle">Live inventory management and product tracking.</p>
 
-      <section class="stats-grid">
-        <div class="stat-card">
+      <section class="summary-grid">
+        <div class="summary-card">
           <h3>Products</h3>
           <p id="totalProducts">0</p>
         </div>
 
-        <div class="stat-card">
+        <div class="summary-card">
           <h3>Total Stock</h3>
           <p id="totalStock">0</p>
         </div>
 
-        <div class="stat-card">
+        <div class="summary-card">
           <h3>Categories</h3>
           <p id="totalCategories">0</p>
         </div>
 
-        <div class="stat-card">
+        <div class="summary-card">
           <h3>Inventory Value</h3>
           <p>$<span id="inventoryValue">0.00</span></p>
         </div>
 
-        <div class="stat-card">
+        <div class="summary-card">
           <h3>Sales Completed</h3>
           <p id="salesCompleted">0</p>
         </div>
 
-        <div class="stat-card">
+        <div class="summary-card">
           <h3>Total Sales</h3>
           <p>$<span id="totalSales">0.00</span></p>
         </div>
       </section>
 
-      <div class="status-message" id="statusMessage">
-        Ready for checkout.
-      </div>
+      <div class="status-bar" id="statusMessage">Ready for checkout.</div>
 
-      <section class="table-section">
-        <div class="table-header">
+      <section class="table-box">
+        <div class="table-top">
           <h2>Inventory Product List</h2>
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Search products..."
-            onkeyup="renderTable()"
-          />
+          <input type="text" id="searchInput" placeholder="Search products..." onkeyup="renderTable()" />
         </div>
 
         <div class="table-wrapper">
@@ -98,6 +350,148 @@
 
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    const products = [
+      { name: "MacBook Pro 14", category: "Laptops", price: 3499, stock: 4 },
+      { name: "iPhone 16 Pro", category: "Phones", price: 2199, stock: 7 },
+      { name: "Samsung Galaxy S25", category: "Phones", price: 1899, stock: 6 },
+      { name: "Sony XM5 Headphones", category: "Audio", price: 699, stock: 10 },
+      { name: "Apple Watch Ultra", category: "Wearables", price: 1299, stock: 5 }
+    ];
+
+    let cart = [];
+    let salesCompleted = 0;
+    let totalSales = 0;
+
+    function renderCheckoutProducts() {
+      const container = document.getElementById("checkoutProducts");
+      container.innerHTML = "";
+
+      products.forEach((product, index) => {
+        container.innerHTML += `
+          <div class="checkout-card">
+            <div>
+              <h3>${product.name}</h3>
+              <p>${product.category}</p>
+              <strong>$${product.price} | Stock: ${product.stock}</strong>
+            </div>
+            <button onclick="addToCart(${index})" ${product.stock === 0 ? "disabled" : ""}>+</button>
+          </div>
+        `;
+      });
+    }
+
+    function renderTable() {
+      const table = document.getElementById("productTable");
+      const search = document.getElementById("searchInput").value.toLowerCase();
+
+      table.innerHTML = "";
+
+      products
+        .filter(product =>
+          product.name.toLowerCase().includes(search) ||
+          product.category.toLowerCase().includes(search)
+        )
+        .forEach(product => {
+          let status = "In Stock";
+          let statusClass = "status-in";
+
+          if (product.stock === 0) {
+            status = "Out of Stock";
+            statusClass = "status-out";
+          } else if (product.stock <= 4) {
+            status = "Low Stock";
+            statusClass = "status-low";
+          }
+
+          table.innerHTML += `
+            <tr>
+              <td>${product.name}</td>
+              <td>${product.category}</td>
+              <td>$${product.price}</td>
+              <td>${product.stock}</td>
+              <td class="${statusClass}">${status}</td>
+            </tr>
+          `;
+        });
+    }
+
+    function updateStats() {
+      const totalProducts = products.length;
+      const totalStock = products.reduce((sum, product) => sum + product.stock, 0);
+      const totalCategories = new Set(products.map(product => product.category)).size;
+      const inventoryValue = products.reduce((sum, product) => sum + product.price * product.stock, 0);
+
+      document.getElementById("totalProducts").textContent = totalProducts;
+      document.getElementById("totalStock").textContent = totalStock;
+      document.getElementById("totalCategories").textContent = totalCategories;
+      document.getElementById("inventoryValue").textContent = inventoryValue.toFixed(2);
+      document.getElementById("salesCompleted").textContent = salesCompleted;
+      document.getElementById("totalSales").textContent = totalSales.toFixed(2);
+    }
+
+    function addToCart(index) {
+      if (products[index].stock <= 0) {
+        document.getElementById("statusMessage").textContent = "This product is out of stock.";
+        return;
+      }
+
+      cart.push(products[index]);
+      products[index].stock--;
+
+      document.getElementById("statusMessage").textContent = `${products[index].name} added to cart.`;
+
+      updateCart();
+      renderCheckoutProducts();
+      renderTable();
+      updateStats();
+    }
+
+    function updateCart() {
+      const cartItems = document.getElementById("cartItems");
+      const cartTotal = document.getElementById("cartTotal");
+
+      if (cart.length === 0) {
+        cartItems.textContent = "No items added.";
+        cartTotal.textContent = "0.00";
+        return;
+      }
+
+      cartItems.innerHTML = cart.map(item => `
+        <div class="cart-row">
+          <span>${item.name}</span>
+          <span>$${item.price}</span>
+        </div>
+      `).join("");
+
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      cartTotal.textContent = total.toFixed(2);
+    }
+
+    function completeCheckout() {
+      if (cart.length === 0) {
+        document.getElementById("statusMessage").textContent = "No items in cart.";
+        return;
+      }
+
+      const saleTotal = cart.reduce((sum, item) => sum + item.price, 0);
+
+      salesCompleted++;
+      totalSales += saleTotal;
+      cart = [];
+
+      document.getElementById("statusMessage").textContent =
+        `Checkout complete. Sale value: $${saleTotal.toFixed(2)}`;
+
+      updateCart();
+      updateStats();
+      renderCheckoutProducts();
+      renderTable();
+    }
+
+    renderCheckoutProducts();
+    renderTable();
+    updateStats();
+  </script>
 </body>
 </html>
