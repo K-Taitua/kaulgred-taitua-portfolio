@@ -195,12 +195,26 @@ button {
 
 .chart-card h3 {
   font-size: 15px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
-.chart-card canvas {
+.chart-scroll {
+  height: calc(100% - 28px);
+  overflow: auto;
+}
+
+.chart-scroll.horizontal canvas {
+  min-width: 760px;
+  height: 100% !important;
+}
+
+.chart-scroll.vertical canvas {
   width: 100% !important;
-  height: calc(100% - 24px) !important;
+  min-height: 520px;
+}
+
+.chart-scroll canvas {
+  display: block;
 }
 
 .table-card {
@@ -262,4 +276,22 @@ td {
 .out {
   background: #fee2e2;
   color: #dc2626;
+}
+
+.chart-scroll::-webkit-scrollbar,
+.table-wrap::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.chart-scroll::-webkit-scrollbar-thumb,
+.table-wrap::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 20px;
+}
+
+.chart-scroll::-webkit-scrollbar-track,
+.table-wrap::-webkit-scrollbar-track {
+  background: #e2e8f0;
+  border-radius: 20px;
 }
