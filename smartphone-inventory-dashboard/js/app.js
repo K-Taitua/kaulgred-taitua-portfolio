@@ -1,622 +1,333 @@
-// =========================================================
-// SMARTPHONE INVENTORY MANAGEMENT DASHBOARD
-// JavaScript file for product data, dashboard totals,
-// inventory table rendering, chart creation, and actions.
-// =========================================================
-
-
-// =========================================================
-// PRODUCT DATA
-// This matches the Python/SQLite database demo data.
-// Each product has price, stock, units sold, and update time.
-// =========================================================
-
 const products = [
-  {
-    brand: "Apple",
-    model: "iPhone 16 Pro",
-    storage: "256GB",
-    price: 2199,
-    stock: 10,
-    sold: 36,
-    lastUpdated: "25 May 2025, 10:45 AM"
-  },
-  {
-    brand: "Apple",
-    model: "iPhone 16",
-    storage: "128GB",
-    price: 1599,
-    stock: 18,
-    sold: 28,
-    lastUpdated: "25 May 2025, 10:30 AM"
-  },
-  {
-    brand: "Samsung",
-    model: "Galaxy S25 Ultra",
-    storage: "256GB",
-    price: 2399,
-    stock: 5,
-    sold: 35,
-    lastUpdated: "25 May 2025, 10:30 AM"
-  },
-  {
-    brand: "Samsung",
-    model: "Galaxy S25",
-    storage: "256GB",
-    price: 1599,
-    stock: 14,
-    sold: 25,
-    lastUpdated: "25 May 2025, 10:28 AM"
-  },
-  {
-    brand: "Google",
-    model: "Pixel 9 Pro",
-    storage: "256GB",
-    price: 1749,
-    stock: 7,
-    sold: 19,
-    lastUpdated: "25 May 2025, 09:15 AM"
-  },
-  {
-    brand: "Google",
-    model: "Pixel 9",
-    storage: "128GB",
-    price: 1289,
-    stock: 11,
-    sold: 16,
-    lastUpdated: "25 May 2025, 09:10 AM"
-  },
-  {
-    brand: "OnePlus",
-    model: "OnePlus 13",
-    storage: "256GB",
-    price: 1284,
-    stock: 6,
-    sold: 14,
-    lastUpdated: "25 May 2025, 09:10 AM"
-  },
-  {
-    brand: "Xiaomi",
-    model: "Redmi Note 15 Pro",
-    storage: "256GB",
-    price: 696,
-    stock: 22,
-    sold: 11,
-    lastUpdated: "25 May 2025, 08:50 AM"
-  },
-  {
-    brand: "Xiaomi",
-    model: "Redmi Note 15",
-    storage: "256GB",
-    price: 596,
-    stock: 25,
-    sold: 8,
-    lastUpdated: "25 May 2025, 08:50 AM"
-  }
+  { id: 1, brand: "Apple", model: "iPhone 16 Pro", storage: "256GB", price: 2199, cost: 1399, stock: 10, sold: 36, lastUpdated: "25 May 2025, 10:45 AM" },
+  { id: 2, brand: "Apple", model: "iPhone 16", storage: "128GB", price: 1499, cost: 929, stock: 13, sold: 32, lastUpdated: "25 May 2025, 10:45 AM" },
+  { id: 3, brand: "Samsung", model: "Galaxy S25 Ultra", storage: "256GB", price: 2399, cost: 1779, stock: 5, sold: 35, lastUpdated: "25 May 2025, 10:45 AM" },
+  { id: 4, brand: "Samsung", model: "Galaxy S25", storage: "256GB", price: 1899, cost: 1399, stock: 8, sold: 29, lastUpdated: "25 May 2025, 10:20 AM" },
+  { id: 5, brand: "Google", model: "Pixel 9 Pro", storage: "256GB", price: 1749, cost: 1229, stock: 0, sold: 19, lastUpdated: "25 May 2025, 09:15 AM" },
+  { id: 6, brand: "Google", model: "Pixel 9", storage: "128GB", price: 1249, cost: 849, stock: 6, sold: 19, lastUpdated: "25 May 2025, 09:40 AM" },
+  { id: 7, brand: "OnePlus", model: "OnePlus 13", storage: "256GB", price: 1199, cost: 559, stock: 7, sold: 10, lastUpdated: "25 May 2025, 09:50 AM" },
+  { id: 8, brand: "Xiaomi", model: "Redmi Note 15 Pro", storage: "256GB", price: 899, cost: 499, stock: 12, sold: 8, lastUpdated: "25 May 2025, 09:35 AM" },
+  { id: 9, brand: "Xiaomi", model: "Redmi Note 15", storage: "256GB", price: 599, cost: 299, stock: 14, sold: 6, lastUpdated: "25 May 2025, 09:30 AM" }
 ];
 
+const formatter = new Intl.NumberFormat("en-US");
+const money = value => `$${formatter.format(Math.round(value))}`;
 
-// =========================================================
-// GLOBAL CHART VARIABLES
-// These let us update charts after inventory changes.
-// =========================================================
+const brandStyles = {
+  Apple: { icon: "<i class='fa-brands fa-apple'></i>", className: "apple" },
+  Samsung: { icon: "●", className: "samsung" },
+  Google: { icon: "G", className: "google" },
+  OnePlus: { icon: "1+", className: "oneplus" },
+  Xiaomi: { icon: "Mi", className: "xiaomi" }
+};
 
-let revenueChart;
-let unitsChart;
-let salesTrendChart;
-let stockChart;
+const chartColours = ["#2563eb", "#1e3a8a", "#64748b", "#334155", "#0f172a"];
+let revenueBrandChart;
+let unitsBrandChart;
+let salesLineChart;
+let profitChart;
 
-
-// =========================================================
-// FORMAT MONEY
-// Converts numbers into NZD-style currency.
-// Example: 2199 becomes $2,199
-// =========================================================
-
-function formatMoney(value) {
-  return "$" + Math.round(value).toLocaleString("en-NZ");
-}
-
-
-// =========================================================
-// CURRENT DATE/TIME DISPLAY
-// Used when the inventory is updated from the sidebar.
-// =========================================================
-
-function getCurrentDateTime() {
+function getNowLabel() {
   const now = new Date();
-
   return now.toLocaleString("en-NZ", {
     day: "2-digit",
     month: "short",
     year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit"
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true
+  }).replace(",", "");
+}
+
+function getStatus(stock) {
+  if (stock === 0) return { text: "Out of Stock", className: "out" };
+  if (stock <= 5) return { text: "Low Stock", className: "low" };
+  return { text: "In Stock", className: "in" };
+}
+
+function productLabel(product) {
+  return `${product.brand} ${product.model} ${product.storage}`;
+}
+
+function populateProductDropdown() {
+  const select = document.getElementById("productSelect");
+  select.innerHTML = products.map(product => `
+    <option value="${product.id}">${productLabel(product)}</option>
+  `).join("");
+  select.value = "3";
+}
+
+function groupByBrand(metric) {
+  const brands = ["Apple", "Samsung", "Google", "OnePlus", "Xiaomi"];
+  return brands.map(brand => {
+    return products
+      .filter(product => product.brand === brand)
+      .reduce((total, product) => total + metric(product), 0);
   });
 }
 
+function updateKpis() {
+  const totalSold = products.reduce((sum, product) => sum + product.sold, 0);
+  const totalRevenue = products.reduce((sum, product) => sum + (product.price * product.sold), 0);
+  const averageSale = totalSold === 0 ? 0 : totalRevenue / totalSold;
 
-// =========================================================
-// STOCK STATUS LOGIC
-// This matches the Python dashboard_report.py logic.
-// 0 stock = Out of Stock
-// 1 to 5 stock = Low Stock
-// 6+ stock = In Stock
-// =========================================================
+  document.getElementById("unitsSoldKpi").textContent = formatter.format(totalSold);
+  document.getElementById("avgSaleKpi").textContent = money(averageSale);
+  document.getElementById("revenueKpi").textContent = money(totalRevenue);
+}
 
-function getStatus(stock) {
-  if (stock === 0) {
-    return {
-      text: "Out of Stock",
-      className: "out-stock"
-    };
-  }
+function updateTable() {
+  const body = document.getElementById("inventoryBody");
+  body.innerHTML = products.map(product => {
+    const status = getStatus(product.stock);
+    const brandStyle = brandStyles[product.brand];
 
-  if (stock <= 5) {
-    return {
-      text: "Low Stock",
-      className: "low-stock"
-    };
-  }
+    return `
+      <tr>
+        <td>
+          <div class="brand-cell">
+            <span class="brand-logo ${brandStyle.className}">${brandStyle.icon}</span>
+            ${product.brand}
+          </div>
+        </td>
+        <td>${product.model}</td>
+        <td>${product.storage}</td>
+        <td>${money(product.price)}</td>
+        <td>${product.stock}</td>
+        <td>${product.sold}</td>
+        <td>${money(product.price * product.stock)}</td>
+        <td><span class="status ${status.className}">${status.text}</span></td>
+        <td>${product.lastUpdated}</td>
+      </tr>
+    `;
+  }).join("");
+}
 
+function baseChartOptions(horizontal = false) {
   return {
-    text: "In Stock",
-    className: "in-stock"
+    responsive: true,
+    maintainAspectRatio: false,
+    indexAxis: horizontal ? "y" : "x",
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: "#0f172a",
+        titleColor: "#fff",
+        bodyColor: "#fff",
+        padding: 10,
+        cornerRadius: 8
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: "#e2e8f0" },
+        ticks: { color: "#10233f", font: { weight: "700" } }
+      },
+      y: {
+        beginAtZero: true,
+        grid: { color: "#e2e8f0" },
+        ticks: { color: "#10233f", font: { weight: "700" } }
+      }
+    }
   };
 }
 
-
-// =========================================================
-// GROUP DATA BY BRAND
-// This creates grouped totals for brand charts.
-// Example: Apple total revenue, Samsung total stock, etc.
-// =========================================================
-
-function groupByBrand(type) {
-  const brandTotals = {};
-
-  products.forEach((product) => {
-    if (!brandTotals[product.brand]) {
-      brandTotals[product.brand] = 0;
-    }
-
-    if (type === "revenue") {
-      brandTotals[product.brand] += product.price * product.sold;
-    }
-
-    if (type === "sold") {
-      brandTotals[product.brand] += product.sold;
-    }
-
-    if (type === "stock") {
-      brandTotals[product.brand] += product.stock;
-    }
-  });
-
-  return brandTotals;
-}
-
-
-// =========================================================
-// UPDATE SUMMARY CARDS
-// Updates the top cards:
-// Total Revenue, Units Sold, Average Product Price.
-// =========================================================
-
-function updateSummaryCards() {
-  const totalRevenue = products.reduce((sum, product) => {
-    return sum + product.price * product.sold;
-  }, 0);
-
-  const totalUnitsSold = products.reduce((sum, product) => {
-    return sum + product.sold;
-  }, 0);
-
-  const averageProductPrice =
-    products.reduce((sum, product) => {
-      return sum + product.price;
-    }, 0) / products.length;
-
-  document.getElementById("totalRevenue").textContent =
-    formatMoney(totalRevenue);
-
-  document.getElementById("unitsSold").textContent =
-    totalUnitsSold;
-
-  document.getElementById("averagePrice").textContent =
-    formatMoney(averageProductPrice);
-}
-
-
-// =========================================================
-// RENDER INVENTORY TABLE
-// Adds all products into the table.
-// Inventory Value = Price x Current Stock.
-// =========================================================
-
-function renderInventoryTable() {
-  const tableBody = document.getElementById("inventoryTableBody");
-  tableBody.innerHTML = "";
-
-  products.forEach((product) => {
-    const status = getStatus(product.stock);
-    const inventoryValue = product.price * product.stock;
-
-    const row = document.createElement("tr");
-
-    row.innerHTML = `
-      <td>${product.brand}</td>
-      <td>${product.model}</td>
-      <td>${product.storage}</td>
-      <td>${formatMoney(product.price)}</td>
-      <td>${product.stock}</td>
-      <td>${product.sold}</td>
-      <td>${formatMoney(inventoryValue)}</td>
-      <td><span class="status ${status.className}">${status.text}</span></td>
-      <td>${product.lastUpdated}</td>
-    `;
-
-    tableBody.appendChild(row);
-  });
-}
-
-
-// =========================================================
-// UPDATE DROPDOWN OPTIONS
-// Brand dropdown controls which models are shown.
-// Storage updates based on selected model.
-// =========================================================
-
-function populateBrandDropdown() {
-  const brandSelect = document.getElementById("brandSelect");
-  const brands = [...new Set(products.map(product => product.brand))];
-
-  brandSelect.innerHTML = "";
-
-  brands.forEach((brand) => {
-    const option = document.createElement("option");
-    option.value = brand;
-    option.textContent = brand;
-    brandSelect.appendChild(option);
-  });
-}
-
-
-function populateProductDropdown() {
-  const brandSelect = document.getElementById("brandSelect");
-  const productSelect = document.getElementById("productSelect");
-
-  const selectedBrand = brandSelect.value;
-
-  const matchingProducts = products.filter((product) => {
-    return product.brand === selectedBrand;
-  });
-
-  productSelect.innerHTML = "";
-
-  matchingProducts.forEach((product) => {
-    const option = document.createElement("option");
-    option.value = product.model;
-    option.textContent = product.model;
-    productSelect.appendChild(option);
-  });
-
-  populateStorageDropdown();
-}
-
-
-function populateStorageDropdown() {
-  const brandSelect = document.getElementById("brandSelect");
-  const productSelect = document.getElementById("productSelect");
-  const storageSelect = document.getElementById("storageSelect");
-
-  const selectedBrand = brandSelect.value;
-  const selectedModel = productSelect.value;
-
-  const selectedProduct = products.find((product) => {
-    return product.brand === selectedBrand && product.model === selectedModel;
-  });
-
-  storageSelect.innerHTML = "";
-
-  if (selectedProduct) {
-    const option = document.createElement("option");
-    option.value = selectedProduct.storage;
-    option.textContent = selectedProduct.storage;
-    storageSelect.appendChild(option);
-  }
-}
-
-
-// =========================================================
-// CHART CONFIGURATION
-// Shared settings for all dashboard charts.
-// =========================================================
-
-const commonChartOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-
-  plugins: {
-    legend: {
-      display: false
-    }
-  },
-
-  scales: {
-    x: {
-      grid: {
-        display: false
-      },
-      ticks: {
-        color: "#334155",
-        font: {
-          size: 11
-        }
-      }
-    },
-    y: {
-      grid: {
-        color: "#e5e7eb"
-      },
-      ticks: {
-        color: "#334155",
-        font: {
-          size: 11
-        }
-      }
-    }
-  }
-};
-
-
-// =========================================================
-// CREATE CHARTS
-// Creates the four dashboard graphs:
-// Revenue by Brand, Units Sold by Brand,
-// Sales Trend, Stock Levels by Brand.
-// =========================================================
-
 function createCharts() {
-  const revenueByBrand = groupByBrand("revenue");
-  const unitsSoldByBrand = groupByBrand("sold");
-  const stockByBrand = groupByBrand("stock");
+  const brands = ["Apple", "Samsung", "Google", "OnePlus", "Xiaomi"];
 
-  const brandLabels = Object.keys(revenueByBrand);
-
-  revenueChart = new Chart(document.getElementById("revenueChart"), {
+  revenueBrandChart = new Chart(document.getElementById("revenueBrandChart"), {
     type: "bar",
     data: {
-      labels: brandLabels,
-      datasets: [
-        {
-          data: Object.values(revenueByBrand),
-          backgroundColor: [
-            "#2563eb",
-            "#1e3a8a",
-            "#64748b",
-            "#334155",
-            "#475569"
-          ],
-          borderRadius: 5
-        }
-      ]
-    },
-    options: commonChartOptions
-  });
-
-  unitsChart = new Chart(document.getElementById("unitsChart"), {
-    type: "bar",
-    data: {
-      labels: brandLabels,
-      datasets: [
-        {
-          data: Object.values(unitsSoldByBrand),
-          backgroundColor: [
-            "#2563eb",
-            "#1e3a8a",
-            "#64748b",
-            "#334155",
-            "#475569"
-          ],
-          borderRadius: 5
-        }
-      ]
-    },
-    options: commonChartOptions
-  });
-
-  salesTrendChart = new Chart(document.getElementById("salesTrendChart"), {
-    type: "line",
-    data: {
-      labels: [
-        "Apr 26",
-        "May 1",
-        "May 6",
-        "May 11",
-        "May 16",
-        "May 21",
-        "May 25"
-      ],
-      datasets: [
-        {
-          data: [
-            1800,
-            3600,
-            5100,
-            2400,
-            3900,
-            2900,
-            5200
-          ],
-          borderColor: "#2563eb",
-          backgroundColor: "rgba(37, 99, 235, 0.12)",
-          fill: true,
-          tension: 0.35,
-          pointRadius: 4,
-          pointBackgroundColor: "#2563eb"
-        }
-      ]
-    },
-    options: commonChartOptions
-  });
-
-  stockChart = new Chart(document.getElementById("stockChart"), {
-    type: "bar",
-    data: {
-      labels: Object.keys(stockByBrand),
-      datasets: [
-        {
-          data: Object.values(stockByBrand),
-          backgroundColor: [
-            "#2563eb",
-            "#1e3a8a",
-            "#64748b",
-            "#334155",
-            "#475569"
-          ],
-          borderRadius: 5
-        }
-      ]
+      labels: brands,
+      datasets: [{
+        data: groupByBrand(product => product.price * product.sold),
+        backgroundColor: chartColours,
+        borderRadius: 4
+      }]
     },
     options: {
-      ...commonChartOptions,
-      indexAxis: "y"
+      ...baseChartOptions(),
+      scales: {
+        x: baseChartOptions().scales.x,
+        y: {
+          ...baseChartOptions().scales.y,
+          ticks: {
+            callback: value => `$${value / 1000}K`,
+            color: "#10233f",
+            font: { weight: "700" }
+          }
+        }
+      },
+      plugins: {
+        ...baseChartOptions().plugins,
+        tooltip: { callbacks: { label: context => money(context.raw) } }
+      }
+    }
+  });
+
+  unitsBrandChart = new Chart(document.getElementById("unitsBrandChart"), {
+    type: "bar",
+    data: {
+      labels: brands,
+      datasets: [{
+        data: groupByBrand(product => product.sold),
+        backgroundColor: chartColours,
+        borderRadius: 4
+      }]
+    },
+    options: baseChartOptions()
+  });
+
+  salesLineChart = new Chart(document.getElementById("salesLineChart"), {
+    type: "line",
+    data: {
+      labels: ["Apr 26", "May 1", "May 6", "May 11", "May 16", "May 21", "May 25"],
+      datasets: [{
+        data: [2100, 3850, 4950, 2500, 4050, 2900, 5250],
+        borderColor: "#2563eb",
+        backgroundColor: "rgba(37, 99, 235, 0.14)",
+        fill: true,
+        tension: 0.35,
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        pointBackgroundColor: "#2563eb"
+      }]
+    },
+    options: {
+      ...baseChartOptions(),
+      scales: {
+        x: baseChartOptions().scales.x,
+        y: {
+          ...baseChartOptions().scales.y,
+          ticks: {
+            callback: value => value >= 1000 ? `${value / 1000}K` : value,
+            color: "#10233f",
+            font: { weight: "700" }
+          }
+        }
+      }
+    }
+  });
+
+  profitChart = new Chart(document.getElementById("profitChart"), {
+    type: "bar",
+    data: {
+      labels: products.map(product => productLabel(product)),
+      datasets: [{
+        data: products.map(product => (product.price - product.cost) * product.sold),
+        backgroundColor: products.map((_, index) => chartColours[index % chartColours.length]),
+        borderRadius: 4
+      }]
+    },
+    options: {
+      ...baseChartOptions(true),
+      scales: {
+        x: {
+          beginAtZero: true,
+          grid: { color: "#e2e8f0" },
+          ticks: {
+            callback: value => `$${value / 1000}K`,
+            color: "#10233f",
+            font: { weight: "700" }
+          }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: "#10233f", font: { weight: "700" } }
+        }
+      },
+      plugins: {
+        ...baseChartOptions(true).plugins,
+        tooltip: { callbacks: { label: context => `Profit: ${money(context.raw)}` } }
+      }
     }
   });
 }
-
-
-// =========================================================
-// UPDATE CHARTS
-// Refreshes chart data after sale/restock/adjustment.
-// =========================================================
 
 function updateCharts() {
-  const revenueByBrand = groupByBrand("revenue");
-  const unitsSoldByBrand = groupByBrand("sold");
-  const stockByBrand = groupByBrand("stock");
+  revenueBrandChart.data.datasets[0].data = groupByBrand(product => product.price * product.sold);
+  unitsBrandChart.data.datasets[0].data = groupByBrand(product => product.sold);
+  profitChart.data.labels = products.map(product => productLabel(product));
+  profitChart.data.datasets[0].data = products.map(product => (product.price - product.cost) * product.sold);
 
-  revenueChart.data.datasets[0].data = Object.values(revenueByBrand);
-  unitsChart.data.datasets[0].data = Object.values(unitsSoldByBrand);
-  stockChart.data.datasets[0].data = Object.values(stockByBrand);
+  const totalRevenue = products.reduce((sum, product) => sum + product.price * product.sold, 0);
+  const lastPoint = Math.round(totalRevenue / 45);
+  salesLineChart.data.datasets[0].data = [2100, 3850, 4950, 2500, 4050, 2900, lastPoint];
 
-  revenueChart.update();
-  unitsChart.update();
-  stockChart.update();
+  revenueBrandChart.update();
+  unitsBrandChart.update();
+  salesLineChart.update();
+  profitChart.update();
 }
 
+function showMessage(type, title, body) {
+  const systemMessage = document.getElementById("systemMessage");
+  const messageIcon = document.getElementById("messageIcon");
+  const messageText = document.getElementById("messageText");
 
-// =========================================================
-// UPDATE INVENTORY ACTION
-// Handles Record Sale, Restock Product, and Adjust Stock.
-// This mirrors the Python inventory_actions.py logic.
-// =========================================================
+  systemMessage.classList.toggle("error", type === "error");
+  messageIcon.innerHTML = type === "error"
+    ? "<i class='fa-solid fa-xmark'></i>"
+    : "<i class='fa-solid fa-check'></i>";
+  messageText.innerHTML = `<strong>${title}</strong>${body}`;
+}
 
-function updateInventory() {
-  const actionSelect = document.getElementById("actionSelect");
-  const brandSelect = document.getElementById("brandSelect");
-  const productSelect = document.getElementById("productSelect");
-  const quantityInput = document.getElementById("quantityInput");
-  const messageBox = document.getElementById("systemMessage");
-  const lastUpdatedBox = document.getElementById("lastUpdated");
+function applyUpdate() {
+  const action = document.getElementById("actionSelect").value;
+  const productId = Number(document.getElementById("productSelect").value);
+  const quantity = Number(document.getElementById("quantityInput").value);
+  const product = products.find(item => item.id === productId);
 
-  const action = actionSelect.value;
-  const selectedBrand = brandSelect.value;
-  const selectedModel = productSelect.value;
-  const quantity = Number(quantityInput.value);
-
-  const product = products.find((item) => {
-    return item.brand === selectedBrand && item.model === selectedModel;
-  });
-
-  if (!product) {
-    messageBox.className = "system-message";
-    messageBox.textContent = "Product not found.";
+  if (!Number.isInteger(quantity) || quantity < 0) {
+    showMessage("error", "Invalid quantity.", "Enter a whole number of 0 or higher.");
     return;
   }
 
-  if (quantity <= 0) {
-    messageBox.className = "system-message";
-    messageBox.textContent = "Quantity must be greater than 0.";
+  if ((action === "add" || action === "remove") && quantity === 0) {
+    showMessage("error", "Invalid quantity.", "Add or remove quantity must be at least 1.");
     return;
   }
 
-  const currentDateTime = getCurrentDateTime();
+  if (action === "remove" && quantity > product.stock) {
+    showMessage("error", "Not enough stock available.", `${productLabel(product)} only has ${product.stock} unit(s) in stock.`);
+    return;
+  }
 
-  if (action === "Record Sale") {
-    if (quantity > product.stock) {
-      messageBox.className = "system-message";
-      messageBox.textContent = "Not enough stock available.";
-      return;
-    }
+  const nowLabel = getNowLabel();
 
+  if (action === "add") {
+    product.stock += quantity;
+    product.lastUpdated = nowLabel;
+    showMessage("success", "Inventory updated successfully!", `${quantity} × ${productLabel(product)} added to stock.<br><br>${nowLabel}`);
+  }
+
+  if (action === "remove") {
     product.stock -= quantity;
     product.sold += quantity;
-    product.lastUpdated = currentDateTime;
-
-    messageBox.className = "system-message success";
-    messageBox.innerHTML = `
-      ✅ Inventory updated successfully.<br>
-      ${quantity} x ${product.model} sold.<br>
-      ${currentDateTime}
-    `;
+    product.lastUpdated = nowLabel;
+    showMessage("success", "Inventory updated successfully!", `${quantity} × ${productLabel(product)} sold.<br><br>${nowLabel}`);
   }
 
-  if (action === "Restock Product") {
-    product.stock += quantity;
-    product.lastUpdated = currentDateTime;
-
-    messageBox.className = "system-message success";
-    messageBox.innerHTML = `
-      ✅ Product restocked successfully.<br>
-      ${quantity} x ${product.model} added.<br>
-      ${currentDateTime}
-    `;
-  }
-
-  if (action === "Adjust Stock") {
+  if (action === "set") {
     product.stock = quantity;
-    product.lastUpdated = currentDateTime;
-
-    messageBox.className = "system-message success";
-    messageBox.innerHTML = `
-      ✅ Stock adjusted successfully.<br>
-      ${product.model} stock set to ${quantity}.<br>
-      ${currentDateTime}
-    `;
+    product.lastUpdated = nowLabel;
+    showMessage("success", "Stock level updated successfully!", `${productLabel(product)} stock set to ${quantity}.<br><br>${nowLabel}`);
   }
 
-  lastUpdatedBox.textContent = currentDateTime;
+  document.getElementById("lastUpdatedBox").textContent = nowLabel;
+  document.getElementById("topDate").textContent = nowLabel;
 
-  updateSummaryCards();
-  renderInventoryTable();
+  updateKpis();
+  updateTable();
   updateCharts();
 }
 
-
-// =========================================================
-// INITIAL PAGE LOAD
-// Runs when the dashboard first opens.
-// =========================================================
-
-document.addEventListener("DOMContentLoaded", () => {
-  populateBrandDropdown();
+function initDashboard() {
   populateProductDropdown();
-
-  updateSummaryCards();
-  renderInventoryTable();
+  updateKpis();
+  updateTable();
   createCharts();
+  document.getElementById("applyUpdate").addEventListener("click", applyUpdate);
+}
 
-  document
-    .getElementById("brandSelect")
-    .addEventListener("change", populateProductDropdown);
-
-  document
-    .getElementById("productSelect")
-    .addEventListener("change", populateStorageDropdown);
-
-  document
-    .getElementById("updateBtn")
-    .addEventListener("click", updateInventory);
-});
+initDashboard();
