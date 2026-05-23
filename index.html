@@ -103,6 +103,12 @@
       font-weight: bold;
     }
 
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
     .project-btn {
       display: inline-block;
       background: #2563eb;
@@ -113,8 +119,12 @@
       font-weight: bold;
     }
 
+    .project-btn.secondary {
+      background: #10233f;
+    }
+
     .project-btn:hover {
-      background: #1d4ed8;
+      opacity: 0.9;
     }
 
     @media (max-width: 900px) {
@@ -176,9 +186,15 @@
             <span>SQLite</span>
           </div>
 
-          <a href="smartphone-inventory-dashboard/" target="_blank" class="project-btn">
-            View Project
-          </a>
+          <div class="btn-row">
+            <a href="smartphone-inventory-dashboard/" target="_blank" class="project-btn">
+              Live Dashboard
+            </a>
+
+            <a href="https://github.com/k-taitua/kaulgred-taitua-portfolio/tree/main/smartphone-inventory-dashboard" target="_blank" class="project-btn secondary">
+              View Code / README
+            </a>
+          </div>
         </div>
 
         <div class="project-card">
@@ -186,8 +202,8 @@
 
           <p>
             A calculator web app that estimates KiwiSaver savings using user
-            inputs such as income, contribution rate, employer contribution,
-            and projected balance calculations.
+            inputs such as salary, contribution rate, employer contributions,
+            and projected savings.
           </p>
 
           <div class="tech-list">
@@ -197,9 +213,15 @@
             <span>Calculator Logic</span>
           </div>
 
-          <a href="kiwisaver-calculator/" target="_blank" class="project-btn">
-            View Project
-          </a>
+          <div class="btn-row">
+            <a href="kiwisaver-calculator/" target="_blank" class="project-btn">
+              Live Calculator
+            </a>
+
+            <a href="https://github.com/k-taitua/kaulgred-taitua-portfolio/tree/main/kiwisaver-calculator" target="_blank" class="project-btn secondary">
+              View Code / README
+            </a>
+          </div>
         </div>
 
       </section>
