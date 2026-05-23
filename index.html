@@ -1,178 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kaulgred Taitua Portfolio</title>
 
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f9;
+      color: #10233f;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 320px 1fr;
     }
 
     .sidebar {
-      width: 230px;
-      height: 100vh;
-      background: #162435;
+      background: #10233f;
       color: white;
-      position: fixed;
-      padding: 25px;
-      box-sizing: border-box;
+      padding: 55px 30px;
     }
 
-    .sidebar h2 {
-      color: #6ec6e8;
-      font-size: 28px;
+    .sidebar h1 {
+      color: #69c9ff;
+      font-size: 32px;
       margin-bottom: 35px;
     }
 
     .sidebar p {
       font-size: 18px;
-      margin: 22px 0;
-    }
-
-    .main {
-      margin-left: 280px;
-      padding: 30px;
-    }
-
-    .main h1 {
-      font-size: 36px;
-      margin-bottom: 25px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-
-    .card,
-    .project {
-      background: white;
-      padding: 20px;
-      box-shadow: 0 1px 4px #ccc;
-    }
-
-    .card {
-      border-radius: 10px;
-      font-size: 18px;
-    }
-
-    .section-title {
-      background: #6ec6e8;
-      padding: 14px 18px;
-      border-radius: 10px 10px 0 0;
-      font-weight: bold;
-      font-size: 20px;
-    }
-
-    .project {
-      border-bottom: 1px solid #e5e7eb;
-    }
-
-    .project:last-child {
-      border-radius: 0 0 10px 10px;
-      border-bottom: none;
-    }
-
-    .project h3 {
-      font-size: 24px;
-      margin-top: 10px;
-    }
-
-    .project p {
-      font-size: 18px;
+      margin-bottom: 22px;
       line-height: 1.5;
     }
 
-    a {
-      color: #0366d6;
-      font-weight: bold;
+    .sidebar a {
+      color: #69c9ff;
       text-decoration: none;
-      font-size: 18px;
+      font-weight: bold;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .main {
+      padding: 60px 55px;
     }
 
-    .link-row {
+    .main h1 {
+      font-size: 44px;
+      margin-bottom: 12px;
+    }
+
+    .intro {
+      font-size: 20px;
+      color: #526173;
+      margin-bottom: 38px;
+      max-width: 900px;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      font-size: 28px;
+      margin-bottom: 22px;
+      color: #10233f;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 8px 24px rgba(15, 35, 65, 0.12);
+      border: 1px solid #dde6f2;
+    }
+
+    .project-card h3 {
+      font-size: 24px;
+      margin-bottom: 14px;
+      color: #10233f;
+    }
+
+    .project-card p {
+      font-size: 16px;
+      color: #526173;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .tech-list {
       display: flex;
-      gap: 20px;
       flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .tech-list span {
+      background: #eaf2ff;
+      color: #1d4ed8;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .project-btn {
+      display: inline-block;
+      background: #2563eb;
+      color: white;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: 0.2s ease;
+    }
+
+    .project-btn:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 850px) {
+      .page {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        padding: 35px 25px;
+      }
+
+      .main {
+        padding: 35px 25px;
+      }
+
+      .main h1 {
+        font-size: 34px;
+      }
     }
   </style>
 </head>
-
 <body>
 
-  <div class="sidebar">
-    <h2>Kaulgred Taitua</h2>
-    <p>Information Technology</p>
-    <p>Cloud Computing</p>
-    <p>Cybersecurity</p>
-  </div>
+  <div class="page">
 
-  <div class="main">
-    <h1>IT Project Portfolio</h1>
+    <aside class="sidebar">
+      <h1>Kaulgred Taitua</h1>
 
-    <div class="cards">
-      <div class="card">
-        <strong>Total Projects:</strong><br>
-        2
-      </div>
-
-      <div class="card">
-        <strong>Focus:</strong><br>
-        Programming and Databases
-      </div>
-
-      <div class="card">
-        <strong>Status:</strong><br>
-        In Progress
-      </div>
-    </div>
-
-    <div class="section-title">PROJECT OVERVIEW</div>
-
-    <div class="project">
-      <h3>KiwiSaver Lump Sum Investment Calculator</h3>
       <p>
-        A Python programme that calculates projected KiwiSaver growth using compound interest.
+        Data, cloud, and web development portfolio.
       </p>
-      <p>
-        <strong>Skills:</strong> Python, input validation, loops, conditions, testing, and documentation
-      </p>
-      <p>
-        <a href="https://github.com/K-Taitua/kaulgred-taitua-portfolio/tree/main/kiwisaver-calculator" target="_blank">
-          View Project on GitHub
-        </a>
-      </p>
-    </div>
 
-    <div class="project">
-      <h3>Smartphone Inventory Management Dashboard</h3>
       <p>
-        A smartphone inventory management dashboard that tracks sales, stock levels,
-        inventory value, product status, and stock movement using a clean visual dashboard.
+        Projects built with Python, SQL, AWS, Azure, HTML, CSS, and JavaScript.
       </p>
-      <p>
-        <strong>Skills:</strong> HTML, CSS, JavaScript, Chart.js, Python, SQLite,
-        database design, inventory logic, and dashboard development
-      </p>
-      <p class="link-row">
-        <a href="smartphone-inventory-dashboard/" target="_blank">
-          View Project
-        </a>
 
-        <a href="https://github.com/K-Taitua/kaulgred-taitua-portfolio/tree/main/smartphone-inventory-dashboard" target="_blank">
-          View Code on GitHub
-        </a>
+      <p>
+        <a href="mailto:kaulgredtaitua@gmail.com">kaulgredtaitua@gmail.com</a>
       </p>
-    </div>
+    </aside>
+
+    <main class="main">
+      <h1>Portfolio Projects</h1>
+
+      <p class="intro">
+        A collection of practical projects showing cloud workflows, database systems,
+        dashboards, automation, and front-end development.
+      </p>
+
+      <h2 class="section-title">Featured Work</h2>
+
+      <section class="projects">
+
+        <div class="project-card">
+          <h3>Smartphone Inventory Management Dashboard</h3>
+
+          <p>
+            A professional inventory and sales dashboard built with HTML, CSS,
+            JavaScript, Chart.js, and a Python SQLite backend. It includes stock
+            updates, sales tracking, revenue metrics, profitability charts, and
+            inventory status badges.
+          </p>
+
+          <div class="tech-list">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>Chart.js</span>
+            <span>Python</span>
+            <span>SQLite</span>
+          </div>
+
+          <a href="smartphone-inventory-dashboard/" target="_blank" class="project-btn">
+            View Project
+          </a>
+        </div>
+
+      </section>
+    </main>
+
   </div>
 
 </body>
