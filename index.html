@@ -18,13 +18,13 @@
       color: #10233f;
     }
 
-    .page {
+    .container {
+      display: flex;
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 320px 1fr;
     }
 
     .sidebar {
+      width: 320px;
       background: #10233f;
       color: white;
       padding: 55px 30px;
@@ -38,43 +38,32 @@
 
     .sidebar p {
       font-size: 18px;
-      margin-bottom: 22px;
+      margin: 24px 0;
       line-height: 1.5;
     }
 
-    .sidebar a {
-      color: #69c9ff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
     .main {
+      flex: 1;
       padding: 60px 55px;
     }
 
     .main h1 {
       font-size: 44px;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
     }
 
     .intro {
       font-size: 20px;
       color: #526173;
-      margin-bottom: 38px;
+      margin-bottom: 40px;
+      line-height: 1.5;
       max-width: 900px;
-      line-height: 1.6;
-    }
-
-    .section-title {
-      font-size: 28px;
-      margin-bottom: 22px;
-      color: #10233f;
     }
 
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(2, minmax(320px, 1fr));
+      gap: 28px;
     }
 
     .project-card {
@@ -85,15 +74,15 @@
       border: 1px solid #dde6f2;
     }
 
-    .project-card h3 {
-      font-size: 24px;
+    .project-card h2 {
+      font-size: 26px;
       margin-bottom: 14px;
       color: #10233f;
     }
 
     .project-card p {
-      font-size: 16px;
       color: #526173;
+      font-size: 16px;
       line-height: 1.6;
       margin-bottom: 20px;
     }
@@ -102,7 +91,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
     }
 
     .tech-list span {
@@ -122,73 +111,60 @@
       padding: 12px 18px;
       border-radius: 10px;
       font-weight: bold;
-      transition: 0.2s ease;
     }
 
     .project-btn:hover {
       background: #1d4ed8;
-      transform: translateY(-1px);
     }
 
-    @media (max-width: 850px) {
-      .page {
-        grid-template-columns: 1fr;
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
       }
 
       .sidebar {
-        padding: 35px 25px;
+        width: 100%;
+      }
+
+      .projects {
+        grid-template-columns: 1fr;
       }
 
       .main {
         padding: 35px 25px;
-      }
-
-      .main h1 {
-        font-size: 34px;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="page">
+  <div class="container">
 
     <aside class="sidebar">
       <h1>Kaulgred Taitua</h1>
 
-      <p>
-        Data, cloud, and web development portfolio.
-      </p>
+      <p>Data, cloud, database, and web development portfolio.</p>
 
-      <p>
-        Projects built with Python, SQL, AWS, Azure, HTML, CSS, and JavaScript.
-      </p>
-
-      <p>
-        <a href="mailto:kaulgredtaitua@gmail.com">kaulgredtaitua@gmail.com</a>
-      </p>
+      <p>Projects using Python, SQL, AWS, Azure, HTML, CSS, and JavaScript.</p>
     </aside>
 
     <main class="main">
       <h1>Portfolio Projects</h1>
 
       <p class="intro">
-        A collection of practical projects showing cloud workflows, database systems,
-        dashboards, automation, and front-end development.
+        A collection of practical projects showing dashboards, calculators,
+        database systems, automation, and cloud-based workflows.
       </p>
-
-      <h2 class="section-title">Featured Work</h2>
 
       <section class="projects">
 
         <div class="project-card">
-          <h3>Smartphone Inventory Management Dashboard</h3>
+          <h2>Smartphone Inventory Management Dashboard</h2>
 
           <p>
-            A professional inventory and sales dashboard built with HTML, CSS,
-            JavaScript, Chart.js, and a Python SQLite backend. It includes stock
-            updates, sales tracking, revenue metrics, profitability charts, and
-            inventory status badges.
+            A professional inventory and sales dashboard with stock updates,
+            revenue tracking, sales metrics, product profitability charts,
+            and inventory status badges.
           </p>
 
           <div class="tech-list">
@@ -201,6 +177,27 @@
           </div>
 
           <a href="smartphone-inventory-dashboard/" target="_blank" class="project-btn">
+            View Project
+          </a>
+        </div>
+
+        <div class="project-card">
+          <h2>KiwiSaver Calculator</h2>
+
+          <p>
+            A calculator web app that estimates KiwiSaver savings using user
+            inputs such as income, contribution rate, employer contribution,
+            and projected balance calculations.
+          </p>
+
+          <div class="tech-list">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>Calculator Logic</span>
+          </div>
+
+          <a href="kiwisaver-calculator/" target="_blank" class="project-btn">
             View Project
           </a>
         </div>
