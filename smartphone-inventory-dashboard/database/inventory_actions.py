@@ -10,49 +10,47 @@ conn = sqlite3.connect(DATABASE_NAME)
 cursor = conn.cursor()
 
 # ----------------------------------------
-# SHOW PRODUCTS
+# SHOW INVENTORY
 # ----------------------------------------
 
-print("\nSMARTPHONE INVENTORY\n")
-print("-" * 70)
+def show_inventory():
 
-cursor.execute("""
-SELECT ProductID, Brand, Model, Storage, Price, StockQuantity
-FROM Products
-""")
+    print("\nSMARTPHONE INVENTORY")
+    print("-" * 90)
 
-products = cursor.fetchall()
+    cursor.execute("""
+    SELECT ProductID, Brand, Model, Storage, Price, StockQuantity
+    FROM Products
+    """)
 
-for product in products:
+    products = cursor.fetchall()
 
-    product_id = product[0]
-    brand = product[1]
-    model = product[2]
-    storage = product[3]
-    price = product[4]
-    stock = product[5]
+    for product in products:
 
-    print(
-        f"{product_id}. "
-        f"{brand} {model} {storage} | "
-        f"Price: ${price:,.2f} | "
-        f"Stock: {stock}"
-    )
+        product_id = product[0]
+        brand = product[1]
+        model = product[2]
+        storage = product[3]
+        price = product[4]
+        stock = product[5]
 
-print("-" * 70)
+        print(
+            f"{product_id}. "
+            f"{brand} {model} {storage} | "
+            f"Price: ${price:,.2f} | "
+            f"Stock: {stock}"
+        )
+
+    print("-" * 90)
 
 # ----------------------------------------
 # RECORD SALE
 # ----------------------------------------
 
-try:
+def record_sale():
 
     product_id = int(input("\nEnter Product ID: "))
-    quantity_sold = int(input("Enter Quantity Sold: "))
-
-    # ----------------------------------------
-    # GET PRODUCT
-    # ----------------------------------------
+    quantity = int(input("Enter Quantity Sold: "))
 
     cursor.execute("""
     SELECT Brand, Model, StockQuantity, UnitsSold, Price
@@ -65,75 +63,198 @@ try:
     if product is None:
 
         print("\nProduct not found.")
+        return
+
+    brand = product[0]
+    model = product[1]
+    current_stock = product[2]
+    current_units_sold = product[3]
+    price = product[4]
+
+    if quantity <= 0:
+
+        print("\nQuantity must be greater than 0.")
+
+    elif quantity > current_stock:
+
+        print("\nNot enough stock available.")
 
     else:
 
-        brand = product[0]
-        model = product[1]
-        current_stock = product[2]
-        current_units_sold = product[3]
-        price = product[4]
+        new_stock = current_stock - quantity
+        new_units_sold = current_units_sold + quantity
 
-        # ----------------------------------------
-        # VALIDATION
-        # ----------------------------------------
+        cursor.execute("""
+        UPDATE Products
+        SET
+            StockQuantity = ?,
+            UnitsSold = ?,
+            LastUpdated = datetime('now')
+        WHERE ProductID = ?
+        """, (
+            new_stock,
+            new_units_sold,
+            product_id
+        ))
 
-        if quantity_sold <= 0:
+        conn.commit()
 
-            print("\nQuantity must be greater than 0.")
+        total_sale = price * quantity
 
-        elif quantity_sold > current_stock:
+        print("\nSale recorded successfully.")
+        print(f"{quantity} x {brand} {model} sold.")
+        print(f"Sale Total: ${total_sale:,.2f}")
+        print(f"Updated Stock: {new_stock}")
 
-            print("\nNot enough stock available.")
+# ----------------------------------------
+# RESTOCK PRODUCT
+# ----------------------------------------
 
-        else:
+def restock_product():
 
-            # ----------------------------------------
-            # UPDATE VALUES
-            # ----------------------------------------
+    product_id = int(input("\nEnter Product ID: "))
+    quantity = int(input("Enter Restock Quantity: "))
 
-            new_stock = current_stock - quantity_sold
-            new_units_sold = current_units_sold + quantity_sold
+    cursor.execute("""
+    SELECT Brand, Model, StockQuantity
+    FROM Products
+    WHERE ProductID = ?
+    """, (product_id,))
 
-            cursor.execute("""
-            UPDATE Products
-            SET
-                StockQuantity = ?,
-                UnitsSold = ?,
-                LastUpdated = datetime('now')
-            WHERE ProductID = ?
-            """, (
-                new_stock,
-                new_units_sold,
-                product_id
-            ))
+    product = cursor.fetchone()
 
-            conn.commit()
+    if product is None:
 
-            # ----------------------------------------
-            # SUCCESS MESSAGE
-            # ----------------------------------------
+        print("\nProduct not found.")
+        return
 
-            total_sale = price * quantity_sold
+    brand = product[0]
+    model = product[1]
+    current_stock = product[2]
 
-            print("\nSale recorded successfully.")
-            print(
-                f"{quantity_sold} x "
-                f"{brand} {model} sold."
-            )
+    if quantity <= 0:
 
-            print(f"Sale Total: ${total_sale:,.2f}")
-            print(f"Updated Stock: {new_stock}")
+        print("\nQuantity must be greater than 0.")
 
-except Exception as error:
+    else:
 
-    print("\nAn error occurred:")
-    print(error)
+        new_stock = current_stock + quantity
+
+        cursor.execute("""
+        UPDATE Products
+        SET
+            StockQuantity = ?,
+            LastUpdated = datetime('now')
+        WHERE ProductID = ?
+        """, (
+            new_stock,
+            product_id
+        ))
+
+        conn.commit()
+
+        print("\nProduct restocked successfully.")
+        print(f"{quantity} units added.")
+        print(f"Updated Stock: {new_stock}")
+
+# ----------------------------------------
+# ADJUST STOCK
+# ----------------------------------------
+
+def adjust_stock():
+
+    product_id = int(input("\nEnter Product ID: "))
+    adjustment = int(input("Enter Stock Adjustment (+/-): "))
+
+    cursor.execute("""
+    SELECT Brand, Model, StockQuantity
+    FROM Products
+    WHERE ProductID = ?
+    """, (product_id,))
+
+    product = cursor.fetchone()
+
+    if product is None:
+
+        print("\nProduct not found.")
+        return
+
+    brand = product[0]
+    model = product[1]
+    current_stock = product[2]
+
+    new_stock = current_stock + adjustment
+
+    if new_stock < 0:
+
+        print("\nStock cannot go below 0.")
+
+    else:
+
+        cursor.execute("""
+        UPDATE Products
+        SET
+            StockQuantity = ?,
+            LastUpdated = datetime('now')
+        WHERE ProductID = ?
+        """, (
+            new_stock,
+            product_id
+        ))
+
+        conn.commit()
+
+        print("\nStock adjusted successfully.")
+        print(f"Updated Stock: {new_stock}")
+
+# ----------------------------------------
+# MAIN MENU
+# ----------------------------------------
+
+while True:
+
+    print("\n" + "=" * 90)
+    print("SMARTPHONE INVENTORY MANAGEMENT SYSTEM")
+    print("=" * 90)
+
+    print("\n1. View Inventory")
+    print("2. Record Sale")
+    print("3. Restock Product")
+    print("4. Adjust Stock")
+    print("5. Exit")
+
+    choice = input("\nSelect an option: ")
+
+    if choice == "1":
+
+        show_inventory()
+
+    elif choice == "2":
+
+        show_inventory()
+        record_sale()
+
+    elif choice == "3":
+
+        show_inventory()
+        restock_product()
+
+    elif choice == "4":
+
+        show_inventory()
+        adjust_stock()
+
+    elif choice == "5":
+
+        print("\nExiting system...")
+        break
+
+    else:
+
+        print("\nInvalid option selected.")
 
 # ----------------------------------------
 # CLOSE CONNECTION
 # ----------------------------------------
 
 conn.close()
-
-input("\nPress Enter to close...")
