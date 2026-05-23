@@ -90,7 +90,7 @@ function updateTable() {
   }).join("");
 }
 
-function chartOptions() {
+function defaultChartOptions() {
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -117,9 +117,38 @@ function chartOptions() {
   };
 }
 
+function horizontalBarOptions() {
+  return {
+    indexAxis: "y",
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false }
+    },
+    scales: {
+      x: {
+        beginAtZero: true,
+        ticks: {
+          color: "#10233f",
+          font: { size: 10, weight: "bold" },
+          callback: value => "$" + Number(value).toLocaleString()
+        },
+        grid: { color: "#e2e8f0" }
+      },
+      y: {
+        ticks: {
+          color: "#10233f",
+          font: { size: 10, weight: "bold" }
+        },
+        grid: { display: false }
+      }
+    }
+  };
+}
+
 function createCharts() {
   const brands = ["Apple", "Samsung", "Google", "OnePlus", "Xiaomi"];
-  const colors = ["#2563eb", "#1e3a8a", "#64748b", "#334155", "#0f172a"];
+  const colors = ["#2563eb", "#1e3a8a", "#64748b", "#334155", "#0f172a", "#3b82f6", "#475569", "#0ea5e9", "#1d4ed8"];
 
   revenueChart = new Chart(document.getElementById("revenueChart"), {
     type: "bar",
@@ -131,7 +160,7 @@ function createCharts() {
         borderRadius: 4
       }]
     },
-    options: chartOptions()
+    options: defaultChartOptions()
   });
 
   unitsChart = new Chart(document.getElementById("unitsChart"), {
@@ -144,7 +173,7 @@ function createCharts() {
         borderRadius: 4
       }]
     },
-    options: chartOptions()
+    options: defaultChartOptions()
   });
 
   salesChart = new Chart(document.getElementById("salesChart"), {
@@ -157,10 +186,11 @@ function createCharts() {
         backgroundColor: "rgba(37,99,235,0.15)",
         fill: true,
         tension: 0.35,
-        pointRadius: 3
+        pointRadius: 4,
+        pointHoverRadius: 6
       }]
     },
-    options: chartOptions()
+    options: defaultChartOptions()
   });
 
   profitChart = new Chart(document.getElementById("profitChart"), {
@@ -173,7 +203,7 @@ function createCharts() {
         borderRadius: 4
       }]
     },
-    options: chartOptions()
+    options: horizontalBarOptions()
   });
 }
 
