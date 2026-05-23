@@ -5,179 +5,149 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Smartphone Inventory Management Dashboard</title>
 
-  <!-- Main CSS file -->
-  <link rel="stylesheet" href="css/style.css" />
-
-  <!-- Chart.js library for dashboard graphs -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
-
-  <!-- ==============================
-       DASHBOARD WRAPPER
-  =============================== -->
-  <div class="dashboard">
-
-    <!-- ==============================
-         LEFT SIDEBAR / INVENTORY CONTROL
-    =============================== -->
+  <div class="app">
     <aside class="sidebar">
-
-      <!-- Sidebar logo/title area -->
       <div class="brand-box">
-        <div class="phone-icon">▯</div>
-        <div>
-          <h2>SMARTPHONE</h2>
-          <p>INVENTORY MANAGEMENT</p>
+        <div class="phone-icon"></div>
+        <div class="brand-title">
+          <h1>SMARTPHONE<br>INVENTORY</h1>
+          <span>MANAGEMENT</span>
         </div>
       </div>
 
-      <!-- Sidebar section title -->
-      <div class="sidebar-section-title">INVENTORY CONTROL</div>
+      <section>
+        <div class="panel-title">Inventory Update</div>
 
-      <!-- Action buttons shown like the mockup -->
-      <div class="action-list">
-        <button class="action-btn active">🛒 Record Sale <span>›</span></button>
-        <button class="action-btn">🚚 Restock Product <span>›</span></button>
-        <button class="action-btn">📝 Adjust Stock <span>›</span></button>
-      </div>
+        <div class="form-group">
+          <label for="actionSelect">Action</label>
+          <select id="actionSelect">
+            <option value="add">Add Stock</option>
+            <option value="remove" selected>Remove Stock / Record Sale</option>
+            <option value="set">Set Stock Level</option>
+          </select>
+        </div>
 
-      <!-- Product form controls -->
-      <div class="sidebar-section-title">PRODUCT DETAILS</div>
+        <div class="form-group">
+          <label for="productSelect">Product</label>
+          <select id="productSelect"></select>
+        </div>
 
-      <div class="form-group">
-        <label for="brandSelect">BRAND</label>
-        <select id="brandSelect"></select>
-      </div>
+        <div class="form-group">
+          <label for="quantityInput">Quantity</label>
+          <input id="quantityInput" type="number" value="1" min="0" step="1" />
+        </div>
 
-      <div class="form-group">
-        <label for="productSelect">MODEL</label>
-        <select id="productSelect"></select>
-      </div>
+        <button class="update-btn" id="applyUpdate">
+          <i class="fa-solid fa-floppy-disk"></i> APPLY UPDATE
+        </button>
+      </section>
 
-      <div class="form-group">
-        <label for="storageSelect">STORAGE</label>
-        <select id="storageSelect"></select>
-      </div>
+      <section class="message-card">
+        <h3>System Message</h3>
+        <div class="system-message" id="systemMessage">
+          <div class="message-icon" id="messageIcon"><i class="fa-solid fa-check"></i></div>
+          <div class="message-text" id="messageText">
+            <strong>Dashboard ready.</strong>
+            Select an action, product, and quantity to update inventory.
+          </div>
+        </div>
+      </section>
 
-      <div class="form-group">
-        <label for="quantityInput">QUANTITY</label>
-        <input id="quantityInput" type="number" value="1" min="1" />
-      </div>
+      <section class="last-updated-card">
+        <h3>Last Updated</h3>
+        <div class="last-time" id="lastUpdatedBox">25 May 2025, 10:45 AM</div>
+      </section>
 
-      <!-- Main inventory update button -->
-      <button id="updateBtn" class="update-btn">▣ UPDATE INVENTORY</button>
-
-      <!-- System message area -->
-      <div class="sidebar-section-title">SYSTEM MESSAGE</div>
-
-      <div id="systemMessage" class="system-message success">
-        ✅ Inventory updated successfully.<br />
-        1 x iPhone 16 Pro sold.<br />
-        25 May 2025, 10:45 AM
-      </div>
-
-      <!-- Last updated display -->
-      <div class="last-updated">
-        <span>◷ LAST UPDATED</span>
-        <strong id="lastUpdated">25 May 2025, 10:45 AM</strong>
-      </div>
-
+      <nav class="nav-list">
+        <div class="nav-item active"><i class="fa-solid fa-house"></i> Dashboard</div>
+        <div class="nav-item"><i class="fa-solid fa-chart-simple"></i> Reports</div>
+        <div class="nav-item"><i class="fa-solid fa-circle-info"></i> About</div>
+      </nav>
     </aside>
 
-    <!-- ==============================
-         MAIN DASHBOARD CONTENT
-    =============================== -->
     <main class="main">
-
-      <!-- Header row -->
-      <header class="top-header">
+      <header class="topbar">
         <div class="title-wrap">
-          <span class="grid-icon">▦</span>
-          <h1>Smartphone Inventory Management Dashboard</h1>
+          <div class="grid-icon"><i class="fa-solid fa-table-cells-large"></i></div>
+          <h2>Smartphone Inventory Management Dashboard</h2>
         </div>
-
-        <div class="date-box">📅 25 May 2025 ▾</div>
+        <div class="date-pill">
+          <i class="fa-regular fa-calendar-days"></i>
+          <span id="topDate">25 May 2025, 10:45 AM</span>
+          <i class="fa-solid fa-angle-down"></i>
+        </div>
       </header>
 
-      <!-- Summary cards -->
-      <section class="summary-grid">
-
-        <div class="summary-card">
-          <div class="circle-icon">$</div>
+      <section class="kpi-grid">
+        <article class="kpi-card">
+          <div class="kpi-icon"><i class="fa-solid fa-chart-column"></i></div>
           <div>
-            <h3>TOTAL REVENUE</h3>
-            <p id="totalRevenue">$0</p>
-            <span>All time revenue</span>
+            <div class="kpi-label">Units Sold This Week</div>
+            <div class="kpi-value" id="unitsSoldKpi">0</div>
+            <div class="kpi-sub"><span class="positive">↑ 15.2%</span> from last week</div>
           </div>
-          <div class="spark">⌁</div>
-        </div>
+        </article>
 
-        <div class="summary-card">
-          <div class="circle-icon">▥</div>
+        <article class="kpi-card">
+          <div class="kpi-icon"><i class="fa-solid fa-dollar-sign"></i></div>
           <div>
-            <h3>UNITS SOLD THIS WEEK</h3>
-            <p id="unitsSold">0</p>
-            <span class="positive">↑ 15% from last week</span>
+            <div class="kpi-label">Average Sale Value</div>
+            <div class="kpi-value" id="avgSaleKpi">$0</div>
+            <div class="kpi-sub">Average per sale</div>
           </div>
-          <div class="spark">⌁</div>
-        </div>
+        </article>
 
-        <div class="summary-card">
-          <div class="circle-icon">◇</div>
+        <article class="kpi-card">
+          <div class="kpi-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
           <div>
-            <h3>AVERAGE SALE VALUE</h3>
-            <p id="averagePrice">$0</p>
-            <span>Average per transaction</span>
+            <div class="kpi-label">Total Revenue</div>
+            <div class="kpi-value" id="revenueKpi">$0</div>
+            <div class="kpi-sub">All time revenue</div>
           </div>
-          <div class="spark">⌁</div>
-        </div>
-
+        </article>
       </section>
 
-      <!-- Graph cards -->
-      <section class="charts-grid">
-
-        <div class="chart-card">
-          <div class="chart-title">
-            <h3>Revenue by Brand</h3>
-            <span>•••</span>
+      <section class="chart-grid">
+        <article class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Revenue by Brand</div>
+            <div class="dots">•••</div>
           </div>
-          <canvas id="revenueChart"></canvas>
-        </div>
+          <div class="chart-box"><canvas id="revenueBrandChart"></canvas></div>
+        </article>
 
-        <div class="chart-card">
-          <div class="chart-title">
-            <h3>Units Sold by Brand</h3>
-            <span>•••</span>
+        <article class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Units Sold by Brand</div>
+            <div class="dots">•••</div>
           </div>
-          <canvas id="unitsChart"></canvas>
-        </div>
+          <div class="chart-box"><canvas id="unitsBrandChart"></canvas></div>
+        </article>
 
-        <div class="chart-card">
-          <div class="chart-title">
-            <h3>Sales Trend (Last 30 Days)</h3>
-            <span>•••</span>
+        <article class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Sales Performance by Product <small>(Last 30 Days)</small></div>
+            <div class="dots">•••</div>
           </div>
-          <canvas id="salesTrendChart"></canvas>
-        </div>
+          <div class="chart-box"><canvas id="salesLineChart"></canvas></div>
+        </article>
 
-        <div class="chart-card">
-          <div class="chart-title">
-            <h3>Stock Levels by Brand</h3>
-            <span>•••</span>
+        <article class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Profitability by Product</div>
+            <div class="dots">•••</div>
           </div>
-          <canvas id="stockChart"></canvas>
-        </div>
-
+          <div class="chart-box"><canvas id="profitChart"></canvas></div>
+        </article>
       </section>
 
-      <!-- Inventory table -->
       <section class="table-card">
-
-        <h3>INVENTORY TABLE</h3>
-
+        <div class="table-title">Inventory Table</div>
         <div class="table-scroll">
           <table>
             <thead>
@@ -185,7 +155,7 @@
                 <th>Brand</th>
                 <th>Model</th>
                 <th>Storage</th>
-                <th>Price</th>
+                <th>Price (USD)</th>
                 <th>Current Stock</th>
                 <th>Units Sold</th>
                 <th>Inventory Value</th>
@@ -193,27 +163,13 @@
                 <th>Last Updated</th>
               </tr>
             </thead>
-
-            <tbody id="inventoryTableBody"></tbody>
+            <tbody id="inventoryBody"></tbody>
           </table>
         </div>
-
-        <div class="table-footer">
-          Showing 1 to 5 of 9 entries
-          <div>
-            <button>‹</button>
-            <button class="page-active">1</button>
-            <button>›</button>
-          </div>
-        </div>
-
       </section>
-
     </main>
-
   </div>
 
-  <!-- Main JavaScript file -->
   <script src="js/app.js"></script>
 </body>
 </html>
