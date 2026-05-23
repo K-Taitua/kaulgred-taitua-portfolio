@@ -26,11 +26,11 @@ try:
     total_units_sold = cursor.fetchone()[0]
 
     cursor.execute("SELECT AVG(Price) FROM Products")
-    average_sale_value = cursor.fetchone()[0]
+    average_product_price = cursor.fetchone()[0]
 
-    print(f"\nTotal Revenue:      ${total_revenue:,.2f}")
-    print(f"Units Sold:         {total_units_sold}")
-    print(f"Average Sale Value: ${average_sale_value:,.2f}")
+    print(f"\nTotal Revenue:          ${total_revenue:,.2f}")
+    print(f"Units Sold:             {total_units_sold}")
+    print(f"Average Product Price:  ${average_product_price:,.2f}")
 
     # ----------------------------------------
     # INVENTORY TABLE
