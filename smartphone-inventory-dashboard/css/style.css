@@ -45,12 +45,12 @@ body {
   flex-shrink: 0;
 }
 
-.logo-box h1 {
+.logo-box h1,
+.logo-box h2 {
   font-size: 18px;
 }
 
 .logo-box h2 {
-  font-size: 18px;
   color: #2f80ff;
 }
 
@@ -125,8 +125,8 @@ button {
   padding: 14px;
   height: 100vh;
   display: grid;
-  grid-template-rows: 48px 90px 1fr 210px;
-  gap: 10px;
+  grid-template-rows: 46px 84px 1fr 195px;
+  gap: 9px;
   overflow: hidden;
 }
 
@@ -137,7 +137,7 @@ button {
 }
 
 .topbar h1 {
-  font-size: 23px;
+  font-size: 22px;
 }
 
 .date-box {
@@ -152,18 +152,18 @@ button {
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 10px;
 }
 
 .card {
   background: white;
-  border-radius: 14px;
+  border-radius: 12px;
   box-shadow: 0 6px 18px rgba(15, 35, 65, 0.12);
   border: 1px solid #dde6f2;
 }
 
 .metric {
-  padding: 12px 16px;
+  padding: 11px 15px;
 }
 
 .metric p {
@@ -173,8 +173,8 @@ button {
 }
 
 .metric h2 {
-  font-size: 26px;
-  margin: 4px 0;
+  font-size: 24px;
+  margin: 3px 0;
 }
 
 .metric span {
@@ -187,12 +187,13 @@ button {
   min-height: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  grid-template-rows: 48% 52%;
+  gap: 10px;
   overflow: hidden;
 }
 
 .chart-card {
-  padding: 9px 10px;
+  padding: 8px 10px;
   min-height: 0;
   overflow: hidden;
   display: flex;
@@ -201,12 +202,12 @@ button {
 
 .chart-card h3 {
   font-size: 14px;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
   flex-shrink: 0;
 }
 
 .chart-scroll {
-  height: calc(100% - 23px);
+  height: calc(100% - 22px);
   width: 100%;
   overflow: auto;
   min-height: 0;
@@ -219,24 +220,28 @@ button {
 
 .vertical-scroll {
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 
+/* top two charts scroll sideways */
 .wide-chart {
-  width: 720px;
+  width: 850px;
   height: 100%;
-  min-height: 165px;
+  min-height: 130px;
 }
 
+/* bottom-left line chart scrolls sideways */
 .extra-wide-chart {
   width: 1050px;
   height: 100%;
-  min-height: 165px;
+  min-height: 150px;
 }
 
+/* bottom-right profitability chart scrolls vertically */
 .tall-chart {
   width: 100%;
-  height: 520px;
+  height: 470px;
+  min-width: 760px;
 }
 
 .chart-card canvas {
@@ -246,7 +251,7 @@ button {
 
 .table-card {
   min-height: 0;
-  padding: 9px 10px;
+  padding: 8px 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -326,10 +331,4 @@ td {
 .table-wrap::-webkit-scrollbar-track {
   background: #e2e8f0;
   border-radius: 999px;
-}
-
-@media (max-width: 1180px) {
-  body {
-    overflow-x: auto;
-  }
 }
