@@ -1,224 +1,386 @@
+/* =========================================================
+   SMARTPHONE INVENTORY MANAGEMENT DASHBOARD
+   Main styling file for layout, sidebar, cards, charts,
+   inventory table, status badges, and responsive behaviour.
+========================================================= */
+
+/* ------------------------------
+   GLOBAL RESET
+------------------------------ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* ------------------------------
+   PAGE BASE
+------------------------------ */
 body {
   font-family: Arial, sans-serif;
   background: #f3f6fb;
   color: #0f172a;
+  overflow: hidden;
 }
 
-.dashboard-container {
-  display: flex;
-  min-height: 100vh;
+/* ------------------------------
+   MAIN DASHBOARD LAYOUT
+------------------------------ */
+.dashboard {
+  display: grid;
+  grid-template-columns: 275px 1fr;
+  height: 100vh;
+  width: 100%;
   background: #f3f6fb;
 }
 
-/* SIDEBAR */
-
+/* =========================================================
+   LEFT SIDEBAR
+========================================================= */
 .sidebar {
-  width: 280px;
-  min-height: 100vh;
-  background: #0f172a;
-  color: white;
-  padding: 32px;
+  background: #071426;
+  color: #ffffff;
+  padding: 22px;
+  overflow-y: auto;
 }
 
-.sidebar-header {
-  margin-bottom: 36px;
+/* Sidebar top logo/title */
+.brand-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
 }
 
-.sidebar-header h2 {
-  font-size: 30px;
-  margin-bottom: 14px;
+.phone-icon {
+  width: 34px;
+  height: 52px;
+  border: 2px solid #2563eb;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #60a5fa;
+  font-size: 22px;
 }
 
-.sidebar-header p {
-  font-size: 18px;
-  line-height: 1.4;
-  color: #bfdbfe;
+.brand-box h2 {
+  font-size: 20px;
+  line-height: 1.1;
 }
 
+.brand-box p {
+  color: #60a5fa;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Sidebar section label */
+.sidebar-section-title {
+  color: #38bdf8;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 22px 0 12px;
+  letter-spacing: 0.4px;
+}
+
+/* Action buttons */
+.action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.action-btn {
+  width: 100%;
+  background: #10243d;
+  color: #ffffff;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.action-btn.active,
+.action-btn:hover {
+  background: #12325a;
+}
+
+/* Form controls */
 .form-group {
-  margin-bottom: 28px;
+  margin-bottom: 14px;
 }
 
 .form-group label {
   display: block;
-  font-size: 18px;
-  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #cbd5e1;
+  margin-bottom: 7px;
 }
 
 .form-group select,
 .form-group input {
   width: 100%;
-  padding: 16px 18px;
-  border: none;
-  border-radius: 14px;
-  background: #1e293b;
-  color: white;
-  font-size: 18px;
+  background: #10243d;
+  color: #ffffff;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
   outline: none;
 }
 
+.form-group select:focus,
+.form-group input:focus {
+  border-color: #2563eb;
+}
+
+/* Inventory update button */
 .update-btn {
   width: 100%;
-  padding: 18px;
-  border: none;
-  border-radius: 14px;
+  margin-top: 8px;
   background: #2563eb;
-  color: white;
-  font-size: 18px;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 13px;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-  margin-top: 10px;
 }
 
 .update-btn:hover {
   background: #1d4ed8;
 }
 
+/* System message box */
 .system-message {
-  margin-top: 28px;
-  padding: 18px;
-  border-radius: 14px;
   background: #064e3b;
   color: #dcfce7;
-  font-size: 15px;
-  line-height: 1.5;
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  border-radius: 8px;
+  padding: 13px;
+  font-size: 12px;
+  line-height: 1.7;
 }
 
-/* MAIN CONTENT */
+/* Last updated card */
+.last-updated {
+  margin-top: 18px;
+  background: #10243d;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 8px;
+  padding: 14px;
+}
 
-.main-content {
-  flex: 1;
-  padding: 26px 30px;
+.last-updated span {
+  display: block;
+  color: #94a3b8;
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+
+.last-updated strong {
+  font-size: 13px;
+  color: #ffffff;
+}
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+.main {
+  padding: 16px 20px;
   overflow-y: auto;
 }
 
-.top-bar {
-  display: grid;
-  grid-template-columns: 1.1fr 2fr;
-  gap: 24px;
-  align-items: start;
-  margin-bottom: 24px;
-}
-
-.dashboard-title h1 {
-  font-size: 38px;
-  line-height: 1.1;
+/* Header row */
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 14px;
 }
 
-.dashboard-title p {
-  font-size: 18px;
-  color: #64748b;
-  max-width: 340px;
+.title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.summary-cards {
+.grid-icon {
+  color: #2563eb;
+  font-size: 25px;
+}
+
+.top-header h1 {
+  font-size: 24px;
+  color: #0f172a;
+}
+
+.date-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #0f172a;
+}
+
+/* =========================================================
+   SUMMARY CARDS
+========================================================= */
+.summary-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  gap: 14px;
+  margin-bottom: 14px;
 }
 
 .summary-card {
-  background: white;
+  background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 20px;
-  padding: 26px;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
-  min-height: 130px;
+  border-radius: 10px;
+  min-height: 112px;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  display: grid;
+  grid-template-columns: 54px 1fr 70px;
+  gap: 14px;
+  align-items: center;
+}
+
+.circle-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
 }
 
 .summary-card h3 {
-  font-size: 17px;
-  color: #64748b;
-  margin-bottom: 14px;
+  font-size: 12px;
+  color: #475569;
+  margin-bottom: 8px;
 }
 
 .summary-card p {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: bold;
   color: #020617;
 }
 
-/* CHARTS */
+.summary-card span {
+  font-size: 12px;
+  color: #475569;
+}
 
+.summary-card .positive {
+  color: #16a34a;
+}
+
+.spark {
+  color: #2563eb;
+  font-size: 42px;
+  opacity: 0.85;
+}
+
+/* =========================================================
+   CHART CARDS
+========================================================= */
 .charts-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  margin-bottom: 18px;
+  gap: 14px;
+  margin-bottom: 14px;
 }
 
 .chart-card {
-  background: white;
+  background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 18px;
-  padding: 18px;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
-  min-height: 285px;
-  position: relative;
+  border-radius: 10px;
+  height: 230px;
+  padding: 14px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
   overflow: hidden;
 }
 
-.chart-card h3 {
-  font-size: 18px;
-  margin-bottom: 12px;
+.chart-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.chart-title h3 {
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.chart-title span {
+  color: #334155;
+  font-size: 13px;
 }
 
 .chart-card canvas {
-  display: block;
   width: 100% !important;
-  height: 220px !important;
+  height: 180px !important;
 }
 
-/* TABLE */
-
-.table-section {
-  background: white;
+/* =========================================================
+   INVENTORY TABLE
+========================================================= */
+.table-card {
+  background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 20px;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
   overflow: hidden;
 }
 
-.table-header {
-  padding: 22px 26px;
+.table-card h3 {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #0f172a;
   border-bottom: 1px solid #e2e8f0;
 }
 
-.table-header h2 {
-  font-size: 26px;
-}
-
-.table-container {
-  max-height: 360px;
+.table-scroll {
+  max-height: 225px;
   overflow: auto;
 }
 
 table {
   width: 100%;
+  min-width: 980px;
   border-collapse: collapse;
-  min-width: 950px;
 }
 
 thead {
-  background: #f8fafc;
   position: sticky;
   top: 0;
+  background: #f8fafc;
   z-index: 2;
 }
 
 th,
 td {
-  padding: 14px 18px;
+  padding: 11px 14px;
   border-bottom: 1px solid #e5e7eb;
+  font-size: 12px;
   text-align: left;
-  font-size: 14px;
+  white-space: nowrap;
 }
 
 th {
@@ -230,10 +392,36 @@ td {
   color: #0f172a;
 }
 
+/* Table footer */
+.table-footer {
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #475569;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-footer button {
+  padding: 6px 10px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.table-footer .page-active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+/* =========================================================
+   STOCK STATUS BADGES
+========================================================= */
 .status {
-  padding: 6px 12px;
+  padding: 5px 10px;
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: bold;
   display: inline-block;
 }
@@ -253,33 +441,25 @@ td {
   color: #b91c1c;
 }
 
-/* RESPONSIVE */
+/* =========================================================
+   RESPONSIVE DESIGN
+========================================================= */
+@media (max-width: 1100px) {
+  body {
+    overflow: auto;
+  }
 
-@media (max-width: 1200px) {
-  .top-bar {
+  .dashboard {
     grid-template-columns: 1fr;
-  }
-
-  .summary-cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 950px) {
-  .dashboard-container {
-    flex-direction: column;
+    height: auto;
   }
 
   .sidebar {
-    width: 100%;
-    min-height: auto;
+    height: auto;
   }
 
+  .summary-grid,
   .charts-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .summary-cards {
     grid-template-columns: 1fr;
   }
 }
