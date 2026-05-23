@@ -1,14 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Smartphone Inventory Dashboard</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartphone Inventory Dashboard</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
-  <h1>Smartphone Inventory Dashboard</h1>
+    <!-- MAIN DASHBOARD -->
+    <div class="dashboard-container">
 
-  <script src="js/app.js"></script>
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="sidebar-header">
+                <h2>Inventory Control</h2>
+                <p>Smartphone Management System</p>
+            </div>
+
+            <!-- ACTION -->
+            <div class="form-group">
+                <label>Action</label>
+
+                <select id="actionSelect">
+                    <option>Record Sale</option>
+                    <option>Restock Product</option>
+                    <option>Adjust Stock</option>
+                </select>
+            </div>
+
+            <!-- BRAND -->
+            <div class="form-group">
+                <label>Brand</label>
+
+                <select id="brandSelect">
+                    <option>Apple</option>
+                    <option>Samsung</option>
+                    <option>Google</option>
+                    <option>OnePlus</option>
+                    <option>Xiaomi</option>
+                </select>
+            </div>
+
+            <!-- PRODUCT -->
+            <div class="form-group">
+                <label>Product</label>
+
+                <select id="productSelect">
+                    <option>iPhone 16 Pro</option>
+                    <option>Galaxy S25 Ultra</option>
+                    <option>Pixel 9 Pro</option>
+                </select>
+            </div>
+
+            <!-- QUANTITY -->
+            <div class="form-group">
+                <label>Quantity</label>
+
+                <input type="number" value="1" min="1">
+            </div>
+
+            <!-- BUTTON -->
+            <button class="update-btn">
+                Update Inventory
+            </button>
+
+            <!-- MESSAGE -->
+            <div class="system-message">
+                System ready.
+            </div>
+
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- TOP BAR -->
+            <div class="top-bar">
+
+                <div class="dashboard-title">
+                    <h1>Smartphone Inventory Dashboard</h1>
+                    <p>Track sales, stock levels, and inventory performance</p>
+                </div>
+
+                <div class="summary-cards">
+
+                    <div class="summary-card">
+                        <h3>Total Revenue</h3>
+                        <p>$332,131</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <h3>Units Sold</h3>
+                        <p>192</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <h3>Average Product Price</h3>
+                        <p>$1,490</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- CHARTS -->
+            <section class="charts-grid">
+
+                <div class="chart-card">
+                    <h3>Revenue by Product</h3>
+                    <canvas id="revenueChart"></canvas>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Units Sold by Product</h3>
+                    <canvas id="unitsChart"></canvas>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Sales Trend</h3>
+                    <canvas id="salesTrendChart"></canvas>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Stock Levels by Product</h3>
+                    <canvas id="stockChart"></canvas>
+                </div>
+
+            </section>
+
+            <!-- INVENTORY TABLE -->
+            <section class="table-section">
+
+                <div class="table-header">
+                    <h2>Inventory Table</h2>
+                </div>
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Brand</th>
+                                <th>Model</th>
+                                <th>Storage</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Units Sold</th>
+                                <th>Inventory Value</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="inventoryTableBody">
+
+                            <!-- JS WILL INSERT DATA -->
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="js/app.js"></script>
+
 </body>
 </html>
