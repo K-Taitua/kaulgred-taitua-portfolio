@@ -26,6 +26,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  overflow: hidden;
 }
 
 .logo-box {
@@ -41,6 +42,7 @@ body {
   height: 64px;
   border: 4px solid #2f80ff;
   border-radius: 10px;
+  flex-shrink: 0;
 }
 
 .logo-box h1 {
@@ -120,11 +122,11 @@ button {
 }
 
 .main {
-  padding: 16px;
+  padding: 14px;
   height: 100vh;
   display: grid;
-  grid-template-rows: 52px 95px 1fr 230px;
-  gap: 12px;
+  grid-template-rows: 48px 90px 1fr 210px;
+  gap: 10px;
   overflow: hidden;
 }
 
@@ -135,21 +137,22 @@ button {
 }
 
 .topbar h1 {
-  font-size: 25px;
+  font-size: 23px;
 }
 
 .date-box {
   background: white;
-  padding: 10px 14px;
+  padding: 9px 13px;
   border-radius: 8px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.08);
   font-weight: bold;
+  font-size: 13px;
 }
 
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  gap: 12px;
 }
 
 .card {
@@ -160,22 +163,22 @@ button {
 }
 
 .metric {
-  padding: 14px 18px;
+  padding: 12px 16px;
 }
 
 .metric p {
-  font-size: 13px;
+  font-size: 12px;
   text-transform: uppercase;
   font-weight: bold;
 }
 
 .metric h2 {
-  font-size: 28px;
-  margin: 5px 0;
+  font-size: 26px;
+  margin: 4px 0;
 }
 
 .metric span {
-  font-size: 13px;
+  font-size: 12px;
   color: #16a34a;
   font-weight: bold;
 }
@@ -184,60 +187,88 @@ button {
   min-height: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-.chart-card {
-  padding: 10px 12px;
-  min-height: 0;
+  gap: 12px;
   overflow: hidden;
 }
 
+.chart-card {
+  padding: 9px 10px;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
 .chart-card h3 {
-  font-size: 15px;
-  margin-bottom: 6px;
+  font-size: 14px;
+  margin-bottom: 5px;
+  flex-shrink: 0;
 }
 
 .chart-scroll {
-  height: calc(100% - 28px);
+  height: calc(100% - 23px);
+  width: 100%;
   overflow: auto;
+  min-height: 0;
 }
 
-.chart-scroll.horizontal canvas {
-  min-width: 760px;
-  height: 100% !important;
+.horizontal-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
-.chart-scroll.vertical canvas {
+.vertical-scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.wide-chart {
+  width: 720px;
+  height: 100%;
+  min-height: 165px;
+}
+
+.extra-wide-chart {
+  width: 1050px;
+  height: 100%;
+  min-height: 165px;
+}
+
+.tall-chart {
+  width: 100%;
+  height: 520px;
+}
+
+.chart-card canvas {
   width: 100% !important;
-  min-height: 520px;
-}
-
-.chart-scroll canvas {
-  display: block;
+  height: 100% !important;
 }
 
 .table-card {
   min-height: 0;
-  padding: 10px 12px;
+  padding: 9px 10px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .table-card h3 {
-  font-size: 15px;
-  margin-bottom: 8px;
+  font-size: 14px;
+  margin-bottom: 6px;
+  flex-shrink: 0;
 }
 
 .table-wrap {
-  height: calc(100% - 28px);
+  height: 100%;
   overflow: auto;
+  min-height: 0;
 }
 
 table {
   width: 100%;
   min-width: 1000px;
   border-collapse: collapse;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 th {
@@ -246,12 +277,13 @@ th {
   background: #f6f9fe;
   z-index: 2;
   text-align: left;
-  padding: 8px;
+  padding: 7px;
   border-bottom: 1px solid #dde6f2;
+  white-space: nowrap;
 }
 
 td {
-  padding: 7px 8px;
+  padding: 6px 7px;
   border-bottom: 1px solid #e5edf7;
   white-space: nowrap;
 }
@@ -260,7 +292,7 @@ td {
   padding: 4px 8px;
   border-radius: 999px;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .in {
@@ -287,11 +319,17 @@ td {
 .chart-scroll::-webkit-scrollbar-thumb,
 .table-wrap::-webkit-scrollbar-thumb {
   background: #94a3b8;
-  border-radius: 20px;
+  border-radius: 999px;
 }
 
 .chart-scroll::-webkit-scrollbar-track,
 .table-wrap::-webkit-scrollbar-track {
   background: #e2e8f0;
-  border-radius: 20px;
+  border-radius: 999px;
+}
+
+@media (max-width: 1180px) {
+  body {
+    overflow-x: auto;
+  }
 }
