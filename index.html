@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Kaulgred Taitua Portfolio</title>
+
   <style>
     body {
       margin: 0;
@@ -16,10 +18,13 @@
       color: white;
       position: fixed;
       padding: 25px;
+      box-sizing: border-box;
     }
 
     .sidebar h2 {
       color: #6ec6e8;
+      font-size: 28px;
+      margin-bottom: 35px;
     }
 
     .sidebar p {
@@ -30,6 +35,11 @@
     .main {
       margin-left: 280px;
       padding: 30px;
+    }
+
+    .main h1 {
+      font-size: 36px;
+      margin-bottom: 25px;
     }
 
     .cards {
@@ -43,34 +53,56 @@
     .project {
       background: white;
       padding: 20px;
-      border-radius: 10px;
       box-shadow: 0 1px 4px #ccc;
+    }
+
+    .card {
+      border-radius: 10px;
+      font-size: 18px;
     }
 
     .section-title {
       background: #6ec6e8;
-      padding: 12px;
+      padding: 14px 18px;
       border-radius: 10px 10px 0 0;
       font-weight: bold;
+      font-size: 20px;
     }
 
     .project {
-      border-radius: 0;
+      border-bottom: 1px solid #e5e7eb;
     }
 
     .project:last-child {
       border-radius: 0 0 10px 10px;
+      border-bottom: none;
+    }
+
+    .project h3 {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+
+    .project p {
+      font-size: 18px;
+      line-height: 1.5;
     }
 
     a {
       color: #0366d6;
       font-weight: bold;
       text-decoration: none;
+      font-size: 18px;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 
 <body>
+
   <div class="sidebar">
     <h2>Kaulgred Taitua</h2>
     <p>Information Technology</p>
@@ -116,20 +148,22 @@
     </div>
 
     <div class="project">
-      <h3>Retail Checkout Management System</h3>
+      <h3>Smartphone Inventory Management Dashboard</h3>
       <p>
-        A retail checkout and inventory dashboard that allows products to be added to a cart,
-        updates stock values, tracks completed sales, and displays inventory information.
+        A smartphone inventory management dashboard that tracks sales, stock levels,
+        inventory value, product status, and stock movement using a clean visual dashboard.
       </p>
       <p>
-        <strong>Skills:</strong> HTML, CSS, JavaScript, Python, SQLite, database design, and dashboard development
+        <strong>Skills:</strong> HTML, CSS, JavaScript, Chart.js, Python, SQLite,
+        database design, inventory logic, and dashboard development
       </p>
       <p>
-        <a href="retail-checkout-system/retail-dashboard.html" target="_blank">
+        <a href="smartphone-inventory-dashboard/index.html" target="_blank">
           View Project
         </a>
       </p>
     </div>
   </div>
+
 </body>
 </html>
