@@ -23,17 +23,17 @@
       <div class="update-panel">
         <h3>Inventory Update</h3>
 
-        <label>Action</label>
+        <label for="actionSelect">Action</label>
         <select id="actionSelect">
           <option value="add">Add Stock</option>
           <option value="remove">Remove Stock / Record Sale</option>
           <option value="set">Set Stock Level</option>
         </select>
 
-        <label>Product</label>
+        <label for="productSelect">Product</label>
         <select id="productSelect"></select>
 
-        <label>Quantity</label>
+        <label for="quantityInput">Quantity</label>
         <input id="quantityInput" type="number" min="0" value="1" />
 
         <button id="applyUpdate">Apply Update</button>
@@ -77,22 +77,30 @@
       <section class="charts">
         <div class="card chart-card">
           <h3>Revenue by Brand</h3>
-          <canvas id="revenueChart"></canvas>
+          <div class="chart-scroll horizontal">
+            <canvas id="revenueChart"></canvas>
+          </div>
         </div>
 
         <div class="card chart-card">
           <h3>Units Sold by Brand</h3>
-          <canvas id="unitsChart"></canvas>
+          <div class="chart-scroll horizontal">
+            <canvas id="unitsChart"></canvas>
+          </div>
         </div>
 
         <div class="card chart-card">
           <h3>Sales Performance by Product</h3>
-          <canvas id="salesChart"></canvas>
+          <div class="chart-scroll horizontal">
+            <canvas id="salesChart"></canvas>
+          </div>
         </div>
 
         <div class="card chart-card">
           <h3>Profitability by Product</h3>
-          <canvas id="profitChart"></canvas>
+          <div class="chart-scroll vertical">
+            <canvas id="profitChart"></canvas>
+          </div>
         </div>
       </section>
 
