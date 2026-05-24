@@ -84,14 +84,25 @@ function defaultChartOptions() {
   return {
     responsive: true,
     maintainAspectRatio: false,
+    layout: {
+      padding: 6
+    },
     plugins: {
       legend: { display: false }
+    },
+    datasets: {
+      bar: {
+        barPercentage: 0.55,
+        categoryPercentage: 0.65
+      }
     },
     scales: {
       x: {
         ticks: {
           color: "#10233f",
-          font: { size: 10, weight: "bold" }
+          font: { size: 10, weight: "bold" },
+          maxRotation: 0,
+          minRotation: 0
         },
         grid: { color: "#e2e8f0" }
       },
@@ -103,6 +114,44 @@ function defaultChartOptions() {
           callback: value => Number(value).toLocaleString()
         },
         grid: { color: "#e2e8f0" }
+      }
+    }
+  };
+}
+
+function profitChartOptions() {
+  return {
+    indexAxis: "y",
+    responsive: true,
+    maintainAspectRatio: false,
+    layout: {
+      padding: 6
+    },
+    plugins: {
+      legend: { display: false }
+    },
+    datasets: {
+      bar: {
+        barPercentage: 0.55,
+        categoryPercentage: 0.7
+      }
+    },
+    scales: {
+      x: {
+        beginAtZero: true,
+        ticks: {
+          color: "#10233f",
+          font: { size: 10, weight: "bold" },
+          callback: value => "$" + Number(value).toLocaleString()
+        },
+        grid: { color: "#e2e8f0" }
+      },
+      y: {
+        ticks: {
+          color: "#10233f",
+          font: { size: 10, weight: "bold" }
+        },
+        grid: { display: false }
       }
     }
   };
@@ -147,8 +196,8 @@ function createCharts() {
         backgroundColor: "rgba(37,99,235,0.15)",
         fill: true,
         tension: 0.35,
-        pointRadius: 4,
-        pointHoverRadius: 6
+        pointRadius: 3,
+        pointHoverRadius: 5
       }]
     },
     options: defaultChartOptions()
@@ -164,7 +213,7 @@ function createCharts() {
         borderRadius: 4
       }]
     },
-    options: defaultChartOptions()
+    options: profitChartOptions()
   });
 }
 
