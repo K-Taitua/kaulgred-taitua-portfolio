@@ -1,5 +1,5 @@
 const products = [
-  { id: 1, brand: "Apple", model: "iPhone 16 Pro", storage: "256GB", price: 2199, cost: 1399, stock: 5, sold: 2, updated: "25 May 2025, 10:45 AM" },
+  { id: 1, brand: "Apple", model: "iPhone 16 Pro", storage: "256GB", price: 2199, cost: 1399, stock: 2, sold: 2, updated: "25 May 2025, 10:45 AM" },
   { id: 2, brand: "Apple", model: "iPhone 16", storage: "128GB", price: 1499, cost: 929, stock: 10, sold: 1, updated: "25 May 2025, 10:45 AM" },
   { id: 3, brand: "Samsung", model: "Galaxy S25 Ultra", storage: "256GB", price: 2399, cost: 1779, stock: 7, sold: 2, updated: "25 May 2025, 10:45 AM" },
   { id: 4, brand: "Samsung", model: "Galaxy S25", storage: "256GB", price: 1899, cost: 1399, stock: 9, sold: 1, updated: "25 May 2025, 10:20 AM" },
