@@ -1,6 +1,6 @@
 # Smartphone Inventory Management Dashboard
 
-A portfolio project for managing smartphone inventory, recording sales, restocking products, and viewing sales and stock analytics.
+A smartphone inventory management dashboard for recording sales, restocking products, tracking stock levels, and viewing sales analytics.
 
 ## Features
 
