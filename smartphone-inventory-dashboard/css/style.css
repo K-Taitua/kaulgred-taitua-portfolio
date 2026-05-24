@@ -246,12 +246,26 @@ button {
 
 .chart-canvas-box {
   width: 920px;
-  height: 205px;
+  height: 195px;
 }
 
 .profit-canvas-box {
   width: 780px;
-  height: 205px;
+  height: 195px;
+}
+
+.doughnut-wrap {
+  height: calc(100% - 16px);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.doughnut-wrap canvas {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .chart-card canvas {
