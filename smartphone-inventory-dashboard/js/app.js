@@ -162,6 +162,7 @@ const valueLabelPlugin = {
 
       meta.data.forEach((bar, index) => {
         const value = dataset.data[index];
+
         const formatted = chart.config.options.indexAxis === "y"
           ? money(value)
           : value >= 1000
@@ -247,6 +248,7 @@ function doughnutOptions() {
           generateLabels(chart) {
             const data = chart.data;
             const values = data.datasets[0].data;
+            const colours = data.datasets[0].backgroundColor;
             const total = values.reduce((sum, value) => sum + value, 0);
 
             return data.labels.map((label, index) => {
@@ -255,8 +257,8 @@ function doughnutOptions() {
 
               return {
                 text: `${label} — ${value} sold — ${percentage}%`,
-                fillStyle: data.datasets[0].backgroundColor[index],
-                strokeStyle: data.datasets[0].backgroundColor[index],
+                fillStyle: colours[index],
+                strokeStyle: colours[index],
                 lineWidth: 1,
                 hidden: false,
                 index
