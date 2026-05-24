@@ -17,7 +17,6 @@ body {
   color: #10233f;
 }
 
-/* Makes the dashboard fit at normal 100% browser zoom */
 .dashboard {
   width: 125vw;
   height: 125vh;
@@ -142,7 +141,7 @@ button {
   height: 125vh;
   padding: 8px;
   display: grid;
-  grid-template-rows: 30px 52px 1fr 125px;
+  grid-template-rows: 30px 48px 1fr 125px;
   gap: 6px;
   overflow: hidden;
 }
@@ -184,7 +183,11 @@ button {
 }
 
 .metric {
-  padding: 6px 10px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   overflow: hidden;
 }
 
@@ -192,18 +195,20 @@ button {
   font-size: 9px;
   text-transform: uppercase;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .metric h2 {
-  font-size: 15px;
+  font-size: 18px;
   line-height: 1;
-  margin: 1px 0;
+  margin-top: 1px;
 }
 
 .metric span {
-  font-size: 8.5px;
+  font-size: 10px;
   color: #16a34a;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 /* CHARTS */
@@ -235,22 +240,18 @@ button {
   height: calc(100% - 16px);
   width: 100%;
   min-height: 0;
-}
-
-.both-scroll {
   overflow-x: auto;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
-/* Wide and tall so each graph can scroll both ways if values grow */
 .chart-canvas-box {
   width: 920px;
-  height: 230px;
+  height: 205px;
 }
 
 .profit-canvas-box {
-  width: 950px;
-  height: 430px;
+  width: 780px;
+  height: 205px;
 }
 
 .chart-card canvas {
