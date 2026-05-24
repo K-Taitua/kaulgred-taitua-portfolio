@@ -3,20 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Smartphone Inventory Dashboard</title>
 
-  <link rel="stylesheet" href="css/style.css" />
-
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="js/app.js" defer></script>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
   <div class="dashboard">
 
     <aside class="sidebar">
-      <div class="logo-row">
+      <div class="logo-box">
         <div class="phone-icon"></div>
         <div>
           <h1>SMARTPHONE</h1>
@@ -24,7 +20,7 @@
         </div>
       </div>
 
-      <section class="control-panel">
+      <div class="update-panel">
         <h3>Inventory Update</h3>
 
         <label for="actionSelect">Action</label>
@@ -42,22 +38,22 @@
 
         <button id="applyUpdate">Apply Update</button>
 
-        <div id="messageBox" class="message success">
-          Dashboard ready.
-        </div>
-      </section>
+        <div id="messageBox" class="message success">Dashboard ready.</div>
+      </div>
 
-      <section class="alerts-card">
+      <div class="alert-panel">
         <h3>Restock Alerts</h3>
         <div id="restockList"></div>
-      </section>
+      </div>
     </aside>
 
     <main class="main">
-      <h1>Smartphone Inventory Management Dashboard</h1>
+      <header class="topbar">
+        <h1>Smartphone Inventory Management Dashboard</h1>
+      </header>
 
-      <section class="kpi-grid">
-        <div class="kpi-card">
+      <section class="cards">
+        <div class="card metric">
           <div>
             <p>Units Sold</p>
             <h2 id="unitsSold">0</h2>
@@ -65,7 +61,7 @@
           <span>Total sold</span>
         </div>
 
-        <div class="kpi-card">
+        <div class="card metric">
           <div>
             <p>Inventory Value</p>
             <h2 id="inventoryValue">$0</h2>
@@ -73,7 +69,7 @@
           <span>Price × stock</span>
         </div>
 
-        <div class="kpi-card">
+        <div class="card metric">
           <div>
             <p>Total Sales Revenue</p>
             <h2 id="totalRevenue">$0</h2>
@@ -82,40 +78,45 @@
         </div>
       </section>
 
-      <section class="charts-grid">
-        <div class="chart-card">
+      <section class="charts">
+        <div class="card chart-card">
           <h3>Sales Revenue by Product</h3>
-          <div class="chart-box">
-            <canvas id="revenueChart"></canvas>
+          <div class="chart-scroll">
+            <div class="chart-canvas-box">
+              <canvas id="revenueChart"></canvas>
+            </div>
           </div>
         </div>
 
-        <div class="chart-card">
+        <div class="card chart-card">
           <h3>Units Sold by Product</h3>
-          <div class="chart-box">
-            <canvas id="unitsChart"></canvas>
+          <div class="chart-scroll">
+            <div class="chart-canvas-box">
+              <canvas id="unitsChart"></canvas>
+            </div>
           </div>
         </div>
 
-        <div class="chart-card">
+        <div class="card chart-card">
           <h3>Sales Share by Brand</h3>
-          <div class="chart-box">
+          <div class="doughnut-wrap">
             <canvas id="salesShareChart"></canvas>
           </div>
         </div>
 
-        <div class="chart-card">
+        <div class="card chart-card">
           <h3>Top 3 Profitability by Product</h3>
-          <div class="chart-box">
-            <canvas id="profitChart"></canvas>
+          <div class="chart-scroll">
+            <div class="profit-canvas-box">
+              <canvas id="profitChart"></canvas>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="table-card">
+      <section class="card table-card">
         <h3>Inventory Table</h3>
-
-        <div class="table-wrapper">
+        <div class="table-wrap">
           <table>
             <thead>
               <tr>
@@ -124,13 +125,12 @@
                 <th>Storage</th>
                 <th>Price</th>
                 <th>Stock</th>
-                <th>Stock Value</th>
                 <th>Units Sold</th>
                 <th>Sales Revenue</th>
                 <th>Status</th>
+                <th>Last Updated</th>
               </tr>
             </thead>
-
             <tbody id="inventoryTable"></tbody>
           </table>
         </div>
@@ -138,5 +138,7 @@
     </main>
 
   </div>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
