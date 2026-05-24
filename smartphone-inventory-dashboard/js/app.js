@@ -72,7 +72,7 @@ function updateTable() {
         <td>${money(product.price)}</td>
         <td>${product.stock}</td>
         <td>${product.sold}</td>
-        <td>${money(product.price * product.stock)}</td>
+        <td>${money(product.price * product.sold)}</td>
         <td><span class="badge ${status.class}">${status.text}</span></td>
         <td>${product.updated}</td>
       </tr>
@@ -99,38 +99,10 @@ function defaultChartOptions() {
         beginAtZero: true,
         ticks: {
           color: "#10233f",
-          font: { size: 10, weight: "bold" }
-        },
-        grid: { color: "#e2e8f0" }
-      }
-    }
-  };
-}
-
-function horizontalBarOptions() {
-  return {
-    indexAxis: "y",
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false }
-    },
-    scales: {
-      x: {
-        beginAtZero: true,
-        ticks: {
-          color: "#10233f",
           font: { size: 10, weight: "bold" },
-          callback: value => "$" + Number(value).toLocaleString()
+          callback: value => Number(value).toLocaleString()
         },
         grid: { color: "#e2e8f0" }
-      },
-      y: {
-        ticks: {
-          color: "#10233f",
-          font: { size: 10, weight: "bold" }
-        },
-        grid: { display: false }
       }
     }
   };
@@ -192,7 +164,7 @@ function createCharts() {
         borderRadius: 4
       }]
     },
-    options: horizontalBarOptions()
+    options: defaultChartOptions()
   });
 }
 
