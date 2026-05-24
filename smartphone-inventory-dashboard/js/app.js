@@ -80,25 +80,20 @@ function updateTable() {
   }).join("");
 }
 
-function defaultChartOptions() {
+function defaultChartOptions(maxValue = null) {
   return {
     responsive: true,
     maintainAspectRatio: false,
     layout: {
-      padding: {
-        top: 6,
-        right: 10,
-        bottom: 8,
-        left: 8
-      }
+      padding: { top: 8, right: 18, bottom: 14, left: 8 }
     },
     plugins: {
       legend: { display: false }
     },
     datasets: {
       bar: {
-        barPercentage: 0.6,
-        categoryPercentage: 0.75
+        barPercentage: 0.7,
+        categoryPercentage: 0.82
       }
     },
     scales: {
@@ -115,6 +110,7 @@ function defaultChartOptions() {
       },
       y: {
         beginAtZero: true,
+        suggestedMax: maxValue ? maxValue * 1.25 : undefined,
         ticks: {
           color: "#10233f",
           font: { size: 9, weight: "bold" },
@@ -126,31 +122,27 @@ function defaultChartOptions() {
   };
 }
 
-function profitChartOptions() {
+function profitChartOptions(maxValue = null) {
   return {
     indexAxis: "y",
     responsive: true,
     maintainAspectRatio: false,
     layout: {
-      padding: {
-        top: 8,
-        right: 12,
-        bottom: 8,
-        left: 8
-      }
+      padding: { top: 8, right: 35, bottom: 10, left: 8 }
     },
     plugins: {
       legend: { display: false }
     },
     datasets: {
       bar: {
-        barPercentage: 0.5,
-        categoryPercentage: 0.7
+        barPercentage: 0.65,
+        categoryPercentage: 0.82
       }
     },
     scales: {
       x: {
         beginAtZero: true,
+        suggestedMax: maxValue ? maxValue * 1.25 : undefined,
         ticks: {
           color: "#10233f",
           font: { size: 9, weight: "bold" },
@@ -173,17 +165,21 @@ function profitChartOptions() {
 function createCharts() {
   const colors = ["#2563eb", "#1e3a8a", "#64748b", "#334155", "#0f172a", "#3b82f6", "#475569", "#0ea5e9", "#1d4ed8"];
 
+  const revenueValues = products.map(product => product.price * product.sold);
+  const unitValues = products.map(product => product.sold);
+  const profitValues = products.map(product => (product.price - product.cost) * product.sold);
+
   revenueChart = new Chart(document.getElementById("revenueChart"), {
     type: "bar",
     data: {
       labels: products.map(product => product.model),
       datasets: [{
-        data: products.map(product => product.price * product.sold),
+        data: revenueValues,
         backgroundColor: colors,
         borderRadius: 4
       }]
     },
-    options: defaultChartOptions()
+    options: defaultChartOptions(Math.max(...revenueValues))
   });
 
   unitsChart = new Chart(document.getElementById("unitsChart"), {
@@ -191,12 +187,12 @@ function createCharts() {
     data: {
       labels: products.map(product => product.model),
       datasets: [{
-        data: products.map(product => product.sold),
+        data: unitValues,
         backgroundColor: colors,
         borderRadius: 4
       }]
     },
-    options: defaultChartOptions()
+    options: defaultChartOptions(Math.max(...unitValues))
   });
 
   salesChart = new Chart(document.getElementById("salesChart"), {
@@ -204,7 +200,7 @@ function createCharts() {
     data: {
       labels: products.map(product => product.model),
       datasets: [{
-        data: products.map(product => product.sold),
+        data: unitValues,
         borderColor: "#2563eb",
         backgroundColor: "rgba(37,99,235,0.15)",
         fill: true,
@@ -213,7 +209,7 @@ function createCharts() {
         pointHoverRadius: 5
       }]
     },
-    options: defaultChartOptions()
+    options: defaultChartOptions(Math.max(...unitValues))
   });
 
   profitChart = new Chart(document.getElementById("profitChart"), {
@@ -221,20 +217,29 @@ function createCharts() {
     data: {
       labels: products.map(product => product.model),
       datasets: [{
-        data: products.map(product => (product.price - product.cost) * product.sold),
+        data: profitValues,
         backgroundColor: colors,
         borderRadius: 4
       }]
     },
-    options: profitChartOptions()
+    options: profitChartOptions(Math.max(...profitValues))
   });
 }
 
 function updateCharts() {
-  revenueChart.data.datasets[0].data = products.map(product => product.price * product.sold);
-  unitsChart.data.datasets[0].data = products.map(product => product.sold);
-  salesChart.data.datasets[0].data = products.map(product => product.sold);
-  profitChart.data.datasets[0].data = products.map(product => (product.price - product.cost) * product.sold);
+  const revenueValues = products.map(product => product.price * product.sold);
+  const unitValues = products.map(product => product.sold);
+  const profitValues = products.map(product => (product.price - product.cost) * product.sold);
+
+  revenueChart.data.datasets[0].data = revenueValues;
+  unitsChart.data.datasets[0].data = unitValues;
+  salesChart.data.datasets[0].data = unitValues;
+  profitChart.data.datasets[0].data = profitValues;
+
+  revenueChart.options = defaultChartOptions(Math.max(...revenueValues));
+  unitsChart.options = defaultChartOptions(Math.max(...unitValues));
+  salesChart.options = defaultChartOptions(Math.max(...unitValues));
+  profitChart.options = profitChartOptions(Math.max(...profitValues));
 
   revenueChart.update();
   unitsChart.update();
