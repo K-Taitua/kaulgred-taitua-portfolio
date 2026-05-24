@@ -3,176 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Kaulgred Taitua Portfolio</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7fb;
-      color: #10233f;
-    }
-
-    .page {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 280px 1fr;
-    }
-
-    .sidebar {
-      background: #08213d;
-      color: white;
-      padding: 42px 30px;
-    }
-
-    .sidebar h1 {
-      margin: 0 0 28px;
-      color: #63c3ff;
-      font-size: 34px;
-      line-height: 1.1;
-    }
-
-    .sidebar p {
-      font-size: 18px;
-      line-height: 1.5;
-      margin: 0 0 26px;
-    }
-
-    .main {
-      padding: 48px 56px;
-    }
-
-    .hero {
-      margin-bottom: 34px;
-      max-width: 980px;
-    }
-
-    .hero h2 {
-      margin: 0 0 14px;
-      font-size: 44px;
-      line-height: 1.1;
-      color: #10233f;
-    }
-
-    .hero p {
-      margin: 0;
-      font-size: 20px;
-      line-height: 1.5;
-      color: #475569;
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(320px, 1fr));
-      gap: 26px;
-      max-width: 1100px;
-    }
-
-    .card {
-      background: white;
-      border: 1px solid #dbe4f0;
-      border-radius: 18px;
-      padding: 30px;
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 350px;
-    }
-
-    .card h3 {
-      margin: 0 0 16px;
-      font-size: 28px;
-      line-height: 1.15;
-      color: #061b35;
-    }
-
-    .card p {
-      margin: 0 0 22px;
-      font-size: 17px;
-      line-height: 1.5;
-      color: #42526b;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 26px;
-    }
-
-    .tag {
-      background: #eaf2ff;
-      color: #1555d8;
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: auto;
-    }
-
-    .btn {
-      text-decoration: none;
-      border: none;
-      border-radius: 10px;
-      padding: 14px 20px;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-block;
-    }
-
-    .btn-primary {
-      background: #2563eb;
-      color: white;
-    }
-
-    .btn-dark {
-      background: #10233f;
-      color: white;
-    }
-
-    .btn:hover {
-      opacity: 0.9;
-      transform: translateY(-1px);
-    }
-
-    @media (max-width: 950px) {
-      .page {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        padding: 28px;
-      }
-
-      .main {
-        padding: 34px 24px;
-      }
-
-      .hero h2 {
-        font-size: 36px;
-      }
-
-      .projects {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 
 <body>
   <div class="page">
+
     <aside class="sidebar">
       <h1>Kaulgred Taitua</h1>
 
@@ -181,74 +21,87 @@
       </p>
 
       <p>
-        Projects using Python, SQL, AWS, Azure, HTML, CSS, and JavaScript.
+        Practical projects built with Python, SQL, JavaScript, AWS, Azure, and database systems.
       </p>
     </aside>
 
-    <main class="main">
-      <section class="hero">
-        <h2>Portfolio Projects</h2>
-        <p>
-          A collection of practical projects showing dashboards, calculators,
-          database systems, automation, and cloud-based workflows.
+    <main class="main-content">
+      <section class="intro-section">
+        <p class="eyebrow">Portfolio</p>
+
+        <h2>Featured Projects</h2>
+
+        <p class="intro-text">
+          A clean collection of practical projects focused on dashboards,
+          business logic, database systems, and web-based tools.
         </p>
       </section>
 
-      <section class="projects">
-        <article class="card">
-          <div>
-            <h3>Smartphone Inventory Management Dashboard</h3>
+      <section class="projects-grid">
+
+        <article class="project-card">
+          <div class="project-content">
+            <p class="project-type">Live Dashboard</p>
+
+            <h3>Smartphone Inventory Management System</h3>
+
             <p>
-              A professional inventory and sales dashboard with stock updates,
-              revenue tracking, sales metrics, product profitability charts,
-              restock alerts, and inventory status badges.
+              A live inventory and sales dashboard with stock controls,
+              restock alerts, product status tracking, revenue metrics,
+              and interactive charts.
             </p>
 
             <div class="tags">
-              <span class="tag">HTML</span>
-              <span class="tag">CSS</span>
-              <span class="tag">JavaScript</span>
-              <span class="tag">Chart.js</span>
-              <span class="tag">Python</span>
-              <span class="tag">SQLite</span>
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>Chart.js</span>
+              <span>Python</span>
+              <span>SQLite</span>
             </div>
           </div>
 
-          <div class="buttons">
-            <a class="btn btn-primary" href="smartphone-inventory-dashboard/" target="_blank">
+          <div class="button-row">
+            <a href="smartphone-inventory-dashboard/" target="_blank" class="btn primary">
               Open Dashboard
             </a>
 
-            <a class="btn btn-dark" href="https://github.com/k-taitua/kaulgred-taitua-portfolio/tree/main/smartphone-inventory-dashboard" target="_blank">
+            <a href="https://github.com/k-taitua/kaulgred-taitua-portfolio/tree/main/smartphone-inventory-dashboard" target="_blank" class="btn secondary">
               View Code / Database
             </a>
           </div>
         </article>
 
-        <article class="card">
-          <div>
+        <article class="project-card">
+          <div class="project-content">
+            <p class="project-type">Calculator Project</p>
+
             <h3>KiwiSaver Calculator</h3>
+
             <p>
-              A calculator project that estimates KiwiSaver savings using salary,
-              contribution rate, employer contributions, and projected savings logic.
+              A calculator project that estimates KiwiSaver savings using
+              salary, contribution rates, employer contributions, and
+              projected savings logic.
             </p>
 
             <div class="tags">
-              <span class="tag">HTML</span>
-              <span class="tag">CSS</span>
-              <span class="tag">JavaScript</span>
-              <span class="tag">Calculator Logic</span>
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>Calculator Logic</span>
             </div>
           </div>
 
-          <div class="buttons">
-            <a class="btn btn-dark" href="https://github.com/k-taitua/kaulgred-taitua-portfolio" target="_blank">
+          <div class="button-row">
+            <a href="https://github.com/k-taitua/kaulgred-taitua-portfolio/tree/main/kiwisaver-calculator" target="_blank" class="btn secondary">
               View Code / README
             </a>
           </div>
         </article>
+
       </section>
     </main>
+
   </div>
 </body>
 </html>
