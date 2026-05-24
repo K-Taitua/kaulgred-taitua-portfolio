@@ -1,18 +1,18 @@
 const products = [
-  { id: 1, brand: "Apple", model: "iPhone 16 Pro", storage: "256GB", price: 2199, cost: 1399, stock: 10, sold: 36, updated: "25 May 2025, 10:45 AM" },
-  { id: 2, brand: "Apple", model: "iPhone 16", storage: "128GB", price: 1499, cost: 929, stock: 13, sold: 32, updated: "25 May 2025, 10:45 AM" },
-  { id: 3, brand: "Samsung", model: "Galaxy S25 Ultra", storage: "256GB", price: 2399, cost: 1779, stock: 5, sold: 35, updated: "25 May 2025, 10:45 AM" },
-  { id: 4, brand: "Samsung", model: "Galaxy S25", storage: "256GB", price: 1899, cost: 1399, stock: 8, sold: 29, updated: "25 May 2025, 10:20 AM" },
+  { id: 1, brand: "Apple", model: "iPhone 16 Pro", storage: "256GB", price: 2199, cost: 1399, stock: 4, sold: 36, updated: "25 May 2025, 10:45 AM" },
+  { id: 2, brand: "Apple", model: "iPhone 16", storage: "128GB", price: 1499, cost: 929, stock: 6, sold: 32, updated: "25 May 2025, 10:45 AM" },
+  { id: 3, brand: "Samsung", model: "Galaxy S25 Ultra", storage: "256GB", price: 2399, cost: 1779, stock: 3, sold: 35, updated: "25 May 2025, 10:45 AM" },
+  { id: 4, brand: "Samsung", model: "Galaxy S25", storage: "256GB", price: 1899, cost: 1399, stock: 5, sold: 29, updated: "25 May 2025, 10:20 AM" },
   { id: 5, brand: "Google", model: "Pixel 9 Pro", storage: "256GB", price: 1749, cost: 1229, stock: 0, sold: 19, updated: "25 May 2025, 09:15 AM" },
-  { id: 6, brand: "Google", model: "Pixel 9", storage: "128GB", price: 1249, cost: 849, stock: 6, sold: 19, updated: "25 May 2025, 09:40 AM" },
-  { id: 7, brand: "OnePlus", model: "OnePlus 13", storage: "256GB", price: 1199, cost: 559, stock: 7, sold: 10, updated: "25 May 2025, 09:50 AM" },
-  { id: 8, brand: "Xiaomi", model: "Redmi Note 15 Pro", storage: "256GB", price: 899, cost: 499, stock: 12, sold: 8, updated: "25 May 2025, 09:35 AM" },
-  { id: 9, brand: "Xiaomi", model: "Redmi Note 15", storage: "256GB", price: 599, cost: 299, stock: 14, sold: 6, updated: "25 May 2025, 09:30 AM" }
+  { id: 6, brand: "Google", model: "Pixel 9", storage: "128GB", price: 1249, cost: 849, stock: 4, sold: 19, updated: "25 May 2025, 09:40 AM" },
+  { id: 7, brand: "OnePlus", model: "OnePlus 13", storage: "256GB", price: 1199, cost: 559, stock: 2, sold: 10, updated: "25 May 2025, 09:50 AM" },
+  { id: 8, brand: "Xiaomi", model: "Redmi Note 15 Pro", storage: "256GB", price: 899, cost: 499, stock: 3, sold: 8, updated: "25 May 2025, 09:35 AM" },
+  { id: 9, brand: "Xiaomi", model: "Redmi Note 15", storage: "256GB", price: 599, cost: 299, stock: 5, sold: 6, updated: "25 May 2025, 09:30 AM" }
 ];
 
 let revenueChart;
 let unitsChart;
-let salesChart;
+let salesShareChart;
 let profitChart;
 
 const money = value => "$" + Math.round(value).toLocaleString();
@@ -44,11 +44,7 @@ function stockStatus(stock) {
 
 function getTopProfitProducts() {
   return [...products]
-    .sort((a, b) => {
-      const profitA = (a.price - a.cost) * a.sold;
-      const profitB = (b.price - b.cost) * b.sold;
-      return profitB - profitA;
-    })
+    .sort((a, b) => ((b.price - b.cost) * b.sold) - ((a.price - a.cost) * a.sold))
     .slice(0, 3);
 }
 
@@ -97,12 +93,12 @@ function updateTable() {
 const valueLabelPlugin = {
   id: "valueLabelPlugin",
   afterDatasetsDraw(chart) {
+    if (chart.config.type === "doughnut") return;
+
     const { ctx } = chart;
     ctx.save();
     ctx.font = "bold 9px Arial";
     ctx.fillStyle = "#10233f";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "bottom";
 
     chart.data.datasets.forEach((dataset, datasetIndex) => {
       const meta = chart.getDatasetMeta(datasetIndex);
@@ -115,9 +111,7 @@ const valueLabelPlugin = {
             ? money(value)
             : value.toLocaleString();
 
-        if (chart.config.type === "line") {
-          ctx.fillText(value.toLocaleString(), bar.x, bar.y - 6);
-        } else if (chart.config.options.indexAxis === "y") {
+        if (chart.config.options.indexAxis === "y") {
           ctx.textAlign = "left";
           ctx.textBaseline = "middle";
           ctx.fillText(formatted, bar.x + 6, bar.y);
@@ -135,12 +129,12 @@ const valueLabelPlugin = {
 
 Chart.register(valueLabelPlugin);
 
-function defaultChartOptions(maxValue = null) {
+function productChartOptions(maxValue = null) {
   return {
     responsive: true,
     maintainAspectRatio: false,
     layout: {
-      padding: { top: 20, right: 22, bottom: 14, left: 8 }
+      padding: { top: 20, right: 22, bottom: 28, left: 8 }
     },
     plugins: {
       legend: { display: false }
@@ -159,7 +153,8 @@ function defaultChartOptions(maxValue = null) {
           font: { size: 9, weight: "bold" },
           maxRotation: 0,
           minRotation: 0,
-          autoSkip: false
+          autoSkip: false,
+          padding: 8
         },
         grid: { color: "#e2e8f0" }
       },
@@ -177,13 +172,41 @@ function defaultChartOptions(maxValue = null) {
   };
 }
 
+function doughnutOptions() {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: "62%",
+    plugins: {
+      legend: {
+        position: "right",
+        labels: {
+          boxWidth: 10,
+          font: { size: 9, weight: "bold" },
+          color: "#10233f"
+        }
+      },
+      tooltip: {
+        callbacks: {
+          label(context) {
+            const total = context.dataset.data.reduce((sum, value) => sum + value, 0);
+            const value = context.raw;
+            const percentage = total === 0 ? 0 : ((value / total) * 100).toFixed(1);
+            return `${context.label}: ${value} sold (${percentage}%)`;
+          }
+        }
+      }
+    }
+  };
+}
+
 function profitChartOptions(maxValue = null) {
   return {
     indexAxis: "y",
     responsive: true,
     maintainAspectRatio: false,
     layout: {
-      padding: { top: 8, right: 70, bottom: 10, left: 8 }
+      padding: { top: 8, right: 70, bottom: 18, left: 8 }
     },
     plugins: {
       legend: { display: false }
@@ -235,7 +258,7 @@ function createCharts() {
         borderRadius: 4
       }]
     },
-    options: defaultChartOptions(Math.max(...revenueValues))
+    options: productChartOptions(Math.max(...revenueValues))
   });
 
   unitsChart = new Chart(document.getElementById("unitsChart"), {
@@ -248,24 +271,21 @@ function createCharts() {
         borderRadius: 4
       }]
     },
-    options: defaultChartOptions(Math.max(...unitValues))
+    options: productChartOptions(Math.max(...unitValues))
   });
 
-  salesChart = new Chart(document.getElementById("salesChart"), {
-    type: "line",
+  salesShareChart = new Chart(document.getElementById("salesShareChart"), {
+    type: "doughnut",
     data: {
       labels: products.map(shortName),
       datasets: [{
         data: unitValues,
-        borderColor: "#2563eb",
-        backgroundColor: "rgba(37,99,235,0.15)",
-        fill: true,
-        tension: 0.35,
-        pointRadius: 3,
-        pointHoverRadius: 5
+        backgroundColor: colors,
+        borderWidth: 2,
+        borderColor: "#ffffff"
       }]
     },
-    options: defaultChartOptions(Math.max(...unitValues))
+    options: doughnutOptions()
   });
 
   profitChart = new Chart(document.getElementById("profitChart"), {
@@ -294,20 +314,19 @@ function updateCharts() {
   unitsChart.data.labels = products.map(shortName);
   unitsChart.data.datasets[0].data = unitValues;
 
-  salesChart.data.labels = products.map(shortName);
-  salesChart.data.datasets[0].data = unitValues;
+  salesShareChart.data.labels = products.map(shortName);
+  salesShareChart.data.datasets[0].data = unitValues;
 
   profitChart.data.labels = topProfitProducts.map(shortName);
   profitChart.data.datasets[0].data = profitValues;
 
-  revenueChart.options = defaultChartOptions(Math.max(...revenueValues));
-  unitsChart.options = defaultChartOptions(Math.max(...unitValues));
-  salesChart.options = defaultChartOptions(Math.max(...unitValues));
+  revenueChart.options = productChartOptions(Math.max(...revenueValues));
+  unitsChart.options = productChartOptions(Math.max(...unitValues));
   profitChart.options = profitChartOptions(Math.max(...profitValues));
 
   revenueChart.update();
   unitsChart.update();
-  salesChart.update();
+  salesShareChart.update();
   profitChart.update();
 }
 
