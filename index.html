@@ -3,142 +3,104 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smartphone Inventory Dashboard</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>Kaulgred Taitua Portfolio</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
+
 <body>
-  <div class="dashboard">
+  <div class="page">
 
     <aside class="sidebar">
-      <div class="logo-box">
-        <div class="phone-icon"></div>
-        <div>
-          <h1>SMARTPHONE</h1>
-          <h2>INVENTORY</h2>
-        </div>
-      </div>
+      <h1>Kaulgred Taitua</h1>
 
-      <div class="update-panel">
-        <h3>Inventory Update</h3>
+      <p>
+        Data, cloud, database, and web development portfolio.
+      </p>
 
-        <label for="actionSelect">Action</label>
-        <select id="actionSelect">
-          <option value="add">Add Stock</option>
-          <option value="remove">Remove Stock / Record Sale</option>
-          <option value="set">Set Stock Level</option>
-        </select>
-
-        <label for="productSelect">Product</label>
-        <select id="productSelect"></select>
-
-        <label for="quantityInput">Quantity</label>
-        <input id="quantityInput" type="number" min="0" value="1" />
-
-        <button id="applyUpdate">Apply Update</button>
-
-        <div id="messageBox" class="message success">Dashboard ready.</div>
-      </div>
-
-      <div class="alert-panel">
-        <h3>Restock Alerts</h3>
-        <div id="restockList"></div>
-      </div>
+      <p>
+        Practical projects built with Python, SQL, JavaScript, AWS, Azure, and database systems.
+      </p>
     </aside>
 
-    <main class="main">
-      <header class="topbar">
-        <h1>Smartphone Inventory Management Dashboard</h1>
-      </header>
+    <main class="main-content">
+      <section class="intro-section">
+        <p class="eyebrow">Projects</p>
 
-      <section class="cards">
-        <div class="card metric">
-          <div>
-            <p>Units Sold</p>
-            <h2 id="unitsSold">0</h2>
-          </div>
-          <span>Total sold</span>
-        </div>
+        <h2>Featured Projects</h2>
 
-        <div class="card metric">
-          <div>
-            <p>Inventory Value</p>
-            <h2 id="inventoryValue">$0</h2>
-          </div>
-          <span>Price × stock</span>
-        </div>
-
-        <div class="card metric">
-          <div>
-            <p>Total Sales Revenue</p>
-            <h2 id="totalRevenue">$0</h2>
-          </div>
-          <span>Price × sold</span>
-        </div>
+        <p class="intro-text">
+          A clean collection of practical projects focused on dashboards,
+          business logic, database systems, and web-based tools.
+        </p>
       </section>
 
-      <section class="charts">
-        <div class="card chart-card">
-          <h3>Sales Revenue by Product</h3>
-          <div class="chart-scroll">
-            <div class="chart-canvas-box">
-              <canvas id="revenueChart"></canvas>
+      <section class="projects-grid">
+
+        <article class="project-card">
+          <div class="project-content">
+            <p class="project-type">Live Dashboard</p>
+
+            <h3>Smartphone Inventory Management System</h3>
+
+            <p>
+              A live inventory and sales dashboard with stock controls,
+              restock alerts, product status tracking, revenue metrics,
+              Python database files, and interactive charts.
+            </p>
+
+            <div class="tags">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>Chart.js</span>
+              <span>Python</span>
+              <span>SQLite</span>
             </div>
           </div>
-        </div>
 
-        <div class="card chart-card">
-          <h3>Units Sold by Product</h3>
-          <div class="chart-scroll">
-            <div class="chart-canvas-box">
-              <canvas id="unitsChart"></canvas>
+          <div class="button-row">
+            <a href="smartphone-inventory-dashboard/" target="_blank" class="btn primary">
+              Open Live Dashboard
+            </a>
+
+            <a href="https://github.com/K-Taitua/kaulgred-taitua-portfolio/tree/main/smartphone-inventory-dashboard" target="_blank" class="btn secondary">
+              View Project Files / README
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-content">
+            <p class="project-type">Python Calculator</p>
+
+            <h3>KiwiSaver Calculator</h3>
+
+            <p>
+              A Python calculator that estimates KiwiSaver investment growth
+              using contribution logic, lump-sum inputs, and projected savings
+              calculations.
+            </p>
+
+            <div class="tags">
+              <span>Python</span>
+              <span>Calculator Logic</span>
+              <span>Investment Growth</span>
             </div>
           </div>
-        </div>
 
-        <div class="card chart-card">
-          <h3>Sales Share by Brand</h3>
-          <div class="doughnut-wrap">
-            <canvas id="salesShareChart"></canvas>
+          <div class="button-row">
+            <a href="https://github.com/K-Taitua/kaulgred-taitua-portfolio/tree/main/kiwisaver-calculator" target="_blank" class="btn secondary">
+              View Project Files / README
+            </a>
           </div>
-        </div>
+        </article>
 
-        <div class="card chart-card">
-          <h3>Top 3 Profitability by Product</h3>
-          <div class="chart-scroll">
-            <div class="profit-canvas-box">
-              <canvas id="profitChart"></canvas>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card table-card">
-        <h3>Inventory Table</h3>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Brand</th>
-                <th>Model</th>
-                <th>Storage</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Stock Value</th>
-                <th>Units Sold</th>
-                <th>Sales Revenue</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="inventoryTable"></tbody>
-          </table>
-        </div>
       </section>
     </main>
 
   </div>
-
-  <script src="js/app.js"></script>
 </body>
 </html>
