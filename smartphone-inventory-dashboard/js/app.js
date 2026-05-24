@@ -17,6 +17,26 @@ let profitChart;
 
 const money = value => "$" + Math.round(value).toLocaleString();
 
+const chartColors = [
+  "#2563eb",
+  "#1d4ed8",
+  "#64748b",
+  "#334155",
+  "#0f172a",
+  "#3b82f6",
+  "#475569",
+  "#0ea5e9",
+  "#0284c7"
+];
+
+const brandColors = [
+  "#2563eb",
+  "#1e3a8a",
+  "#64748b",
+  "#0ea5e9",
+  "#0f172a"
+];
+
 function productName(product) {
   return `${product.brand} ${product.model} ${product.storage}`;
 }
@@ -48,6 +68,19 @@ function getTopProfitProducts() {
     .slice(0, 3);
 }
 
+function getBrandSalesData() {
+  const brandTotals = {};
+
+  products.forEach(product => {
+    brandTotals[product.brand] = (brandTotals[product.brand] || 0) + product.sold;
+  });
+
+  return {
+    labels: Object.keys(brandTotals),
+    values: Object.values(brandTotals)
+  };
+}
+
 function fillDropdown() {
   const select = document.getElementById("productSelect");
 
@@ -66,6 +99,31 @@ function updateCards() {
   document.getElementById("unitsSold").textContent = unitsSold.toLocaleString();
   document.getElementById("inventoryValue").textContent = money(inventoryValue);
   document.getElementById("totalRevenue").textContent = money(revenue);
+}
+
+function updateRestockAlerts() {
+  const alerts = products.filter(product => product.stock <= 5);
+  const list = document.getElementById("restockList");
+  const count = document.getElementById("alertCount");
+
+  count.textContent = alerts.length;
+
+  if (alerts.length === 0) {
+    list.innerHTML = `<div class="alert-item"><span class="alert-name">All stock levels healthy</span></div>`;
+    return;
+  }
+
+  list.innerHTML = alerts.map(product => {
+    const status = stockStatus(product.stock);
+    const badgeClass = status.class === "out" ? "alert-out" : "alert-low";
+
+    return `
+      <div class="alert-item">
+        <span class="alert-name">${product.model}</span>
+        <span class="alert-badge ${badgeClass}">${status.text}</span>
+      </div>
+    `;
+  }).join("");
 }
 
 function updateTable() {
@@ -133,17 +191,10 @@ function productChartOptions(maxValue = null) {
   return {
     responsive: true,
     maintainAspectRatio: false,
-    layout: {
-      padding: { top: 20, right: 22, bottom: 28, left: 8 }
-    },
-    plugins: {
-      legend: { display: false }
-    },
+    layout: { padding: { top: 20, right: 22, bottom: 28, left: 8 } },
+    plugins: { legend: { display: false } },
     datasets: {
-      bar: {
-        barPercentage: 0.78,
-        categoryPercentage: 0.82
-      }
+      bar: { barPercentage: 0.78, categoryPercentage: 0.82 }
     },
     scales: {
       x: {
@@ -205,17 +256,10 @@ function profitChartOptions(maxValue = null) {
     indexAxis: "y",
     responsive: true,
     maintainAspectRatio: false,
-    layout: {
-      padding: { top: 10, right: 95, bottom: 28, left: 8 }
-    },
-    plugins: {
-      legend: { display: false }
-    },
+    layout: { padding: { top: 10, right: 95, bottom: 28, left: 8 } },
+    plugins: { legend: { display: false } },
     datasets: {
-      bar: {
-        barPercentage: 0.7,
-        categoryPercentage: 0.78
-      }
+      bar: { barPercentage: 0.7, categoryPercentage: 0.78 }
     },
     scales: {
       x: {
@@ -241,10 +285,9 @@ function profitChartOptions(maxValue = null) {
 }
 
 function createCharts() {
-  const colors = ["#2563eb", "#1e3a8a", "#64748b", "#334155", "#0f172a", "#3b82f6", "#475569", "#0ea5e9", "#1d4ed8"];
-
   const revenueValues = products.map(product => product.price * product.sold);
   const unitValues = products.map(product => product.sold);
+  const brandSales = getBrandSalesData();
   const topProfitProducts = getTopProfitProducts();
   const profitValues = topProfitProducts.map(product => (product.price - product.cost) * product.sold);
 
@@ -254,7 +297,7 @@ function createCharts() {
       labels: products.map(shortName),
       datasets: [{
         data: revenueValues,
-        backgroundColor: colors,
+        backgroundColor: chartColors,
         borderRadius: 4
       }]
     },
@@ -267,7 +310,7 @@ function createCharts() {
       labels: products.map(shortName),
       datasets: [{
         data: unitValues,
-        backgroundColor: colors,
+        backgroundColor: chartColors,
         borderRadius: 4
       }]
     },
@@ -277,12 +320,13 @@ function createCharts() {
   salesShareChart = new Chart(document.getElementById("salesShareChart"), {
     type: "doughnut",
     data: {
-      labels: products.map(shortName),
+      labels: brandSales.labels,
       datasets: [{
-        data: unitValues,
-        backgroundColor: colors,
+        data: brandSales.values,
+        backgroundColor: brandColors,
         borderWidth: 2,
-        borderColor: "#ffffff"
+        borderColor: "#ffffff",
+        hoverOffset: 8
       }]
     },
     options: doughnutOptions()
@@ -294,7 +338,7 @@ function createCharts() {
       labels: topProfitProducts.map(shortName),
       datasets: [{
         data: profitValues,
-        backgroundColor: colors,
+        backgroundColor: chartColors,
         borderRadius: 4
       }]
     },
@@ -305,6 +349,7 @@ function createCharts() {
 function updateCharts() {
   const revenueValues = products.map(product => product.price * product.sold);
   const unitValues = products.map(product => product.sold);
+  const brandSales = getBrandSalesData();
   const topProfitProducts = getTopProfitProducts();
   const profitValues = topProfitProducts.map(product => (product.price - product.cost) * product.sold);
 
@@ -314,8 +359,9 @@ function updateCharts() {
   unitsChart.data.labels = products.map(shortName);
   unitsChart.data.datasets[0].data = unitValues;
 
-  salesShareChart.data.labels = products.map(shortName);
-  salesShareChart.data.datasets[0].data = unitValues;
+  salesShareChart.data.labels = brandSales.labels;
+  salesShareChart.data.datasets[0].data = brandSales.values;
+  salesShareChart.data.datasets[0].backgroundColor = brandColors;
 
   profitChart.data.labels = topProfitProducts.map(shortName);
   profitChart.data.datasets[0].data = profitValues;
@@ -381,9 +427,9 @@ function applyUpdate() {
   }
 
   product.updated = updated;
-  document.getElementById("dateBox").textContent = updated;
 
   updateCards();
+  updateRestockAlerts();
   updateTable();
   updateCharts();
 }
@@ -391,6 +437,7 @@ function applyUpdate() {
 document.addEventListener("DOMContentLoaded", function () {
   fillDropdown();
   updateCards();
+  updateRestockAlerts();
   updateTable();
   createCharts();
 
