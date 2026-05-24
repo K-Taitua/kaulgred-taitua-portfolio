@@ -8,226 +8,247 @@
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f4f6f9;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
       color: #10233f;
     }
 
-    .container {
-      display: flex;
+    .page {
       min-height: 100vh;
+      display: grid;
+      grid-template-columns: 280px 1fr;
     }
 
     .sidebar {
-      width: 320px;
-      background: #10233f;
+      background: #08213d;
       color: white;
-      padding: 55px 30px;
+      padding: 42px 30px;
     }
 
     .sidebar h1 {
-      color: #69c9ff;
-      font-size: 32px;
-      margin-bottom: 35px;
+      margin: 0 0 28px;
+      color: #63c3ff;
+      font-size: 34px;
+      line-height: 1.1;
     }
 
     .sidebar p {
       font-size: 18px;
-      margin: 24px 0;
       line-height: 1.5;
+      margin: 0 0 26px;
     }
 
     .main {
-      flex: 1;
-      padding: 60px 55px;
+      padding: 48px 56px;
     }
 
-    .main h1 {
+    .hero {
+      margin-bottom: 34px;
+      max-width: 980px;
+    }
+
+    .hero h2 {
+      margin: 0 0 14px;
       font-size: 44px;
-      margin-bottom: 15px;
+      line-height: 1.1;
+      color: #10233f;
     }
 
-    .intro {
+    .hero p {
+      margin: 0;
       font-size: 20px;
-      color: #526173;
-      margin-bottom: 40px;
       line-height: 1.5;
-      max-width: 900px;
+      color: #475569;
     }
 
     .projects {
       display: grid;
       grid-template-columns: repeat(2, minmax(320px, 1fr));
-      gap: 28px;
+      gap: 26px;
+      max-width: 1100px;
     }
 
-    .project-card {
+    .card {
       background: white;
-      border-radius: 16px;
-      padding: 28px;
-      box-shadow: 0 8px 24px rgba(15, 35, 65, 0.12);
-      border: 1px solid #dde6f2;
-    }
-
-    .project-card h2 {
-      font-size: 26px;
-      margin-bottom: 14px;
-      color: #10233f;
-    }
-
-    .project-card p {
-      color: #526173;
-      font-size: 16px;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .tech-list {
+      border: 1px solid #dbe4f0;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 24px;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 350px;
     }
 
-    .tech-list span {
-      background: #eaf2ff;
-      color: #1d4ed8;
-      padding: 7px 10px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: bold;
+    .card h3 {
+      margin: 0 0 16px;
+      font-size: 28px;
+      line-height: 1.15;
+      color: #061b35;
     }
 
-    .btn-row {
+    .card p {
+      margin: 0 0 22px;
+      font-size: 17px;
+      line-height: 1.5;
+      color: #42526b;
+    }
+
+    .tags {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+      margin-bottom: 26px;
     }
 
-    .project-btn {
+    .tag {
+      background: #eaf2ff;
+      color: #1555d8;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: auto;
+    }
+
+    .btn {
+      text-decoration: none;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 20px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
       display: inline-block;
+    }
+
+    .btn-primary {
       background: #2563eb;
       color: white;
-      text-decoration: none;
-      padding: 12px 18px;
-      border-radius: 10px;
-      font-weight: bold;
     }
 
-    .project-btn.secondary {
+    .btn-dark {
       background: #10233f;
+      color: white;
     }
 
-    .project-btn:hover {
+    .btn:hover {
       opacity: 0.9;
+      transform: translateY(-1px);
     }
 
-    @media (max-width: 900px) {
-      .container {
-        flex-direction: column;
+    @media (max-width: 950px) {
+      .page {
+        grid-template-columns: 1fr;
       }
 
       .sidebar {
-        width: 100%;
+        padding: 28px;
+      }
+
+      .main {
+        padding: 34px 24px;
+      }
+
+      .hero h2 {
+        font-size: 36px;
       }
 
       .projects {
         grid-template-columns: 1fr;
       }
-
-      .main {
-        padding: 35px 25px;
-      }
     }
   </style>
 </head>
+
 <body>
-
-  <div class="container">
-
+  <div class="page">
     <aside class="sidebar">
       <h1>Kaulgred Taitua</h1>
 
-      <p>Data, cloud, database, and web development portfolio.</p>
+      <p>
+        Data, cloud, database, and web development portfolio.
+      </p>
 
-      <p>Projects using Python, SQL, AWS, Azure, HTML, CSS, and JavaScript.</p>
+      <p>
+        Projects using Python, SQL, AWS, Azure, HTML, CSS, and JavaScript.
+      </p>
     </aside>
 
     <main class="main">
-      <h1>Portfolio Projects</h1>
-
-      <p class="intro">
-        A collection of practical projects showing dashboards, calculators,
-        database systems, automation, and cloud-based workflows.
-      </p>
+      <section class="hero">
+        <h2>Portfolio Projects</h2>
+        <p>
+          A collection of practical projects showing dashboards, calculators,
+          database systems, automation, and cloud-based workflows.
+        </p>
+      </section>
 
       <section class="projects">
+        <article class="card">
+          <div>
+            <h3>Smartphone Inventory Management Dashboard</h3>
+            <p>
+              A professional inventory and sales dashboard with stock updates,
+              revenue tracking, sales metrics, product profitability charts,
+              restock alerts, and inventory status badges.
+            </p>
 
-        <div class="project-card">
-          <h2>Smartphone Inventory Management Dashboard</h2>
-
-          <p>
-            A professional inventory and sales dashboard with stock updates,
-            revenue tracking, sales metrics, product profitability charts,
-            and inventory status badges.
-          </p>
-
-          <div class="tech-list">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-            <span>Chart.js</span>
-            <span>Python</span>
-            <span>SQLite</span>
+            <div class="tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Chart.js</span>
+              <span class="tag">Python</span>
+              <span class="tag">SQLite</span>
+            </div>
           </div>
 
-          <div class="btn-row">
-            <a href="smartphone-inventory-dashboard/" target="_blank" class="project-btn">
-              Live Dashboard
+          <div class="buttons">
+            <a class="btn btn-primary" href="smartphone-inventory-dashboard/" target="_blank">
+              Open Dashboard
             </a>
 
-            <a href="https://github.com/k-taitua/kaulgred-taitua-portfolio/tree/main/smartphone-inventory-dashboard" target="_blank" class="project-btn secondary">
+            <a class="btn btn-dark" href="https://github.com/k-taitua/kaulgred-taitua-portfolio/tree/main/smartphone-inventory-dashboard" target="_blank">
+              View Code / Database
+            </a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>KiwiSaver Calculator</h3>
+            <p>
+              A calculator project that estimates KiwiSaver savings using salary,
+              contribution rate, employer contributions, and projected savings logic.
+            </p>
+
+            <div class="tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Calculator Logic</span>
+            </div>
+          </div>
+
+          <div class="buttons">
+            <a class="btn btn-dark" href="https://github.com/k-taitua/kaulgred-taitua-portfolio" target="_blank">
               View Code / README
             </a>
           </div>
-        </div>
-
-        <div class="project-card">
-          <h2>KiwiSaver Calculator</h2>
-
-          <p>
-            A calculator web app that estimates KiwiSaver savings using user
-            inputs such as salary, contribution rate, employer contributions,
-            and projected savings.
-          </p>
-
-          <div class="tech-list">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-            <span>Calculator Logic</span>
-          </div>
-
-          <div class="btn-row">
-            <a href="kiwisaver-calculator/" target="_blank" class="project-btn">
-              Live Calculator
-            </a>
-
-            <a href="https://github.com/k-taitua/kaulgred-taitua-portfolio/tree/main/kiwisaver-calculator" target="_blank" class="project-btn secondary">
-              View Code / README
-            </a>
-          </div>
-        </div>
-
+        </article>
       </section>
     </main>
-
   </div>
-
 </body>
 </html>
