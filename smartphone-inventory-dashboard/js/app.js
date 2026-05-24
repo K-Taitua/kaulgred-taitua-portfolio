@@ -124,6 +124,7 @@ function updateTable() {
 
     return `
       <tr>
+        <td>${product.brand}</td>
         <td>${product.model}</td>
         <td>${product.storage}</td>
         <td>${money(product.price)}</td>
