@@ -1,13 +1,13 @@
 const products = [
-  { id: 1, brand: "Apple", model: "iPhone 16 Pro", storage: "256GB", price: 2199, cost: 1399, stock: 4, sold: 36, updated: "25 May 2025, 10:45 AM" },
-  { id: 2, brand: "Apple", model: "iPhone 16", storage: "128GB", price: 1499, cost: 929, stock: 6, sold: 32, updated: "25 May 2025, 10:45 AM" },
-  { id: 3, brand: "Samsung", model: "Galaxy S25 Ultra", storage: "256GB", price: 2399, cost: 1779, stock: 3, sold: 35, updated: "25 May 2025, 10:45 AM" },
-  { id: 4, brand: "Samsung", model: "Galaxy S25", storage: "256GB", price: 1899, cost: 1399, stock: 5, sold: 29, updated: "25 May 2025, 10:20 AM" },
-  { id: 5, brand: "Google", model: "Pixel 9 Pro", storage: "256GB", price: 1749, cost: 1229, stock: 0, sold: 19, updated: "25 May 2025, 09:15 AM" },
-  { id: 6, brand: "Google", model: "Pixel 9", storage: "128GB", price: 1249, cost: 849, stock: 4, sold: 19, updated: "25 May 2025, 09:40 AM" },
-  { id: 7, brand: "OnePlus", model: "OnePlus 13", storage: "256GB", price: 1199, cost: 559, stock: 2, sold: 10, updated: "25 May 2025, 09:50 AM" },
-  { id: 8, brand: "Xiaomi", model: "Redmi Note 15 Pro", storage: "256GB", price: 899, cost: 499, stock: 3, sold: 8, updated: "25 May 2025, 09:35 AM" },
-  { id: 9, brand: "Xiaomi", model: "Redmi Note 15", storage: "256GB", price: 599, cost: 299, stock: 5, sold: 6, updated: "25 May 2025, 09:30 AM" }
+  { id: 1, brand: "Apple", model: "iPhone 16 Pro", storage: "256GB", price: 2199, cost: 1399, stock: 8, sold: 7, updated: "25 May 2025, 10:45 AM" },
+  { id: 2, brand: "Apple", model: "iPhone 16", storage: "128GB", price: 1499, cost: 929, stock: 10, sold: 6, updated: "25 May 2025, 10:45 AM" },
+  { id: 3, brand: "Samsung", model: "Galaxy S25 Ultra", storage: "256GB", price: 2399, cost: 1779, stock: 7, sold: 6, updated: "25 May 2025, 10:45 AM" },
+  { id: 4, brand: "Samsung", model: "Galaxy S25", storage: "256GB", price: 1899, cost: 1399, stock: 9, sold: 5, updated: "25 May 2025, 10:20 AM" },
+  { id: 5, brand: "Google", model: "Pixel 9 Pro", storage: "256GB", price: 1749, cost: 1229, stock: 4, sold: 4, updated: "25 May 2025, 09:15 AM" },
+  { id: 6, brand: "Google", model: "Pixel 9", storage: "128GB", price: 1249, cost: 849, stock: 8, sold: 4, updated: "25 May 2025, 09:40 AM" },
+  { id: 7, brand: "OnePlus", model: "OnePlus 13", storage: "256GB", price: 1199, cost: 559, stock: 7, sold: 3, updated: "25 May 2025, 09:50 AM" },
+  { id: 8, brand: "Xiaomi", model: "Redmi Note 15 Pro", storage: "256GB", price: 899, cost: 499, stock: 9, sold: 3, updated: "25 May 2025, 09:35 AM" },
+  { id: 9, brand: "Xiaomi", model: "Redmi Note 15", storage: "256GB", price: 599, cost: 299, stock: 11, sold: 2, updated: "25 May 2025, 09:30 AM" }
 ];
 
 let revenueChart;
@@ -60,11 +60,11 @@ function fillDropdown() {
 
 function updateCards() {
   const unitsSold = products.reduce((sum, product) => sum + product.sold, 0);
+  const inventoryValue = products.reduce((sum, product) => sum + product.stock * product.price, 0);
   const revenue = products.reduce((sum, product) => sum + product.sold * product.price, 0);
-  const avgSale = unitsSold === 0 ? 0 : revenue / unitsSold;
 
   document.getElementById("unitsSold").textContent = unitsSold.toLocaleString();
-  document.getElementById("averageSale").textContent = money(avgSale);
+  document.getElementById("inventoryValue").textContent = money(inventoryValue);
   document.getElementById("totalRevenue").textContent = money(revenue);
 }
 
