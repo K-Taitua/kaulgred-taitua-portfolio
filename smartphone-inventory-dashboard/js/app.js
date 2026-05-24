@@ -21,6 +21,10 @@ function productName(product) {
   return `${product.brand} ${product.model} ${product.storage}`;
 }
 
+function shortName(product) {
+  return product.model;
+}
+
 function nowText() {
   return new Date().toLocaleString("en-NZ", {
     day: "2-digit",
@@ -36,6 +40,16 @@ function stockStatus(stock) {
   if (stock === 0) return { text: "Out of Stock", class: "out" };
   if (stock <= 5) return { text: "Low Stock", class: "low" };
   return { text: "In Stock", class: "in" };
+}
+
+function getTopProfitProducts() {
+  return [...products]
+    .sort((a, b) => {
+      const profitA = (a.price - a.cost) * a.sold;
+      const profitB = (b.price - b.cost) * b.sold;
+      return profitB - profitA;
+    })
+    .slice(0, 3);
 }
 
 function fillDropdown() {
@@ -80,19 +94,60 @@ function updateTable() {
   }).join("");
 }
 
+const valueLabelPlugin = {
+  id: "valueLabelPlugin",
+  afterDatasetsDraw(chart) {
+    const { ctx } = chart;
+    ctx.save();
+    ctx.font = "bold 9px Arial";
+    ctx.fillStyle = "#10233f";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+
+    chart.data.datasets.forEach((dataset, datasetIndex) => {
+      const meta = chart.getDatasetMeta(datasetIndex);
+
+      meta.data.forEach((bar, index) => {
+        const value = dataset.data[index];
+        const formatted = chart.config.options.indexAxis === "y"
+          ? money(value)
+          : value >= 1000
+            ? money(value)
+            : value.toLocaleString();
+
+        if (chart.config.type === "line") {
+          ctx.fillText(value.toLocaleString(), bar.x, bar.y - 6);
+        } else if (chart.config.options.indexAxis === "y") {
+          ctx.textAlign = "left";
+          ctx.textBaseline = "middle";
+          ctx.fillText(formatted, bar.x + 6, bar.y);
+        } else {
+          ctx.textAlign = "center";
+          ctx.textBaseline = "bottom";
+          ctx.fillText(formatted, bar.x, bar.y - 5);
+        }
+      });
+    });
+
+    ctx.restore();
+  }
+};
+
+Chart.register(valueLabelPlugin);
+
 function defaultChartOptions(maxValue = null) {
   return {
     responsive: true,
     maintainAspectRatio: false,
     layout: {
-      padding: { top: 8, right: 18, bottom: 14, left: 8 }
+      padding: { top: 20, right: 22, bottom: 14, left: 8 }
     },
     plugins: {
       legend: { display: false }
     },
     datasets: {
       bar: {
-        barPercentage: 0.7,
+        barPercentage: 0.78,
         categoryPercentage: 0.82
       }
     },
@@ -110,7 +165,7 @@ function defaultChartOptions(maxValue = null) {
       },
       y: {
         beginAtZero: true,
-        suggestedMax: maxValue ? maxValue * 1.25 : undefined,
+        suggestedMax: maxValue ? maxValue * 1.45 : undefined,
         ticks: {
           color: "#10233f",
           font: { size: 9, weight: "bold" },
@@ -128,21 +183,21 @@ function profitChartOptions(maxValue = null) {
     responsive: true,
     maintainAspectRatio: false,
     layout: {
-      padding: { top: 8, right: 35, bottom: 10, left: 8 }
+      padding: { top: 8, right: 70, bottom: 10, left: 8 }
     },
     plugins: {
       legend: { display: false }
     },
     datasets: {
       bar: {
-        barPercentage: 0.65,
+        barPercentage: 0.72,
         categoryPercentage: 0.82
       }
     },
     scales: {
       x: {
         beginAtZero: true,
-        suggestedMax: maxValue ? maxValue * 1.25 : undefined,
+        suggestedMax: maxValue ? maxValue * 1.35 : undefined,
         ticks: {
           color: "#10233f",
           font: { size: 9, weight: "bold" },
@@ -167,12 +222,13 @@ function createCharts() {
 
   const revenueValues = products.map(product => product.price * product.sold);
   const unitValues = products.map(product => product.sold);
-  const profitValues = products.map(product => (product.price - product.cost) * product.sold);
+  const topProfitProducts = getTopProfitProducts();
+  const profitValues = topProfitProducts.map(product => (product.price - product.cost) * product.sold);
 
   revenueChart = new Chart(document.getElementById("revenueChart"), {
     type: "bar",
     data: {
-      labels: products.map(product => product.model),
+      labels: products.map(shortName),
       datasets: [{
         data: revenueValues,
         backgroundColor: colors,
@@ -185,7 +241,7 @@ function createCharts() {
   unitsChart = new Chart(document.getElementById("unitsChart"), {
     type: "bar",
     data: {
-      labels: products.map(product => product.model),
+      labels: products.map(shortName),
       datasets: [{
         data: unitValues,
         backgroundColor: colors,
@@ -198,7 +254,7 @@ function createCharts() {
   salesChart = new Chart(document.getElementById("salesChart"), {
     type: "line",
     data: {
-      labels: products.map(product => product.model),
+      labels: products.map(shortName),
       datasets: [{
         data: unitValues,
         borderColor: "#2563eb",
@@ -215,7 +271,7 @@ function createCharts() {
   profitChart = new Chart(document.getElementById("profitChart"), {
     type: "bar",
     data: {
-      labels: products.map(product => product.model),
+      labels: topProfitProducts.map(shortName),
       datasets: [{
         data: profitValues,
         backgroundColor: colors,
@@ -229,11 +285,19 @@ function createCharts() {
 function updateCharts() {
   const revenueValues = products.map(product => product.price * product.sold);
   const unitValues = products.map(product => product.sold);
-  const profitValues = products.map(product => (product.price - product.cost) * product.sold);
+  const topProfitProducts = getTopProfitProducts();
+  const profitValues = topProfitProducts.map(product => (product.price - product.cost) * product.sold);
 
+  revenueChart.data.labels = products.map(shortName);
   revenueChart.data.datasets[0].data = revenueValues;
+
+  unitsChart.data.labels = products.map(shortName);
   unitsChart.data.datasets[0].data = unitValues;
+
+  salesChart.data.labels = products.map(shortName);
   salesChart.data.datasets[0].data = unitValues;
+
+  profitChart.data.labels = topProfitProducts.map(shortName);
   profitChart.data.datasets[0].data = profitValues;
 
   revenueChart.options = defaultChartOptions(Math.max(...revenueValues));
