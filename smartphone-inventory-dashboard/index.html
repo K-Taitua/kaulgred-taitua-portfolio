@@ -54,20 +54,26 @@
 
       <section class="cards">
         <div class="card metric">
-          <p>Units Sold</p>
-          <h2 id="unitsSold">0</h2>
+          <div>
+            <p>Units Sold</p>
+            <h2 id="unitsSold">0</h2>
+          </div>
           <span>Total units sold</span>
         </div>
 
         <div class="card metric">
-          <p>Average Sale Value</p>
-          <h2 id="averageSale">$0</h2>
+          <div>
+            <p>Average Sale Value</p>
+            <h2 id="averageSale">$0</h2>
+          </div>
           <span>Average per sale</span>
         </div>
 
         <div class="card metric">
-          <p>Total Sales Revenue</p>
-          <h2 id="totalRevenue">$0</h2>
+          <div>
+            <p>Total Sales Revenue</p>
+            <h2 id="totalRevenue">$0</h2>
+          </div>
           <span>Price × units sold</span>
         </div>
       </section>
@@ -75,7 +81,7 @@
       <section class="charts">
         <div class="card chart-card">
           <h3>Sales Revenue by Product</h3>
-          <div class="chart-scroll both-scroll">
+          <div class="chart-scroll">
             <div class="chart-canvas-box">
               <canvas id="revenueChart"></canvas>
             </div>
@@ -84,7 +90,7 @@
 
         <div class="card chart-card">
           <h3>Units Sold by Product</h3>
-          <div class="chart-scroll both-scroll">
+          <div class="chart-scroll">
             <div class="chart-canvas-box">
               <canvas id="unitsChart"></canvas>
             </div>
@@ -93,7 +99,7 @@
 
         <div class="card chart-card">
           <h3>Sales Performance by Product</h3>
-          <div class="chart-scroll both-scroll">
+          <div class="chart-scroll">
             <div class="chart-canvas-box">
               <canvas id="salesChart"></canvas>
             </div>
@@ -101,8 +107,8 @@
         </div>
 
         <div class="card chart-card">
-          <h3>Profitability by Product</h3>
-          <div class="chart-scroll both-scroll">
+          <h3>Top 3 Profitability by Product</h3>
+          <div class="chart-scroll">
             <div class="profit-canvas-box">
               <canvas id="profitChart"></canvas>
             </div>
