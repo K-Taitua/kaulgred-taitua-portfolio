@@ -166,20 +166,6 @@ button {
   color: #dc2626;
 }
 
-.side-nav {
-  padding: 8px;
-  border-radius: 8px;
-  font-weight: bold;
-  color: #dbeafe;
-  font-size: 11px;
-}
-
-.side-nav.active {
-  background: #0b2c55;
-  color: #4da3ff;
-  border-left: 4px solid #2f80ff;
-}
-
 .main {
   height: 125vh;
   padding: 8px;
@@ -198,71 +184,6 @@ button {
 .topbar h1 {
   font-size: 18px;
   white-space: nowrap;
-}
-
-.top-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.search-box {
-  width: 190px;
-  height: 28px;
-  border-radius: 9px;
-  border: 1px solid #cbd5e1;
-  background: white;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 0 10px;
-  font-size: 11px;
-  color: #64748b;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
-}
-
-.bell {
-  position: relative;
-  width: 30px;
-  height: 30px;
-  background: white;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
-}
-
-.bell span {
-  position: absolute;
-  top: -3px;
-  right: -3px;
-  background: #ef4444;
-  color: white;
-  width: 14px;
-  height: 14px;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 8px;
-  font-weight: bold;
-}
-
-.user-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
-  overflow: hidden;
-  background: #111827;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-}
-
-.user-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .cards {
