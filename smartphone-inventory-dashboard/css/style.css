@@ -4,51 +4,62 @@
   padding: 0;
 }
 
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   background: #f3f7fc;
   color: #10233f;
+}
+
+/* This makes 100% browser zoom look like the clean 80% layout */
+.dashboard {
+  width: 125vw;
+  height: 125vh;
+  transform: scale(0.8);
+  transform-origin: top left;
+  display: grid;
+  grid-template-columns: 240px 1fr;
   overflow: hidden;
 }
 
-.dashboard {
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  overflow: hidden;
-}
+/* SIDEBAR */
 
 .sidebar {
   background: #061a33;
   color: white;
-  padding: 14px 16px;
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
   overflow: hidden;
 }
 
 .logo-box {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding-bottom: 12px;
+  gap: 9px;
+  padding-bottom: 10px;
   border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 
 .phone-icon {
-  width: 36px;
-  height: 54px;
+  width: 32px;
+  height: 48px;
   border: 3px solid #2f80ff;
-  border-radius: 9px;
+  border-radius: 8px;
   flex-shrink: 0;
 }
 
 .logo-box h1,
 .logo-box h2 {
-  font-size: 16px;
-  line-height: 1.1;
+  font-size: 15px;
+  line-height: 1.05;
 }
 
 .logo-box h2 {
@@ -57,48 +68,48 @@ body {
 
 .update-panel h3 {
   color: #2f80ff;
-  margin-bottom: 8px;
-  font-size: 14px;
+  margin-bottom: 6px;
+  font-size: 13px;
 }
 
 label {
   display: block;
-  font-size: 12px;
-  margin: 7px 0 4px;
+  font-size: 11px;
+  margin: 6px 0 3px;
   color: #d7e3f5;
 }
 
 select,
 input {
   width: 100%;
-  height: 33px;
+  height: 30px;
   border-radius: 7px;
   border: 1px solid #31506f;
   background: #07182f;
   color: white;
-  padding: 0 9px;
-  font-size: 12px;
+  padding: 0 8px;
+  font-size: 11px;
 }
 
 button {
   width: 100%;
-  height: 35px;
-  margin-top: 10px;
+  height: 32px;
+  margin-top: 8px;
   border: none;
   border-radius: 8px;
   background: #2563eb;
   color: white;
   font-weight: bold;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .message {
-  margin-top: 10px;
-  padding: 8px;
+  margin-top: 8px;
+  padding: 7px;
   border-radius: 8px;
-  font-size: 12px;
-  line-height: 1.25;
+  font-size: 11px;
+  line-height: 1.2;
 }
 
 .success {
@@ -112,11 +123,11 @@ button {
 }
 
 .side-nav {
-  padding: 10px;
+  padding: 9px;
   border-radius: 8px;
   font-weight: bold;
   color: #dbeafe;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .side-nav.active {
@@ -125,12 +136,14 @@ button {
   border-left: 4px solid #2f80ff;
 }
 
+/* MAIN */
+
 .main {
-  height: 100vh;
-  padding: 10px;
+  height: 125vh;
+  padding: 8px;
   display: grid;
-  grid-template-rows: 34px 54px 1fr 138px;
-  gap: 7px;
+  grid-template-rows: 30px 44px 1fr 125px;
+  gap: 6px;
   overflow: hidden;
 }
 
@@ -138,71 +151,73 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  overflow: hidden;
 }
 
 .topbar h1 {
-  font-size: 20px;
+  font-size: 18px;
   white-space: nowrap;
 }
 
 .date-box {
   background: white;
-  padding: 7px 11px;
+  padding: 6px 10px;
   border-radius: 8px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
   font-weight: bold;
-  font-size: 12px;
+  font-size: 11px;
   white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
+
+/* KPI CARDS */
 
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  min-height: 0;
+  gap: 7px;
 }
 
 .card {
   background: white;
-  border-radius: 11px;
-  box-shadow: 0 5px 14px rgba(15, 35, 65, 0.12);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(15, 35, 65, 0.11);
   border: 1px solid #dde6f2;
 }
 
 .metric {
-  padding: 6px 12px;
+  padding: 5px 10px;
   overflow: hidden;
 }
 
 .metric p {
-  font-size: 10px;
+  font-size: 9px;
   text-transform: uppercase;
   font-weight: bold;
 }
 
 .metric h2 {
-  font-size: 18px;
-  margin: 0;
+  font-size: 16px;
+  line-height: 1.05;
 }
 
 .metric span {
-  font-size: 10px;
+  font-size: 9px;
   color: #16a34a;
   font-weight: bold;
 }
+
+/* CHARTS */
 
 .charts {
   min-height: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 48% 52%;
-  gap: 8px;
+  grid-template-rows: 1fr 1fr;
+  gap: 7px;
   overflow: hidden;
 }
 
 .chart-card {
-  padding: 7px 8px;
+  padding: 6px 7px;
   min-height: 0;
   overflow: hidden;
   display: flex;
@@ -210,13 +225,13 @@ button {
 }
 
 .chart-card h3 {
-  font-size: 13px;
-  margin-bottom: 3px;
+  font-size: 12px;
+  margin-bottom: 2px;
   flex-shrink: 0;
 }
 
 .chart-scroll {
-  height: calc(100% - 18px);
+  height: calc(100% - 16px);
   width: 100%;
   overflow: auto;
   min-height: 0;
@@ -228,38 +243,40 @@ button {
 }
 
 .vertical-scroll {
-  overflow-y: auto;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .wide-chart {
-  width: 780px;
-  height: 100%;
-  min-height: 135px;
+  width: 850px;
+  height: 180px;
 }
 
 .tall-chart {
   width: 100%;
-  min-width: 650px;
-  height: 390px;
+  min-width: 620px;
+  height: 360px;
 }
 
 .chart-card canvas {
+  display: block;
   width: 100% !important;
   height: 100% !important;
 }
 
+/* TABLE */
+
 .table-card {
   min-height: 0;
-  padding: 7px 8px;
+  padding: 6px 7px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
 .table-card h3 {
-  font-size: 13px;
-  margin-bottom: 4px;
+  font-size: 12px;
+  margin-bottom: 3px;
   flex-shrink: 0;
 }
 
@@ -271,9 +288,9 @@ button {
 
 table {
   width: 100%;
-  min-width: 900px;
+  min-width: 880px;
   border-collapse: collapse;
-  font-size: 11px;
+  font-size: 10px;
 }
 
 th {
@@ -282,22 +299,22 @@ th {
   background: #f6f9fe;
   z-index: 2;
   text-align: left;
-  padding: 5px 6px;
+  padding: 4px 5px;
   border-bottom: 1px solid #dde6f2;
   white-space: nowrap;
 }
 
 td {
-  padding: 4px 6px;
+  padding: 3px 5px;
   border-bottom: 1px solid #e5edf7;
   white-space: nowrap;
 }
 
 .badge {
-  padding: 3px 7px;
+  padding: 2px 6px;
   border-radius: 999px;
   font-weight: bold;
-  font-size: 10px;
+  font-size: 9px;
 }
 
 .in {
@@ -315,10 +332,12 @@ td {
   color: #dc2626;
 }
 
+/* SCROLLBARS */
+
 .chart-scroll::-webkit-scrollbar,
 .table-wrap::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 
 .chart-scroll::-webkit-scrollbar-thumb,
