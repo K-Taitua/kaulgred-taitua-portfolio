@@ -1,13 +1,13 @@
 const products = [
-  { id: 1, brand: "Apple", model: "iPhone 16 Pro", storage: "256GB", price: 2199, cost: 1399, stock: 2, sold: 2, updated: "25 May 2025, 10:45 AM" },
-  { id: 2, brand: "Apple", model: "iPhone 16", storage: "128GB", price: 1499, cost: 929, stock: 10, sold: 1, updated: "25 May 2025, 10:45 AM" },
-  { id: 3, brand: "Samsung", model: "Galaxy S25 Ultra", storage: "256GB", price: 2399, cost: 1779, stock: 7, sold: 2, updated: "25 May 2025, 10:45 AM" },
-  { id: 4, brand: "Samsung", model: "Galaxy S25", storage: "256GB", price: 1899, cost: 1399, stock: 9, sold: 1, updated: "25 May 2025, 10:20 AM" },
-  { id: 5, brand: "Google", model: "Pixel 9 Pro", storage: "256GB", price: 1749, cost: 1229, stock: 0, sold: 1, updated: "25 May 2025, 09:15 AM" },
-  { id: 6, brand: "Google", model: "Pixel 9", storage: "128GB", price: 1249, cost: 849, stock: 5, sold: 1, updated: "25 May 2025, 09:40 AM" },
-  { id: 7, brand: "OnePlus", model: "OnePlus 13", storage: "256GB", price: 1199, cost: 559, stock: 5, sold: 1, updated: "25 May 2025, 09:50 AM" },
-  { id: 8, brand: "Xiaomi", model: "Redmi Note 15 Pro", storage: "256GB", price: 899, cost: 499, stock: 9, sold: 1, updated: "25 May 2025, 09:35 AM" },
-  { id: 9, brand: "Xiaomi", model: "Redmi Note 15", storage: "256GB", price: 599, cost: 299, stock: 11, sold: 1, updated: "25 May 2025, 09:30 AM" }
+  { id: 1, brand: "Apple", model: "iPhone 16 Pro", storage: "256GB", price: 2199, cost: 1399, stock: 2, sold: 2 },
+  { id: 2, brand: "Apple", model: "iPhone 16", storage: "128GB", price: 1499, cost: 929, stock: 10, sold: 1 },
+  { id: 3, brand: "Samsung", model: "Galaxy S25 Ultra", storage: "256GB", price: 2399, cost: 1779, stock: 7, sold: 2 },
+  { id: 4, brand: "Samsung", model: "Galaxy S25", storage: "256GB", price: 1899, cost: 1399, stock: 9, sold: 1 },
+  { id: 5, brand: "Google", model: "Pixel 9 Pro", storage: "256GB", price: 1749, cost: 1229, stock: 0, sold: 1 },
+  { id: 6, brand: "Google", model: "Pixel 9", storage: "128GB", price: 1249, cost: 849, stock: 5, sold: 1 },
+  { id: 7, brand: "OnePlus", model: "OnePlus 13", storage: "256GB", price: 1199, cost: 559, stock: 5, sold: 1 },
+  { id: 8, brand: "Xiaomi", model: "Redmi Note 15 Pro", storage: "256GB", price: 899, cost: 499, stock: 9, sold: 1 },
+  { id: 9, brand: "Xiaomi", model: "Redmi Note 15", storage: "256GB", price: 599, cost: 299, stock: 11, sold: 1 }
 ];
 
 let revenueChart;
@@ -43,17 +43,6 @@ function productName(product) {
 
 function shortName(product) {
   return product.model;
-}
-
-function nowText() {
-  return new Date().toLocaleString("en-NZ", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true
-  });
 }
 
 function stockStatus(stock) {
@@ -130,18 +119,19 @@ function updateTable() {
 
   table.innerHTML = products.map(product => {
     const status = stockStatus(product.stock);
+    const stockValue = product.price * product.stock;
+    const salesRevenue = product.price * product.sold;
 
     return `
       <tr>
-        <td>${product.brand}</td>
         <td>${product.model}</td>
         <td>${product.storage}</td>
         <td>${money(product.price)}</td>
         <td>${product.stock}</td>
+        <td>${money(stockValue)}</td>
         <td>${product.sold}</td>
-        <td>${money(product.price * product.sold)}</td>
+        <td>${money(salesRevenue)}</td>
         <td><span class="badge ${status.class}">${status.text}</span></td>
-        <td>${product.updated}</td>
       </tr>
     `;
   }).join("");
@@ -447,8 +437,6 @@ function applyUpdate() {
     return;
   }
 
-  const updated = nowText();
-
   if (action === "add") {
     product.stock += quantity;
     showMessage(`${quantity} unit(s) added to ${productName(product)}.`);
@@ -464,8 +452,6 @@ function applyUpdate() {
     product.stock = quantity;
     showMessage(`${productName(product)} stock set to ${quantity}.`);
   }
-
-  product.updated = updated;
 
   updateCards();
   updateRestockAlerts();
