@@ -17,8 +17,25 @@ let profitChart;
 
 const money = value => "$" + Math.round(value).toLocaleString();
 
-const chartColors = ["#2563eb", "#1e3a8a", "#64748b", "#334155", "#0f172a", "#3b82f6", "#475569", "#0ea5e9", "#0284c7"];
-const brandColors = ["#2563eb", "#1e3a8a", "#64748b", "#0ea5e9", "#0f172a"];
+const chartColors = [
+  "#2563eb",
+  "#1e3a8a",
+  "#64748b",
+  "#334155",
+  "#0f172a",
+  "#3b82f6",
+  "#475569",
+  "#0ea5e9",
+  "#0284c7"
+];
+
+const brandColors = [
+  "#2563eb",
+  "#1e3a8a",
+  "#64748b",
+  "#0ea5e9",
+  "#0f172a"
+];
 
 function productName(product) {
   return `${product.brand} ${product.model} ${product.storage}`;
@@ -133,34 +150,9 @@ function updateTable() {
 const valueLabelPlugin = {
   id: "valueLabelPlugin",
   afterDatasetsDraw(chart) {
+    if (chart.config.type === "doughnut") return;
+
     const { ctx } = chart;
-
-    if (chart.config.type === "doughnut") {
-      const dataset = chart.data.datasets[0];
-      const total = dataset.data.reduce((sum, value) => sum + value, 0);
-
-      ctx.save();
-      ctx.font = "bold 9px Arial";
-      ctx.fillStyle = "#10233f";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-
-      chart.getDatasetMeta(0).data.forEach((arc, index) => {
-        const value = dataset.data[index];
-
-        if (value === 0) return;
-
-        const percentage = total === 0 ? 0 : Math.round((value / total) * 100);
-        const label = `${value} sold • ${percentage}%`;
-        const position = arc.tooltipPosition();
-
-        ctx.fillText(label, position.x, position.y);
-      });
-
-      ctx.restore();
-      return;
-    }
-
     ctx.save();
     ctx.font = "bold 9px Arial";
     ctx.fillStyle = "#10233f";
@@ -198,10 +190,17 @@ function productChartOptions(maxValue = null) {
   return {
     responsive: true,
     maintainAspectRatio: false,
-    layout: { padding: { top: 20, right: 22, bottom: 28, left: 8 } },
-    plugins: { legend: { display: false } },
+    layout: {
+      padding: { top: 20, right: 22, bottom: 28, left: 8 }
+    },
+    plugins: {
+      legend: { display: false }
+    },
     datasets: {
-      bar: { barPercentage: 0.78, categoryPercentage: 0.82 }
+      bar: {
+        barPercentage: 0.78,
+        categoryPercentage: 0.82
+      }
     },
     scales: {
       x: {
@@ -240,8 +239,30 @@ function doughnutOptions() {
         position: "right",
         labels: {
           boxWidth: 10,
-          font: { size: 9, weight: "bold" },
-          color: "#10233f"
+          font: {
+            size: 9,
+            weight: "bold"
+          },
+          color: "#10233f",
+          generateLabels(chart) {
+            const data = chart.data;
+            const values = data.datasets[0].data;
+            const total = values.reduce((sum, value) => sum + value, 0);
+
+            return data.labels.map((label, index) => {
+              const value = values[index];
+              const percentage = total === 0 ? 0 : Math.round((value / total) * 100);
+
+              return {
+                text: `${label} — ${value} sold — ${percentage}%`,
+                fillStyle: data.datasets[0].backgroundColor[index],
+                strokeStyle: data.datasets[0].backgroundColor[index],
+                lineWidth: 1,
+                hidden: false,
+                index
+              };
+            });
+          }
         }
       },
       tooltip: {
@@ -263,10 +284,17 @@ function profitChartOptions(maxValue = null) {
     indexAxis: "y",
     responsive: true,
     maintainAspectRatio: false,
-    layout: { padding: { top: 10, right: 95, bottom: 28, left: 8 } },
-    plugins: { legend: { display: false } },
+    layout: {
+      padding: { top: 10, right: 95, bottom: 28, left: 8 }
+    },
+    plugins: {
+      legend: { display: false }
+    },
     datasets: {
-      bar: { barPercentage: 0.7, categoryPercentage: 0.78 }
+      bar: {
+        barPercentage: 0.7,
+        categoryPercentage: 0.78
+      }
     },
     scales: {
       x: {
@@ -302,7 +330,11 @@ function createCharts() {
     type: "bar",
     data: {
       labels: products.map(shortName),
-      datasets: [{ data: revenueValues, backgroundColor: chartColors, borderRadius: 4 }]
+      datasets: [{
+        data: revenueValues,
+        backgroundColor: chartColors,
+        borderRadius: 4
+      }]
     },
     options: productChartOptions(Math.max(...revenueValues))
   });
@@ -311,7 +343,11 @@ function createCharts() {
     type: "bar",
     data: {
       labels: products.map(shortName),
-      datasets: [{ data: unitValues, backgroundColor: chartColors, borderRadius: 4 }]
+      datasets: [{
+        data: unitValues,
+        backgroundColor: chartColors,
+        borderRadius: 4
+      }]
     },
     options: productChartOptions(Math.max(...unitValues))
   });
@@ -335,7 +371,11 @@ function createCharts() {
     type: "bar",
     data: {
       labels: topProfitProducts.map(shortName),
-      datasets: [{ data: profitValues, backgroundColor: chartColors, borderRadius: 4 }]
+      datasets: [{
+        data: profitValues,
+        backgroundColor: chartColors,
+        borderRadius: 4
+      }]
     },
     options: profitChartOptions(Math.max(...profitValues))
   });
@@ -356,6 +396,7 @@ function updateCharts() {
 
   salesShareChart.data.labels = brandSales.labels;
   salesShareChart.data.datasets[0].data = brandSales.values;
+  salesShareChart.data.datasets[0].backgroundColor = brandColors;
 
   profitChart.data.labels = topProfitProducts.map(shortName);
   profitChart.data.datasets[0].data = profitValues;
