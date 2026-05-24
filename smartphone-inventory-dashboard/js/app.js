@@ -234,14 +234,16 @@ function doughnutOptions() {
   return {
     responsive: true,
     maintainAspectRatio: false,
-    cutout: "62%",
+    cutout: "58%",
     plugins: {
       legend: {
         position: "right",
         labels: {
-          boxWidth: 10,
+          boxWidth: 14,
+          boxHeight: 14,
+          padding: 14,
           font: {
-            size: 9,
+            size: 12,
             weight: "bold"
           },
           color: "#10233f",
