@@ -17,7 +17,7 @@ body {
   color: #10233f;
 }
 
-/* This makes 100% browser zoom look like the clean 80% layout */
+/* Makes the dashboard fit at normal 100% browser zoom */
 .dashboard {
   width: 125vw;
   height: 125vh;
@@ -142,7 +142,7 @@ button {
   height: 125vh;
   padding: 8px;
   display: grid;
-  grid-template-rows: 30px 44px 1fr 125px;
+  grid-template-rows: 30px 52px 1fr 125px;
   gap: 6px;
   overflow: hidden;
 }
@@ -184,7 +184,7 @@ button {
 }
 
 .metric {
-  padding: 5px 10px;
+  padding: 6px 10px;
   overflow: hidden;
 }
 
@@ -195,12 +195,13 @@ button {
 }
 
 .metric h2 {
-  font-size: 16px;
-  line-height: 1.05;
+  font-size: 15px;
+  line-height: 1;
+  margin: 1px 0;
 }
 
 .metric span {
-  font-size: 9px;
+  font-size: 8.5px;
   color: #16a34a;
   font-weight: bold;
 }
@@ -233,29 +234,23 @@ button {
 .chart-scroll {
   height: calc(100% - 16px);
   width: 100%;
-  overflow: auto;
   min-height: 0;
 }
 
-.horizontal-scroll {
+.both-scroll {
   overflow-x: auto;
-  overflow-y: hidden;
-}
-
-.vertical-scroll {
-  overflow-x: hidden;
   overflow-y: auto;
 }
 
-.wide-chart {
-  width: 850px;
-  height: 180px;
+/* Wide and tall so each graph can scroll both ways if values grow */
+.chart-canvas-box {
+  width: 920px;
+  height: 230px;
 }
 
-.tall-chart {
-  width: 100%;
-  min-width: 620px;
-  height: 360px;
+.profit-canvas-box {
+  width: 950px;
+  height: 430px;
 }
 
 .chart-card canvas {
