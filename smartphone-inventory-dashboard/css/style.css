@@ -19,8 +19,6 @@ body {
   overflow: hidden;
 }
 
-/* SIDEBAR */
-
 .sidebar {
   background: #061a33;
   color: white;
@@ -127,13 +125,11 @@ button {
   border-left: 4px solid #2f80ff;
 }
 
-/* MAIN */
-
 .main {
   height: 100vh;
   padding: 10px;
   display: grid;
-  grid-template-rows: 34px 58px 1fr 145px;
+  grid-template-rows: 34px 54px 1fr 138px;
   gap: 7px;
   overflow: hidden;
 }
@@ -152,15 +148,13 @@ button {
 
 .date-box {
   background: white;
-  padding: 8px 11px;
+  padding: 7px 11px;
   border-radius: 8px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.08);
   font-weight: bold;
   font-size: 12px;
   white-space: nowrap;
 }
-
-/* KPI CARDS */
 
 .cards {
   display: grid;
@@ -177,7 +171,7 @@ button {
 }
 
 .metric {
-  padding: 7px 12px;
+  padding: 6px 12px;
   overflow: hidden;
 }
 
@@ -188,8 +182,8 @@ button {
 }
 
 .metric h2 {
-  font-size: 19px;
-  margin: 1px 0;
+  font-size: 18px;
+  margin: 0;
 }
 
 .metric span {
@@ -198,13 +192,11 @@ button {
   font-weight: bold;
 }
 
-/* CHARTS */
-
 .charts {
   min-height: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 47% 53%;
+  grid-template-rows: 48% 52%;
   gap: 8px;
   overflow: hidden;
 }
@@ -235,18 +227,27 @@ button {
   overflow-y: hidden;
 }
 
+.vertical-scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .wide-chart {
-  width: 950px;
+  width: 780px;
   height: 100%;
-  min-height: 120px;
+  min-height: 135px;
+}
+
+.tall-chart {
+  width: 100%;
+  min-width: 650px;
+  height: 390px;
 }
 
 .chart-card canvas {
   width: 100% !important;
   height: 100% !important;
 }
-
-/* TABLE */
 
 .table-card {
   min-height: 0;
@@ -313,8 +314,6 @@ td {
   background: #fee2e2;
   color: #dc2626;
 }
-
-/* SCROLLBARS */
 
 .chart-scroll::-webkit-scrollbar,
 .table-wrap::-webkit-scrollbar {
