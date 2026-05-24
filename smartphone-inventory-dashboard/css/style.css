@@ -59,12 +59,14 @@ body {
   line-height: 1.05;
 }
 
-.logo-box h2 {
+.logo-box h2,
+.update-panel h3,
+.alert-panel h3 {
   color: #2f80ff;
 }
 
-.update-panel h3 {
-  color: #2f80ff;
+.update-panel h3,
+.alert-panel h3 {
   margin-bottom: 5px;
   font-size: 12px;
 }
@@ -119,6 +121,51 @@ button {
   border: 1px solid #dc2626;
 }
 
+.alert-panel {
+  background: rgba(7, 24, 47, 0.7);
+  border: 1px solid #17395f;
+  border-radius: 8px;
+  padding: 7px;
+}
+
+.alert-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 10px;
+}
+
+.alert-item:last-child {
+  border-bottom: none;
+}
+
+.alert-name {
+  color: #e5efff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.alert-badge {
+  padding: 2px 5px;
+  border-radius: 999px;
+  font-size: 8px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.alert-low {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.alert-out {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
 .side-nav {
   padding: 8px;
   border-radius: 8px;
@@ -153,14 +200,69 @@ button {
   white-space: nowrap;
 }
 
-.date-box {
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-box {
+  width: 190px;
+  height: 28px;
+  border-radius: 9px;
+  border: 1px solid #cbd5e1;
   background: white;
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
   font-size: 11px;
-  white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  color: #64748b;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+}
+
+.bell {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background: white;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+}
+
+.bell span {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  background: #ef4444;
+  color: white;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: bold;
+}
+
+.user-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #111827;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.user-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .cards {
