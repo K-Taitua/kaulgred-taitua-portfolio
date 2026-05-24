@@ -239,11 +239,11 @@ function doughnutOptions() {
       legend: {
         position: "right",
         labels: {
-          boxWidth: 14,
-          boxHeight: 14,
-          padding: 14,
+          boxWidth: 12,
+          boxHeight: 12,
+          padding: 11,
           font: {
-            size: 12,
+            size: 11,
             weight: "bold"
           },
           color: "#10233f",
