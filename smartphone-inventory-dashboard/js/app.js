@@ -85,24 +85,31 @@ function defaultChartOptions() {
     responsive: true,
     maintainAspectRatio: false,
     layout: {
-      padding: 6
+      padding: {
+        top: 6,
+        right: 10,
+        bottom: 8,
+        left: 8
+      }
     },
     plugins: {
       legend: { display: false }
     },
     datasets: {
       bar: {
-        barPercentage: 0.55,
-        categoryPercentage: 0.65
+        barPercentage: 0.6,
+        categoryPercentage: 0.75
       }
     },
     scales: {
       x: {
+        offset: true,
         ticks: {
           color: "#10233f",
-          font: { size: 10, weight: "bold" },
+          font: { size: 9, weight: "bold" },
           maxRotation: 0,
-          minRotation: 0
+          minRotation: 0,
+          autoSkip: false
         },
         grid: { color: "#e2e8f0" }
       },
@@ -110,7 +117,7 @@ function defaultChartOptions() {
         beginAtZero: true,
         ticks: {
           color: "#10233f",
-          font: { size: 10, weight: "bold" },
+          font: { size: 9, weight: "bold" },
           callback: value => Number(value).toLocaleString()
         },
         grid: { color: "#e2e8f0" }
@@ -125,14 +132,19 @@ function profitChartOptions() {
     responsive: true,
     maintainAspectRatio: false,
     layout: {
-      padding: 6
+      padding: {
+        top: 8,
+        right: 12,
+        bottom: 8,
+        left: 8
+      }
     },
     plugins: {
       legend: { display: false }
     },
     datasets: {
       bar: {
-        barPercentage: 0.55,
+        barPercentage: 0.5,
         categoryPercentage: 0.7
       }
     },
@@ -141,7 +153,7 @@ function profitChartOptions() {
         beginAtZero: true,
         ticks: {
           color: "#10233f",
-          font: { size: 10, weight: "bold" },
+          font: { size: 9, weight: "bold" },
           callback: value => "$" + Number(value).toLocaleString()
         },
         grid: { color: "#e2e8f0" }
@@ -149,7 +161,8 @@ function profitChartOptions() {
       y: {
         ticks: {
           color: "#10233f",
-          font: { size: 10, weight: "bold" }
+          font: { size: 9, weight: "bold" },
+          autoSkip: false
         },
         grid: { display: false }
       }
