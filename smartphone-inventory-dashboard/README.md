@@ -89,3 +89,4 @@ The dashboard will update the KPI cards, charts, restock alerts, and inventory t
 
 ## Dashboard Preview
 
+<img width="1904" height="926" alt="Screenshot 2026-05-24 230118" src="https://github.com/user-attachments/assets/517f076c-d214-450e-ab27-2237fd77edc8" />
