@@ -26,53 +26,88 @@ body {
 }
 
 .auth-box {
-  width: 420px;
+  width: 430px;
   height: 500px;
   display: grid;
-  grid-template-columns: 190px 230px;
-  background: white;
+  grid-template-columns: 195px 235px;
+  background: #ffffff;
   border: 1px solid #cfd8e3;
   border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 10px 28px rgba(15, 35, 65, 0.12);
 }
 
-.brand {
-  background: #061b3a;
+.brand-panel {
+  background: linear-gradient(180deg, #061b3a 0%, #03152f 100%);
   color: white;
   text-align: center;
-  padding: 76px 22px 24px;
+  padding: 70px 22px 24px;
 }
 
-.shield {
-  width: 54px;
-  height: 62px;
-  margin: 0 auto 20px;
+.shield-logo {
+  width: 62px;
+  height: 70px;
+  margin: 0 auto 18px;
   border: 3px solid #2563eb;
-  clip-path: polygon(50% 0%, 90% 18%, 90% 58%, 50% 100%, 10% 58%, 10% 18%);
+  clip-path: polygon(50% 0%, 88% 17%, 88% 58%, 50% 100%, 12% 58%, 12% 17%);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.lock {
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
+.lock-body {
+  position: relative;
+  width: 26px;
+  height: 28px;
 }
 
-.brand h1 {
+.lock-shackle {
+  position: absolute;
+  top: 0;
+  left: 6px;
+  width: 14px;
+  height: 14px;
+  border: 3px solid #ffffff;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+}
+
+.lock-box {
+  position: absolute;
+  bottom: 0;
+  left: 2px;
+  width: 22px;
+  height: 17px;
+  border: 3px solid #ffffff;
+  border-radius: 4px;
+}
+
+.lock-box::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 8px;
+  width: 4px;
+  height: 6px;
+  background: #ffffff;
+  border-radius: 3px;
+}
+
+.brand-panel h1 {
   font-size: 16px;
   line-height: 1.15;
   font-weight: 900;
   margin-bottom: 12px;
+  letter-spacing: 0.2px;
 }
 
-.brand h1 span {
+.brand-panel h1 span {
+  display: inline-block;
   color: #2563eb;
   font-size: 20px;
 }
 
-.brand p {
+.brand-text {
   font-size: 9.5px;
   line-height: 1.45;
   color: #dbeafe;
@@ -80,9 +115,9 @@ body {
 }
 
 .features {
-  text-align: left;
   display: grid;
-  gap: 17px;
+  gap: 16px;
+  text-align: left;
 }
 
 .feature {
@@ -91,39 +126,45 @@ body {
   align-items: flex-start;
 }
 
-.feature span {
-  color: #2563eb;
-  font-size: 15px;
+.mini-shield {
+  width: 15px;
+  height: 17px;
+  border: 2px solid #2563eb;
+  clip-path: polygon(50% 0%, 88% 17%, 88% 58%, 50% 100%, 12% 58%, 12% 17%);
+  flex-shrink: 0;
+  margin-top: 1px;
 }
 
 .feature strong {
   display: block;
-  font-size: 10px;
   color: white;
+  font-size: 10px;
+  margin-bottom: 2px;
 }
 
 .feature small {
   display: block;
-  font-size: 8px;
   color: #cbd5e1;
-  margin-top: 2px;
+  font-size: 8px;
 }
 
-.welcome {
-  background: white;
-  padding: 0 26px;
+.welcome-panel {
+  background: #ffffff;
+  padding: 0 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
 }
 
-.welcome h2 {
+.welcome-panel h2 {
   font-size: 21px;
-  margin-bottom: 13px;
+  line-height: 1;
+  color: #111827;
+  margin-bottom: 14px;
 }
 
-.welcome p {
+.welcome-panel p {
   font-size: 10px;
   line-height: 1.5;
   color: #64748b;
@@ -133,23 +174,26 @@ body {
 button {
   width: 100%;
   height: 34px;
-  border: none;
   border-radius: 4px;
-  background: #2563eb;
-  color: white;
   font-size: 10px;
   font-weight: 800;
-  margin-bottom: 11px;
   cursor: pointer;
+  margin-bottom: 11px;
 }
 
-.outline {
+.primary-btn {
+  background: #2563eb;
+  color: white;
+  border: 1px solid #2563eb;
+}
+
+.secondary-btn {
   background: white;
   color: #111827;
   border: 1px solid #9ca3af;
 }
 
-.welcome small {
+.welcome-panel small {
   margin-top: 78px;
   font-size: 8px;
   color: #94a3b8;
