@@ -1,57 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Authentication System</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Authentication System</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/app.js" defer></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
 </head>
+
 <body>
+  <main class="auth-page">
 
-    <div class="container">
+    <section class="auth-box">
 
-        <!-- Left Panel -->
-        <div class="left-panel">
-
-            <div class="logo-box">
-                🔒
-            </div>
-
-            <h1>Secure Access Portal</h1>
-
-            <p>
-                Your data. Your account.
-                Always protected.
-            </p>
-
+      <div class="brand-panel">
+        <div class="shield-icon">
+          <svg viewBox="0 0 64 64">
+            <path d="M32 4 L54 14 V30 C54 45 44 56 32 61 C20 56 10 45 10 30 V14 Z"></path>
+            <rect x="22" y="29" width="20" height="17" rx="3"></rect>
+            <path d="M25 29 V23 C25 18 28 15 32 15 C36 15 39 18 39 23 V29"></path>
+          </svg>
         </div>
 
-        <!-- Right Panel -->
-        <div class="right-panel">
+        <h1>
+          SECURE ACCESS<br>
+          <span>PORTAL</span>
+        </h1>
 
-            <div class="auth-card">
+        <p class="brand-text">
+          Your data. Your account.<br>
+          Always protected.
+        </p>
 
-                <h2>Welcome</h2>
-
-                <p class="subtitle">
-                    Please sign in or create an account.
-                </p>
-
-                <button id="showSignInBtn">
-                    Sign In
-                </button>
-
-                <button id="showSignUpBtn" class="secondary-btn">
-                    Create Account
-                </button>
-
+        <div class="brand-features">
+          <div class="feature">
+            <span>♡</span>
+            <div>
+              <strong>Secure</strong>
+              <small>Industry standard security</small>
             </div>
+          </div>
 
+          <div class="feature">
+            <span>◇</span>
+            <div>
+              <strong>Private</strong>
+              <small>Your information is safe</small>
+            </div>
+          </div>
         </div>
+      </div>
 
-    </div>
+      <div class="welcome-panel">
+        <div class="welcome-card">
+          <h2>Welcome</h2>
 
+          <p>
+            Please sign in or create an<br>
+            account to continue.
+          </p>
+
+          <button id="showSignInBtn">Sign In</button>
+
+          <button id="showSignUpBtn" class="outline-btn">
+            Create Account
+          </button>
+
+          <small class="copyright">
+            © 2024 Secure Access Portal
+          </small>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
 </body>
 </html>
