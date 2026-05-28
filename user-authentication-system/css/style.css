@@ -8,80 +8,91 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #f3f6fb;
   min-height: 100vh;
-  color: #0f172a;
+  color: #111827;
 }
 
-.container {
+.auth-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 30px;
 }
 
-.auth-wrapper {
-  width: 720px;
-  min-height: 430px;
+.auth-box {
+  width: 470px;
+  height: 520px;
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 230px 240px;
   background: white;
-  border-radius: 16px;
+  border: 1px solid #cfd8e3;
+  border-radius: 10px;
   overflow: hidden;
-  border: 1px solid #d9e2ef;
-  box-shadow: 0 18px 45px rgba(15, 35, 65, 0.12);
+  box-shadow: 0 12px 30px rgba(15, 35, 65, 0.12);
 }
 
-.left-panel {
+.brand-panel {
   background: #061b3a;
   color: white;
-  padding: 46px 28px;
+  padding: 76px 28px 28px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-.logo-box {
-  width: 54px;
-  height: 54px;
-  border: 2px solid #2563eb;
-  border-radius: 16px;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  margin-bottom: 22px;
+  text-align: center;
 }
 
-.left-panel h1 {
-  font-size: 25px;
+.shield-icon {
+  width: 66px;
+  height: 66px;
+  margin-bottom: 24px;
+}
+
+.shield-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.shield-icon path,
+.shield-icon rect {
+  fill: none;
+  stroke: #2563eb;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.brand-panel h1 {
+  font-size: 20px;
   line-height: 1.08;
-  text-transform: uppercase;
-  margin-bottom: 14px;
+  font-weight: 900;
+  margin-bottom: 16px;
 }
 
-.left-panel h1 span {
+.brand-panel h1 span {
   color: #2563eb;
 }
 
-.left-panel p {
+.brand-text {
   font-size: 12px;
   line-height: 1.5;
   color: #dbeafe;
-  margin-bottom: 28px;
+  margin-bottom: 72px;
 }
 
-.feature-list {
+.brand-features {
+  width: 100%;
   display: grid;
-  gap: 16px;
+  gap: 18px;
+  text-align: left;
 }
 
-.feature-item {
+.feature {
   display: flex;
   gap: 10px;
   align-items: flex-start;
 }
 
-.feature-icon {
+.feature span {
   width: 18px;
   height: 18px;
   border: 1px solid #2563eb;
@@ -94,81 +105,66 @@ body {
   flex-shrink: 0;
 }
 
-.feature-item strong {
+.feature strong {
   display: block;
   font-size: 12px;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
-.feature-item small {
-  color: #cbd5e1;
+.feature small {
+  display: block;
   font-size: 10px;
+  color: #cbd5e1;
 }
 
-.right-panel {
+.welcome-panel {
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 28px;
 }
 
-.auth-card {
+.welcome-card {
   width: 100%;
-  max-width: 320px;
   text-align: center;
 }
 
-.auth-card h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
-  color: #0f172a;
+.welcome-card h2 {
+  font-size: 22px;
+  margin-bottom: 14px;
+  color: #111827;
 }
 
-.subtitle {
-  font-size: 13px;
+.welcome-card p {
+  font-size: 12px;
+  line-height: 1.5;
   color: #64748b;
-  margin-bottom: 28px;
+  margin-bottom: 26px;
 }
 
 button {
   width: 100%;
-  padding: 13px;
-  border-radius: 8px;
+  height: 38px;
   border: none;
+  border-radius: 6px;
   background: #2563eb;
   color: white;
+  font-size: 12px;
   font-weight: 800;
   cursor: pointer;
   margin-bottom: 12px;
 }
 
-button:hover {
-  background: #1d4ed8;
-}
-
-.secondary-btn {
+.outline-btn {
   background: white;
-  color: #2563eb;
-  border: 1px solid #2563eb;
+  color: #111827;
+  border: 1px solid #9ca3af;
 }
 
-.secondary-btn:hover {
-  background: #eff6ff;
-}
-
-.footer-text {
-  margin-top: 32px;
-  font-size: 10px;
+.copyright {
+  display: block;
+  margin-top: 78px;
   color: #94a3b8;
-}
-
-@media (max-width: 760px) {
-  .auth-wrapper {
-    width: 100%;
-    grid-template-columns: 1fr;
-  }
-
-  .left-panel {
-    padding: 34px 26px;
-  }
+  font-size: 9px;
 }
