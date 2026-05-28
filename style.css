@@ -4,12 +4,6 @@
   padding: 0;
 }
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
-
 body {
   font-family: Arial, Helvetica, sans-serif;
   background: #f4f7fb;
@@ -32,22 +26,21 @@ body {
 .sidebar h1 {
   color: #63c3ff;
   font-size: 22px;
-  line-height: 1.05;
   margin-bottom: 24px;
 }
 
 .sidebar p {
-  font-size: 12.5px;
+  font-size: 12px;
   line-height: 1.45;
   margin-bottom: 22px;
 }
 
 .main-content {
-  padding: 22px 24px;
+  padding: 22px;
 }
 
 .intro-section {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .eyebrow {
@@ -56,36 +49,33 @@ body {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
 .intro-section h2 {
-  font-size: 28px;
+  font-size: 26px;
   color: #061b35;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .intro-text {
-  font-size: 13px;
+  font-size: 12.5px;
   color: #526173;
 }
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 14px;
-  width: 100%;
-  max-width: none;
 }
 
 .project-card {
-  min-width: 0;
   background: white;
   border: 1px solid #dbe4f0;
   border-radius: 14px;
   padding: 16px;
+  min-height: 350px;
   box-shadow: 0 8px 20px rgba(15, 35, 65, 0.08);
-  min-height: 355px;
 
   display: flex;
   flex-direction: column;
@@ -103,14 +93,14 @@ body {
 
 .project-card h3 {
   font-size: 16px;
-  line-height: 1.18;
+  line-height: 1.2;
   color: #061b35;
   margin-bottom: 9px;
 }
 
 .project-card p {
-  font-size: 11.5px;
-  line-height: 1.42;
+  font-size: 11px;
+  line-height: 1.4;
   color: #526173;
   margin-bottom: 12px;
 }
@@ -119,7 +109,6 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  margin-bottom: 12px;
 }
 
 .tags span {
@@ -127,7 +116,7 @@ body {
   color: #1d4ed8;
   padding: 4px 7px;
   border-radius: 999px;
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 700;
 }
 
@@ -135,17 +124,14 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 7px;
-  margin-top: auto;
 }
 
 .btn {
-  display: inline-block;
   text-decoration: none;
   border-radius: 8px;
   padding: 8px 9px;
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 800;
-  transition: 0.2s ease;
 }
 
 .btn.primary {
@@ -156,24 +142,4 @@ body {
 .btn.secondary {
   background: #10233f;
   color: white;
-}
-
-.btn:hover {
-  opacity: 0.92;
-  transform: translateY(-1px);
-}
-
-@media (max-width: 700px) {
-  body {
-    overflow: auto;
-  }
-
-  .page {
-    height: auto;
-    grid-template-columns: 1fr;
-  }
-
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
 }
