@@ -4,77 +4,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Authentication System</title>
-
   <link rel="stylesheet" href="css/style.css">
-  <script src="js/app.js" defer></script>
 </head>
 
 <body>
-  <main class="auth-page">
+  <main class="screen">
+    <section class="auth-card">
 
-    <section class="auth-box">
-
-      <div class="brand-panel">
-        <div class="shield-icon">
-          <svg viewBox="0 0 64 64">
-            <path d="M32 4 L54 14 V30 C54 45 44 56 32 61 C20 56 10 45 10 30 V14 Z"></path>
-            <rect x="22" y="29" width="20" height="17" rx="3"></rect>
-            <path d="M25 29 V23 C25 18 28 15 32 15 C36 15 39 18 39 23 V29"></path>
-          </svg>
-        </div>
+      <aside class="left-panel">
+        <div class="logo">🔒</div>
 
         <h1>
           SECURE ACCESS<br>
           <span>PORTAL</span>
         </h1>
 
-        <p class="brand-text">
-          Your data. Your account.<br>
-          Always protected.
-        </p>
+        <p>Your data. Your account.<br>Always protected.</p>
 
-        <div class="brand-features">
-          <div class="feature">
-            <span>♡</span>
-            <div>
-              <strong>Secure</strong>
-              <small>Industry standard security</small>
-            </div>
+        <div class="features">
+          <div>
+            <strong>🛡 Secure</strong>
+            <small>Industry standard security</small>
           </div>
 
-          <div class="feature">
-            <span>◇</span>
-            <div>
-              <strong>Private</strong>
-              <small>Your information is safe</small>
-            </div>
+          <div>
+            <strong>🔐 Private</strong>
+            <small>Your information is safe</small>
           </div>
         </div>
-      </div>
+      </aside>
 
-      <div class="welcome-panel">
-        <div class="welcome-card">
-          <h2>Welcome</h2>
+      <section class="right-panel">
+        <h2>Welcome</h2>
 
-          <p>
-            Please sign in or create an<br>
-            account to continue.
-          </p>
+        <p>Please sign in or create an<br>account to continue.</p>
 
-          <button id="showSignInBtn">Sign In</button>
+        <button>Sign In</button>
+        <button class="outline">Create Account</button>
 
-          <button id="showSignUpBtn" class="outline-btn">
-            Create Account
-          </button>
-
-          <small class="copyright">
-            © 2024 Secure Access Portal
-          </small>
-        </div>
-      </div>
+        <small>© 2024 Secure Access Portal</small>
+      </section>
 
     </section>
-
   </main>
 </body>
 </html>
