@@ -17,6 +17,8 @@ body {
 }
 
 .page {
+  width: 100vw;
   height: 100vh;
-  border: 2px solid red;
+  outline: 2px solid red;
+  outline-offset: -2px;
 }
