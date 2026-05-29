@@ -41,24 +41,23 @@ body {
 }
 
 .lock-image {
-  width: 370px;
+  width: 360px;
   height: auto;
-  margin-top: 55px;
-  margin-bottom: 8px;
+  margin-top: 90px;
+  margin-bottom: 45px;
 }
 
 .brand-title {
   color: white;
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 900;
   text-align: center;
   line-height: 1.05;
-  margin-top: 0;
 }
 
 .brand-title span {
   display: block;
-  color: #38cfff;
+  color: #36c9ff;
 }
 
 .right-panel {
