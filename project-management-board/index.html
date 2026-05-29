@@ -13,69 +13,117 @@
 <body>
   <div class="app">
 
-    <aside class="sidebar">
-      <h1>Project Board</h1>
-
-      <p>
-        Create, organise, and track tasks across each project stage.
-      </p>
-
-      <div class="sidebar-card">
-        <p>Total Tasks</p>
-        <strong id="totalTasks">0</strong>
+    <header class="top-nav">
+      <div class="brand">
+        <span class="menu-icon">☰</span>
+        <span class="logo-icon">▮▮▮</span>
+        <h1>Project Board</h1>
       </div>
-    </aside>
 
-    <main class="main">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">Workflow</p>
-          <h2>Project Management Board</h2>
-          <p class="subtitle">
-            Drag tasks between columns to update progress.
-          </p>
-        </div>
+      <div class="top-actions">
+        <input type="text" placeholder="Search tasks..." />
+        <div class="avatar">KT</div>
+        <span>Kaulgred Taitua</span>
+      </div>
+    </header>
 
-        <button id="addTaskBtn" class="add-btn">+ New Task</button>
-      </header>
+    <div class="layout">
 
-      <section class="board">
-
-        <div class="column" data-status="todo">
-          <div class="column-header">
-            <h3>To Do</h3>
-            <span class="count">0</span>
+      <aside class="sidebar">
+        <div class="project-info">
+          <div class="project-icon">📋</div>
+          <div>
+            <h2>Project Management</h2>
+            <p>Interactive Web App</p>
           </div>
-          <div class="task-list"></div>
         </div>
 
-        <div class="column" data-status="doing">
-          <div class="column-header">
-            <h3>Doing</h3>
-            <span class="count">0</span>
+        <nav class="side-menu">
+          <a class="active" href="#">▮ Board</a>
+          <a href="#">□ Calendar</a>
+          <a href="#">◇ Activity</a>
+          <a href="#">◎ Members</a>
+          <a href="#">⚙ Settings</a>
+        </nav>
+
+        <div class="progress-box">
+          <p>Project Progress</p>
+          <strong>0 / 0 tasks completed</strong>
+          <div class="progress-bar">
+            <span></span>
           </div>
-          <div class="task-list"></div>
+          <small>0%</small>
         </div>
+      </aside>
 
-        <div class="column" data-status="review">
-          <div class="column-header">
-            <h3>To Be Reviewed</h3>
-            <span class="count">0</span>
+      <main class="main">
+        <section class="board-header">
+          <div>
+            <h2>Project Management Board</h2>
+            <p>Plan, organise and track tasks across project workflow stages.</p>
           </div>
-          <div class="task-list"></div>
-        </div>
 
-        <div class="column" data-status="done">
-          <div class="column-header">
-            <h3>Done</h3>
-            <span class="count">0</span>
-          </div>
-          <div class="task-list"></div>
-        </div>
+          <button id="addTaskBtn">+ New Task</button>
+        </section>
 
-      </section>
-    </main>
+        <section class="content-grid">
 
+          <section class="board">
+            <div class="column" data-status="todo">
+              <div class="column-header">
+                <h3>To Do</h3>
+                <span class="count">0</span>
+              </div>
+              <div class="task-list"></div>
+              <button class="small-add">+ Add another task</button>
+            </div>
+
+            <div class="column" data-status="doing">
+              <div class="column-header">
+                <h3>Doing</h3>
+                <span class="count">0</span>
+              </div>
+              <div class="task-list"></div>
+              <button class="small-add">+ Add another task</button>
+            </div>
+
+            <div class="column" data-status="review">
+              <div class="column-header">
+                <h3>To Be Reviewed</h3>
+                <span class="count">0</span>
+              </div>
+              <div class="task-list"></div>
+              <button class="small-add">+ Add another task</button>
+            </div>
+
+            <div class="column" data-status="done">
+              <div class="column-header">
+                <h3>Done</h3>
+                <span class="count">0</span>
+              </div>
+              <div class="task-list"></div>
+              <button class="small-add">+ Add another task</button>
+            </div>
+          </section>
+
+          <aside class="activity-panel">
+            <div class="activity-header">
+              <h3>Recent Activity</h3>
+              <button>All⌄</button>
+            </div>
+
+            <div class="activity-list" id="activityList">
+              <div class="activity-item">
+                <span class="activity-icon">✓</span>
+                <p>Board loaded and ready to use.</p>
+              </div>
+            </div>
+          </aside>
+
+        </section>
+      </main>
+
+    </div>
   </div>
 </body>
 </html>
