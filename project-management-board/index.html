@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Project Management Board</title>
-
+  <title>Project Board</title>
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/app.js" defer></script>
 </head>
@@ -13,97 +11,188 @@
 <body>
   <div class="app">
 
-    <header class="top-nav">
+    <header class="topbar">
       <div class="brand">
-        <span class="menu-icon">☰</span>
-        <span class="logo-icon">▮▮▮</span>
+        <span class="hamburger">☰</span>
+        <span class="logo">▮▮▮</span>
         <h1>Project Board</h1>
       </div>
 
       <div class="top-actions">
-        <input type="text" placeholder="Search tasks..." />
-        <div class="avatar">KT</div>
-        <span>Kaulgred Taitua</span>
+        <div class="search-box">
+          <input type="text" placeholder="Search tasks..." />
+          <span>⌕</span>
+        </div>
+        <span class="sun">☼</span>
+        <span class="avatar">KT</span>
+        <span class="username">Kaulgred Taitua⌄</span>
       </div>
     </header>
 
-    <div class="layout">
+    <div class="workspace">
 
       <aside class="sidebar">
-        <div class="project-info">
-          <div class="project-icon">📋</div>
+        <div class="project-block">
+          <div class="project-icon">▣</div>
           <div>
             <h2>Project Management</h2>
             <p>Interactive Web App</p>
           </div>
         </div>
 
-        <nav class="side-menu">
+        <nav class="menu">
           <a class="active" href="#">▮ Board</a>
-          <a href="#">□ Calendar</a>
+          <a href="#">▣ Calendar</a>
           <a href="#">◇ Activity</a>
-          <a href="#">◎ Members</a>
+          <a href="#">♙ Members</a>
           <a href="#">⚙ Settings</a>
         </nav>
 
-        <div class="progress-box">
-          <p>Project Progress</p>
-          <strong>0 / 0 tasks completed</strong>
-          <div class="progress-bar">
-            <span></span>
+        <div class="progress">
+          <p>PROJECT PROGRESS</p>
+          <span>10 / 16 tasks completed</span>
+
+          <div class="progress-line">
+            <div></div>
           </div>
-          <small>0%</small>
+
+          <strong>62%</strong>
         </div>
       </aside>
 
       <main class="main">
-        <section class="board-header">
+
+        <section class="main-header">
           <div>
             <h2>Project Management Board</h2>
             <p>Plan, organise and track tasks across project workflow stages.</p>
           </div>
 
-          <button id="addTaskBtn">+ New Task</button>
+          <button id="addTaskBtn">＋ New Task</button>
         </section>
 
-        <section class="content-grid">
+        <section class="dashboard">
 
           <section class="board">
-            <div class="column" data-status="todo">
+
+            <div class="column">
+              <div class="column-top grey"></div>
               <div class="column-header">
-                <h3>To Do</h3>
-                <span class="count">0</span>
+                <h3>TO DO</h3>
+                <span>4</span>
               </div>
-              <div class="task-list"></div>
-              <button class="small-add">+ Add another task</button>
+
+              <div class="task-card">
+                <h4>Research Cybersecurity Breach Case Studies</h4>
+                <span class="tag purple">Research</span>
+                <div class="task-bottom"><small>▧ 18 Feb 2026</small><b>KT</b></div>
+              </div>
+
+              <div class="task-card">
+                <h4>Review Privacy Act 2020 Requirements</h4>
+                <span class="tag purple">Research</span>
+                <div class="task-bottom"><small>▧ 16 Feb 2026</small><b>SM</b></div>
+              </div>
+
+              <div class="task-card">
+                <h4>Gather References for Report</h4>
+                <span class="tag purple">Research</span>
+                <div class="task-bottom"><small>▧ 17 Feb 2026</small><b>KT</b></div>
+              </div>
+
+              <div class="task-card">
+                <h4>Create Presentation Outline</h4>
+                <span class="tag blue">Planning</span>
+                <div class="task-bottom"><small>▧ 19 Feb 2026</small><b>SM</b></div>
+              </div>
+
+              <button class="add-small">＋ Add another task</button>
             </div>
 
-            <div class="column" data-status="doing">
+            <div class="column">
+              <div class="column-top yellow"></div>
               <div class="column-header">
-                <h3>Doing</h3>
-                <span class="count">0</span>
+                <h3>DOING</h3>
+                <span>3</span>
               </div>
-              <div class="task-list"></div>
-              <button class="small-add">+ Add another task</button>
+
+              <div class="task-card">
+                <h4>Write Introduction Section</h4>
+                <span class="tag orange">Writing</span>
+                <div class="task-bottom"><small>▧ 15 Feb 2026</small><b>KT</b></div>
+              </div>
+
+              <div class="task-card">
+                <h4>Draft Executive Summary</h4>
+                <span class="tag orange">Writing</span>
+                <div class="task-bottom"><small>▧ 15 Feb 2026</small><b>KT</b></div>
+              </div>
+
+              <div class="task-card">
+                <h4>Write Activities Following a Breach</h4>
+                <span class="tag orange">Writing</span>
+                <div class="task-bottom"><small>▧ 16 Feb 2026</small><b>SM</b></div>
+              </div>
+
+              <button class="add-small">＋ Add another task</button>
             </div>
 
-            <div class="column" data-status="review">
+            <div class="column">
+              <div class="column-top violet"></div>
               <div class="column-header">
-                <h3>To Be Reviewed</h3>
-                <span class="count">0</span>
+                <h3>TO BE REVIEWED</h3>
+                <span>2</span>
               </div>
-              <div class="task-list"></div>
-              <button class="small-add">+ Add another task</button>
+
+              <div class="task-card">
+                <h4>Review Legal and Notification Obligations Section</h4>
+                <span class="tag purple">Review</span>
+                <div class="task-bottom"><small>▧ 16 Feb 2026</small><b>SM</b></div>
+              </div>
+
+              <div class="task-card">
+                <h4>Check Recovery of Systems and Data Section</h4>
+                <span class="tag purple">Review</span>
+                <div class="task-bottom"><small>▧ 16 Feb 2026</small><b>KT</b></div>
+              </div>
+
+              <button class="add-small">＋ Add another task</button>
             </div>
 
-            <div class="column" data-status="done">
+            <div class="column">
+              <div class="column-top green"></div>
               <div class="column-header">
-                <h3>Done</h3>
-                <span class="count">0</span>
+                <h3>DONE</h3>
+                <span>4</span>
               </div>
-              <div class="task-list"></div>
-              <button class="small-add">+ Add another task</button>
+
+              <div class="task-card done">
+                <h4>Create Table of Contents</h4>
+                <span class="tag complete">Completed</span>
+                <div class="task-bottom"><small>▧ 2 Feb 2026</small><b>KT</b></div>
+              </div>
+
+              <div class="task-card done">
+                <h4>Set Up OneDrive Project Folder</h4>
+                <span class="tag complete">Completed</span>
+                <div class="task-bottom"><small>▧ 10 Feb 2026</small><b>KT</b></div>
+              </div>
+
+              <div class="task-card done">
+                <h4>Initial Group Meeting and Planning</h4>
+                <span class="tag complete">Completed</span>
+                <div class="task-bottom"><small>▧ 9 Feb 2026</small><b>SM</b></div>
+              </div>
+
+              <div class="task-card done">
+                <h4>Allocate Tasks in Trello</h4>
+                <span class="tag complete">Completed</span>
+                <div class="task-bottom"><small>▧ 9 Feb 2026</small><b>KT</b></div>
+              </div>
+
+              <button class="add-small">＋ Add another task</button>
             </div>
+
           </section>
 
           <aside class="activity-panel">
@@ -112,17 +201,21 @@
               <button>All⌄</button>
             </div>
 
-            <div class="activity-list" id="activityList">
-              <div class="activity-item">
-                <span class="activity-icon">✓</span>
-                <p>Board loaded and ready to use.</p>
-              </div>
-            </div>
+            <div class="activity-item"><span class="activity-icon green-bg">✓</span><p>Moved <strong>“Executive Summary”</strong> to <em>Done</em><br><small>Today, 11:24 AM</small></p></div>
+            <div class="activity-item"><span class="activity-icon orange-bg">→</span><p>Moved <strong>“Write Introduction Section”</strong> to <em>Doing</em><br><small>Today, 11:20 AM</small></p></div>
+            <div class="activity-item"><span class="activity-icon purple-bg">＋</span><p>Created task <strong>“Research Privacy Act 2020 Requirements”</strong><br><small>Today, 11:15 AM</small></p></div>
+            <div class="activity-item"><span class="activity-icon blue-bg">✎</span><p>Updated task <strong>“Write Activities Following a Breach”</strong><br><small>Today, 10:58 AM</small></p></div>
+            <div class="activity-item"><span class="activity-icon green-bg">✓</span><p>Moved <strong>“Create Table of Contents”</strong> to <em>Done</em><br><small>Today, 10:30 AM</small></p></div>
+            <div class="activity-item"><span class="activity-icon red-bg">🗑</span><p>Deleted task <strong>“Old Draft Section”</strong><br><small>Today, 10:12 AM</small></p></div>
           </aside>
 
         </section>
-      </main>
 
+        <footer>
+          Mini Project Management Board • Built with HTML, CSS & JavaScript • Data saved locally in your browser ☁
+        </footer>
+
+      </main>
     </div>
   </div>
 </body>
