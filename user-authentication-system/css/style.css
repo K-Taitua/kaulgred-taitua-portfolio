@@ -34,10 +34,17 @@ body {
   height: 100%;
   background: #061b3a;
   color: white;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
 }
 
 .lock-image {
-    width: 150px;
+  width: 110px;
+  height: auto;
+  margin-top: 55px;
 }
 
 .right-panel {
