@@ -245,3 +245,7 @@ html,body{
 }
 
 .card.dragging{opacity:.5}
+
+.board{
+  justify-content:center;
+}
