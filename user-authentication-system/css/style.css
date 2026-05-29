@@ -36,6 +36,10 @@ body {
   color: white;
 }
 
+.lock-image {
+    width: 150px;
+}
+
 .right-panel {
   width: 60%;
   height: 100%;
