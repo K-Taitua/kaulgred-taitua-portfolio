@@ -47,6 +47,21 @@ body {
   margin-bottom: 25px;
 }
 
+.brand-title {
+  color: white;
+  font-size: 30px;
+  font-weight: 900;
+  text-align: center;
+  line-height: 1.1;
+  margin-top: 20px;
+  max-width: 420px;
+}
+
+.brand-title span {
+  display: block;
+  color: #1f6fff;
+}
+
 .right-panel {
   width: 60%;
   height: 100%;
