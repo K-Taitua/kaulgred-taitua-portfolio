@@ -18,7 +18,7 @@ body {
 
 .auth-card {
   width: 460px;
-  height: 520px;
+  height: 100vh;
   display: flex;
   border: 2px solid red;
 }
