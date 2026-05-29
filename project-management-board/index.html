@@ -17,46 +17,63 @@
       <h1>Project Board</h1>
 
       <p>
-        Interactive task management board for planning, tracking,
-        and completing project work.
+        Create, organise, and track tasks across each project stage.
       </p>
+
+      <div class="sidebar-card">
+        <p>Total Tasks</p>
+        <strong id="totalTasks">0</strong>
+      </div>
     </aside>
 
-    <main class="board-area">
-      <header class="board-header">
+    <main class="main">
+      <header class="topbar">
         <div>
           <p class="eyebrow">Workflow</p>
           <h2>Project Management Board</h2>
           <p class="subtitle">
-            Create, organise, and move tasks through each project stage.
+            Drag tasks between columns to update progress.
           </p>
         </div>
 
-        <button class="add-task-btn">+ New Task</button>
+        <button id="addTaskBtn" class="add-btn">+ New Task</button>
       </header>
 
       <section class="board">
-        <div class="column">
-          <h3>To Do</h3>
+
+        <div class="column" data-status="todo">
+          <div class="column-header">
+            <h3>To Do</h3>
+            <span class="count">0</span>
+          </div>
           <div class="task-list"></div>
         </div>
 
-        <div class="column">
-          <h3>Doing</h3>
+        <div class="column" data-status="doing">
+          <div class="column-header">
+            <h3>Doing</h3>
+            <span class="count">0</span>
+          </div>
           <div class="task-list"></div>
         </div>
 
-        <div class="column">
-          <h3>To Be Reviewed</h3>
+        <div class="column" data-status="review">
+          <div class="column-header">
+            <h3>To Be Reviewed</h3>
+            <span class="count">0</span>
+          </div>
           <div class="task-list"></div>
         </div>
 
-        <div class="column">
-          <h3>Done</h3>
+        <div class="column" data-status="done">
+          <div class="column-header">
+            <h3>Done</h3>
+            <span class="count">0</span>
+          </div>
           <div class="task-list"></div>
         </div>
+
       </section>
-
     </main>
 
   </div>
