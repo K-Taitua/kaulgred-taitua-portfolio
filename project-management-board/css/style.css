@@ -147,8 +147,8 @@ html,body{
 .board::-webkit-scrollbar-thumb{background:rgba(255,255,255,.55);border-radius:999px}
 
 .list{
-  width:190px;
-  min-width:190px;
+  width:205px;
+  min-width:205px;
   max-height:100%;
   background:#ebedf0;
   border-radius:7px;
@@ -194,7 +194,7 @@ html,body{
 }
 
 .card p{
-  font-size:11px;
+  font-size:12px;
   line-height:1.25;
   margin-bottom:7px;
 }
