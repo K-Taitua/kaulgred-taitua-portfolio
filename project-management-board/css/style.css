@@ -24,46 +24,46 @@ body{
 /* TOP BAR */
 
 .topbar{
-  height:58px;
+  height:50px;
   background:#40586d;
   color:white;
   display:flex;
   align-items:center;
-  gap:18px;
-  padding:0 18px;
+  gap:16px;
+  padding:0 16px;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:12px;
-  min-width:260px;
+  gap:10px;
+  min-width:250px;
 }
 
 .brand h1{
-  font-size:18px;
+  font-size:17px;
 }
 
 .grid-icon{
-  font-size:22px;
+  font-size:18px;
 }
 
 .trello-logo{
   color:white;
-  font-size:22px;
+  font-size:19px;
   letter-spacing:2px;
 }
 
 .search{
   flex:1;
-  height:38px;
-  max-width:900px;
+  height:34px;
+  max-width:880px;
   background:#607487;
   border:1px solid rgba(255,255,255,0.25);
   border-radius:5px;
   color:white;
-  padding:0 14px;
-  font-size:16px;
+  padding:0 13px;
+  font-size:15px;
 }
 
 .search::placeholder{
@@ -74,7 +74,7 @@ body{
   background:#607487;
   color:white;
   border:none;
-  padding:10px 18px;
+  padding:8px 16px;
   border-radius:5px;
   font-weight:bold;
 }
@@ -83,44 +83,44 @@ body{
   margin-left:auto;
   display:flex;
   align-items:center;
-  gap:18px;
+  gap:16px;
 }
 
 .avatar{
-  width:32px;
-  height:32px;
+  width:30px;
+  height:30px;
   border-radius:50%;
   background:#5b3fc4;
   color:white;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:14px;
+  font-size:13px;
   font-weight:bold;
 }
 
 .avatar.small{
-  width:28px;
-  height:28px;
-  font-size:12px;
+  width:24px;
+  height:24px;
+  font-size:11px;
 }
 
 /* BOARD PAGE */
 
 .board-page{
-  height:calc(100vh - 58px);
+  height:calc(100vh - 50px);
   background:
     linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.18)),
     radial-gradient(circle at 30% 35%, #f7c948 0, transparent 18%),
     linear-gradient(135deg, #466b3f, #d3e0ea 45%, #243b53);
   background-size:cover;
-  padding:20px 14px 70px;
+  padding:16px 12px 58px;
   overflow:hidden;
   position:relative;
 }
 
 .board-title{
-  height:55px;
+  height:48px;
   color:white;
   display:flex;
   align-items:center;
@@ -129,33 +129,33 @@ body{
 }
 
 .board-title h2{
-  font-size:22px;
+  font-size:20px;
   text-shadow:0 2px 6px rgba(0,0,0,0.4);
 }
 
 .members{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:7px;
 }
 
 .members span{
-  width:32px;
-  height:32px;
+  width:30px;
+  height:30px;
   border-radius:50%;
   background:#2563eb;
   color:white;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:13px;
+  font-size:12px;
 }
 
 .members button{
   border:none;
   background:#e8eef6;
   color:#1e293b;
-  padding:10px 18px;
+  padding:9px 16px;
   border-radius:6px;
   font-weight:bold;
 }
@@ -163,32 +163,37 @@ body{
 /* BOARD */
 
 .board{
-  height:calc(100% - 55px);
+  height:calc(100% - 48px);
   display:flex;
-  gap:14px;
+  gap:12px;
   overflow-x:auto;
   overflow-y:hidden;
-  padding-bottom:14px;
+  padding-bottom:13px;
 }
 
 .board::-webkit-scrollbar{
-  height:12px;
+  height:11px;
+}
+
+.board::-webkit-scrollbar-track{
+  background:rgba(255,255,255,0.18);
+  border-radius:999px;
 }
 
 .board::-webkit-scrollbar-thumb{
-  background:rgba(255,255,255,0.45);
+  background:rgba(255,255,255,0.55);
   border-radius:999px;
 }
 
 .list{
-  width:305px;
-  min-width:305px;
+  width:270px;
+  min-width:270px;
   max-height:100%;
   background:#ebedf0;
-  border-radius:10px;
+  border-radius:9px;
   display:flex;
   flex-direction:column;
-  padding:12px 10px;
+  padding:10px 9px;
   box-shadow:0 4px 12px rgba(0,0,0,0.18);
 }
 
@@ -196,11 +201,11 @@ body{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 4px 10px;
+  padding:0 4px 9px;
 }
 
 .list-header h3{
-  font-size:17px;
+  font-size:16px;
   color:#2f3542;
 }
 
@@ -225,9 +230,9 @@ body{
 
 .card{
   background:white;
-  border-radius:8px;
-  padding:13px 14px;
-  margin-bottom:10px;
+  border-radius:7px;
+  padding:10px 11px;
+  margin-bottom:9px;
   box-shadow:0 1px 2px rgba(0,0,0,0.2);
   cursor:grab;
 }
@@ -241,9 +246,9 @@ body{
 }
 
 .card p{
-  font-size:16px;
+  font-size:14px;
   line-height:1.35;
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
 
 .card-footer{
@@ -251,15 +256,15 @@ body{
   align-items:center;
   justify-content:space-between;
   color:#4b5563;
-  font-size:14px;
+  font-size:13px;
 }
 
 .add-card{
   border:none;
   background:transparent;
   text-align:left;
-  padding:12px 8px 4px;
-  font-size:16px;
+  padding:10px 8px 3px;
+  font-size:15px;
   color:#4b5563;
   cursor:pointer;
 }
@@ -273,7 +278,7 @@ body{
 
 .bottom-nav{
   position:absolute;
-  bottom:16px;
+  bottom:14px;
   left:50%;
   transform:translateX(-50%);
   background:white;
@@ -287,9 +292,9 @@ body{
 .bottom-nav button{
   border:none;
   background:white;
-  padding:10px 16px;
+  padding:9px 15px;
   border-radius:8px;
-  font-size:15px;
+  font-size:14px;
 }
 
 .bottom-nav button.active{
@@ -311,12 +316,12 @@ body{
   }
 
   .board-title{
+    height:70px;
     align-items:flex-start;
-    height:75px;
     flex-direction:column;
   }
 
   .board{
-    height:calc(100% - 75px);
+    height:calc(100% - 70px);
   }
 }
