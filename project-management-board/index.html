@@ -1,1 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>Project Management Board</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/app.js" defer></script>
+</head>
+
+<body>
+  <div class="app">
+
+    <aside class="sidebar">
+      <h1>Project Board</h1>
+
+      <p>
+        Interactive task management board for planning, tracking,
+        and completing project work.
+      </p>
+    </aside>
+
+    <main class="board-area">
+      <header class="board-header">
+        <div>
+          <p class="eyebrow">Workflow</p>
+          <h2>Project Management Board</h2>
+          <p class="subtitle">
+            Create, organise, and move tasks through each project stage.
+          </p>
+        </div>
+
+        <button class="add-task-btn">+ New Task</button>
+      </header>
+
+      <section class="board">
+        <div class="column">
+          <h3>To Do</h3>
+          <div class="task-list"></div>
+        </div>
+
+        <div class="column">
+          <h3>Doing</h3>
+          <div class="task-list"></div>
+        </div>
+
+        <div class="column">
+          <h3>To Be Reviewed</h3>
+          <div class="task-list"></div>
+        </div>
+
+        <div class="column">
+          <h3>Done</h3>
+          <div class="task-list"></div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+</body>
+</html>
