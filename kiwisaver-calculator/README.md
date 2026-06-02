@@ -2,9 +2,9 @@
 
 ## Overview
 
-The KiwiSaver Lump Sum Investment Calculator is a Python programme used to calculate the projected growth of a one-off KiwiSaver contribution over a selected investment period.
+The KiwiSaver Investment Calculator is a Python program designed to estimate the growth of a one-off lump-sum contribution over a selected investment period.
 
-The programme applies compound interest at annual return rates of 4%, 6%, and 8%, allowing users to compare conservative, balanced, and growth fund options using the same deposit and timeframe.
+The program uses compound interest calculations with annual return rates of 4%, 6%, and 8% to project potential investment growth.
 
 ## Features
 
