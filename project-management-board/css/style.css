@@ -31,11 +31,7 @@ body {
   border-bottom: 1px solid #1e3a5f;
 }
 
-.title-area {
-  display: contents;
-}
-
-.title-area h1 {
+.top-panel h1 {
   justify-self: start;
   font-size: 15px;
   font-weight: 800;
@@ -63,36 +59,9 @@ body {
   color: white;
 }
 
-.actions {
-  justify-self: end;
-  display: flex;
-  gap: 8px;
-}
-
 button {
   font-family: inherit;
   cursor: pointer;
-}
-
-.primary-btn,
-.outline-btn {
-  height: 32px;
-  padding: 0 14px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.primary-btn {
-  border: none;
-  background: #2563eb;
-  color: white;
-}
-
-.outline-btn {
-  border: 1px solid #31577f;
-  background: #0b294b;
-  color: white;
 }
 
 /* BOARD AREA */
