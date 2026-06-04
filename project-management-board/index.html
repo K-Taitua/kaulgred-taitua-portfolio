@@ -3,157 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Task Management Board</title>
-
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/app.js" defer></script>
 </head>
 
 <body>
   <div class="app">
-
     <header class="top-panel">
       <h1>Task Management Board</h1>
 
       <div class="board-name-card">
         <span>Board Name:</span>
-        <strong>Portfolio Rebuild</strong>
-        <button class="edit-btn">✎</button>
+        <strong id="boardName">My Project Board</strong>
+        <button id="editBoardName" class="edit-btn">✎</button>
       </div>
 
       <div></div>
     </header>
 
-    <main class="board">
-
-      <section class="column">
-        <div class="column-header">
-          <h2>Backlog <span class="count">(3)</span></h2>
-          <div class="column-actions">
-            <button class="edit-btn">✎</button>
-            <button class="delete-btn">🗑</button>
-          </div>
-        </div>
-
-        <div class="cards">
-          <article class="card" draggable="true">
-            <p>Research animation libraries</p>
-            <span class="tag">Low Priority</span>
-          </article>
-
-          <article class="card" draggable="true">
-            <p>Create initial wireframes</p>
-            <span class="tag">Medium Priority</span>
-          </article>
-
-          <article class="card" draggable="true">
-            <p>Collect content and assets</p>
-            <span class="tag">Low Priority</span>
-          </article>
-        </div>
-
-        <button class="add-card">+ Add Card</button>
-      </section>
-
-      <section class="column">
-        <div class="column-header">
-          <h2>To Do <span class="count">(2)</span></h2>
-          <div class="column-actions">
-            <button class="edit-btn">✎</button>
-            <button class="delete-btn">🗑</button>
-          </div>
-        </div>
-
-        <div class="cards">
-          <article class="card" draggable="true">
-            <p>Build HTML structure</p>
-            <span class="tag">High Priority</span>
-          </article>
-
-          <article class="card" draggable="true">
-            <p>Style the board layout</p>
-            <span class="tag">Medium Priority</span>
-          </article>
-        </div>
-
-        <button class="add-card">+ Add Card</button>
-      </section>
-
-      <section class="column">
-        <div class="column-header">
-          <h2>In Progress <span class="count">(2)</span></h2>
-          <div class="column-actions">
-            <button class="edit-btn">✎</button>
-            <button class="delete-btn">🗑</button>
-          </div>
-        </div>
-
-        <div class="cards">
-          <article class="card" draggable="true">
-            <p>Implement drag and drop</p>
-            <span class="tag">High Priority</span>
-          </article>
-
-          <article class="card" draggable="true">
-            <p>Save board using localStorage</p>
-            <span class="tag">Medium Priority</span>
-          </article>
-        </div>
-
-        <button class="add-card">+ Add Card</button>
-      </section>
-
-      <section class="column">
-        <div class="column-header">
-          <h2>Review <span class="count">(1)</span></h2>
-          <div class="column-actions">
-            <button class="edit-btn">✎</button>
-            <button class="delete-btn">🗑</button>
-          </div>
-        </div>
-
-        <div class="cards">
-          <article class="card" draggable="true">
-            <p>Check responsiveness on all devices</p>
-            <span class="tag">Low Priority</span>
-          </article>
-        </div>
-
-        <button class="add-card">+ Add Card</button>
-      </section>
-
-      <section class="column">
-        <div class="column-header">
-          <h2>Done <span class="count">(3)</span></h2>
-          <div class="column-actions">
-            <button class="edit-btn">✎</button>
-            <button class="delete-btn">🗑</button>
-          </div>
-        </div>
-
-        <div class="cards">
-          <article class="card" draggable="true">
-            <p>Setup project repository</p>
-            <span class="tag">Complete</span>
-          </article>
-
-          <article class="card" draggable="true">
-            <p>Create colour palette</p>
-            <span class="tag">Complete</span>
-          </article>
-
-          <article class="card" draggable="true">
-            <p>Link HTML, CSS and JavaScript</p>
-            <span class="tag">Complete</span>
-          </article>
-        </div>
-
-        <button class="add-card">+ Add Card</button>
-      </section>
-
-    </main>
-
+    <main id="board" class="board"></main>
   </div>
 </body>
 </html>
