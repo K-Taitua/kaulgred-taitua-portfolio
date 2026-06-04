@@ -10,7 +10,7 @@ body {
   height: 100%;
   overflow: hidden;
   font-family: Arial, sans-serif;
-  background: #edf4fb;
+  background: #f4f8ff;
   color: #071b45;
 }
 
@@ -18,14 +18,15 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  background: #f4f8ff;
 }
 
+/* TOP SECTION */
 .top-panel {
-  height: 54px;
-  background: #40586d;
-  color: white;
-  padding: 0 14px;
+  height: 110px;
+  background: #ffffff;
+  border-bottom: 1px solid #dce8f8;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,38 +34,40 @@ body {
 
 .title-area {
   display: flex;
-  align-items: center;
-  gap: 18px;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .title-area h1 {
-  font-size: 16px;
+  font-size: 26px;
   font-weight: 800;
+  color: #071b45;
 }
 
 .board-name-card {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 6px;
-  padding: 0 10px;
+  width: 360px;
+  height: 34px;
+  background: #f8fbff;
+  border: 1px solid #dce8f8;
+  border-radius: 8px;
+  padding: 0 12px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .board-name-card span {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
 }
 
 .board-name-card strong {
-  font-size: 13px;
+  font-size: 17px;
 }
 
 .actions {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
 
 button {
@@ -74,47 +77,47 @@ button {
 
 .primary-btn,
 .outline-btn {
-  height: 32px;
-  padding: 0 14px;
-  border-radius: 6px;
-  font-size: 12px;
+  height: 38px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 800;
 }
 
 .primary-btn {
   border: none;
-  background: #2563eb;
+  background: #135ff2;
   color: white;
 }
 
 .outline-btn {
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.12);
-  color: white;
+  border: 1px solid #135ff2;
+  background: white;
+  color: #135ff2;
 }
 
+/* BOARD AREA */
 .board {
   flex: 1;
   min-height: 0;
-  padding: 12px;
+  padding: 14px 20px 18px;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   overflow: hidden;
-  background:
-    linear-gradient(rgba(255,255,255,.10),rgba(255,255,255,.10)),
-    linear-gradient(135deg,#5e7768,#d7e3ec 45%,#243b53);
+  background: #eaf2fb;
 }
 
 .column {
-  width: 235px;
+  width: 245px;
   height: 100%;
-  background: #ebedf0;
-  border-radius: 8px;
+  background: #f1f4f8;
+  border: 1px solid #dce8f8;
+  border-radius: 9px;
   padding: 8px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 12px rgba(0,0,0,.16);
+  overflow: hidden;
 }
 
 .column-header {
@@ -125,8 +128,8 @@ button {
 }
 
 .column-header h2 {
-  font-size: 14px;
-  color: #172033;
+  font-size: 15px;
+  color: #071b45;
 }
 
 .edit-btn,
@@ -138,11 +141,12 @@ button {
 }
 
 .edit-btn {
-  color: #2563eb;
+  color: #135ff2;
 }
 
+/* hide ugly red delete icons for now */
 .delete-btn {
-  color: #ef4444;
+  display: none;
 }
 
 .count {
@@ -154,6 +158,7 @@ button {
   font-size: 13px;
 }
 
+/* CARD SCROLL AREA */
 .cards {
   flex: 1;
   min-height: 0;
@@ -166,7 +171,7 @@ button {
 }
 
 .cards::-webkit-scrollbar-thumb {
-  background: #c4c9d1;
+  background: #b9c9dd;
   border-radius: 999px;
 }
 
@@ -175,7 +180,7 @@ button {
   border-radius: 7px;
   padding: 10px;
   margin-bottom: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,.22);
+  box-shadow: 0 1px 4px rgba(7, 27, 69, 0.15);
   cursor: grab;
 }
 
