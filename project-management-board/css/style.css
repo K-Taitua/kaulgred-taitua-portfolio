@@ -118,10 +118,9 @@ button {
 }
 
 .column-header {
-  display: grid;
-  grid-template-columns: 1fr auto auto auto;
+  display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: space-between;
   padding: 0 4px 8px;
 }
 
@@ -131,8 +130,15 @@ button {
 }
 
 .count {
-  font-size: 12px;
-  color: #4b5563;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.column-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
 }
 
 .edit-btn,
