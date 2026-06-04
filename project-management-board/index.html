@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Management Board</title>
+
+  <title>Task Management Board</title>
+
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/app.js" defer></script>
 </head>
@@ -11,224 +13,162 @@
 <body>
   <div class="app">
 
-    <header class="topbar">
-      <div class="brand">
-        <span class="grid-icon">▦</span>
-        <span class="trello-logo">▮▮</span>
-        <h1>Project Board</h1>
+    <header class="top-panel">
+      <div class="title-area">
+        <h1>Task Management Board</h1>
+
+        <div class="board-name-card">
+          <span>Board Name:</span>
+          <strong>Portfolio Rebuild</strong>
+          <button class="edit-btn">✎</button>
+        </div>
       </div>
 
-      <input class="search" type="text" placeholder="Search" />
-
-      <button class="create-btn">Create</button>
-
-      <div class="user-actions">
-        <span>🔔</span>
-        <span>?</span>
-        <span class="avatar">K</span>
+      <div class="actions">
+        <button class="outline-btn">+ Add Column</button>
+        <button class="primary-btn">+ New Card</button>
       </div>
     </header>
 
-    <main class="board-page">
+    <main class="board">
 
-      <section class="board-title">
-        <h2>Project Management Board</h2>
-
-        <div class="members">
-          <span>K</span>
-          <span>S</span>
-          <span>MH</span>
-          <button>Share</button>
+      <section class="column">
+        <div class="column-header">
+          <h2>Backlog</h2>
+          <div>
+            <button class="edit-btn">✎</button>
+            <button class="delete-btn">🗑</button>
+          </div>
         </div>
+
+        <span class="count">3</span>
+
+        <div class="cards">
+          <article class="card" draggable="true">
+            <p>Research animation libraries</p>
+            <span class="tag low">Low Priority</span>
+          </article>
+
+          <article class="card" draggable="true">
+            <p>Create initial wireframes</p>
+            <span class="tag medium">Medium Priority</span>
+          </article>
+
+          <article class="card" draggable="true">
+            <p>Collect content and assets</p>
+            <span class="tag low">Low Priority</span>
+          </article>
+        </div>
+
+        <button class="add-card">+ Add Card</button>
       </section>
 
-      <section class="board">
-
-        <div class="list">
-          <div class="list-header">
-            <h3>Admin</h3>
-            <span>4</span>
+      <section class="column">
+        <div class="column-header">
+          <h2>To Do</h2>
+          <div>
+            <button class="edit-btn">✎</button>
+            <button class="delete-btn">🗑</button>
           </div>
-
-          <div class="cards">
-            <article class="card" draggable="true">
-              <p>Research Cybersecurity Breach Case Studies</p>
-              <div class="card-footer">
-                <span>🔗 1</span>
-                <span class="avatar small">K</span>
-              </div>
-            </article>
-
-            <article class="card" draggable="true">
-              <p>Review Privacy Act 2020 Requirements</p>
-              <div class="card-footer">
-                <span>🔗 1</span>
-                <span class="avatar small">K</span>
-              </div>
-            </article>
-
-            <article class="card" draggable="true">
-              <p>Gather References for Report</p>
-              <div class="card-footer">
-                <span>👁 🔗 1</span>
-                <span class="avatar small">K</span>
-              </div>
-            </article>
-
-            <article class="card" draggable="true">
-              <p>Set Up Project Folder</p>
-              <div class="card-footer">
-                <span>🔗 1</span>
-                <span class="avatar small">K</span>
-              </div>
-            </article>
-          </div>
-
-          <button class="add-card">+ Add a card</button>
         </div>
 
-        <div class="list">
-          <div class="list-header">
-            <h3>To Do</h3>
-            <span>2</span>
-          </div>
+        <span class="count">2</span>
 
-          <div class="cards">
-            <article class="card" draggable="true">
-              <p>Create Presentation Outline</p>
-              <div class="card-footer">
-                <span>High Priority</span>
-                <span class="avatar small">K</span>
-              </div>
-            </article>
+        <div class="cards">
+          <article class="card" draggable="true">
+            <p>Build HTML structure</p>
+            <span class="tag high">High Priority</span>
+          </article>
 
-            <article class="card" draggable="true">
-              <p>Prepare Report Structure</p>
-              <div class="card-footer">
-                <span>Medium Priority</span>
-                <span class="avatar small">K</span>
-              </div>
-            </article>
-          </div>
-
-          <button class="add-card">+ Add a card</button>
+          <article class="card" draggable="true">
+            <p>Style the board layout</p>
+            <span class="tag medium">Medium Priority</span>
+          </article>
         </div>
 
-        <div class="list">
-          <div class="list-header">
-            <h3>Doing</h3>
-            <span>3</span>
-          </div>
-
-          <div class="cards">
-            <article class="card" draggable="true">
-              <p>Write Introduction Section</p>
-              <div class="card-footer">
-                <span>Writing</span>
-                <span class="avatar small">K</span>
-              </div>
-            </article>
-
-            <article class="card" draggable="true">
-              <p>Draft Executive Summary</p>
-              <div class="card-footer">
-                <span>Writing</span>
-                <span class="avatar small">K</span>
-              </div>
-            </article>
-
-            <article class="card" draggable="true">
-              <p>Write Activities Following a Breach</p>
-              <div class="card-footer">
-                <span>Writing</span>
-                <span class="avatar small">K</span>
-              </div>
-            </article>
-          </div>
-
-          <button class="add-card">+ Add a card</button>
-        </div>
-
-        <div class="list">
-          <div class="list-header">
-            <h3>To Be Reviewed</h3>
-            <span>2</span>
-          </div>
-
-          <div class="cards">
-            <article class="card" draggable="true">
-              <p>Check Recovery of Systems and Data Section</p>
-              <div class="card-footer">
-                <span>Review</span>
-                <span class="avatar small">K</span>
-              </div>
-            </article>
-
-            <article class="card" draggable="true">
-              <p>Allocate Tasks in Trello</p>
-              <div class="card-footer">
-                <span>Complete</span>
-                <span class="avatar small">K</span>
-              </div>
-            </article>
-          </div>
-
-          <button class="add-card">+ Add a card</button>
-        </div>
-
-        <div class="list">
-          <div class="list-header">
-            <h3>Done</h3>
-            <span>4</span>
-          </div>
-
-          <div class="cards">
-            <article class="card" draggable="true">
-              <p>✅ Create Table of Contents</p>
-              <div class="card-footer">
-                <span>Complete</span>
-                <span class="avatar small">K</span>
-              </div>
-            </article>
-
-            <article class="card" draggable="true">
-              <p>✅ Review Legal and Notification Obligations</p>
-              <div class="card-footer">
-                <span>Review</span>
-                <span class="avatar small">K</span>
-              </div>
-            </article>
-
-            <article class="card" draggable="true">
-              <p>✅ Initial Group Meeting and Planning</p>
-              <div class="card-footer">
-                <span>Complete</span>
-                <span class="avatar small">K</span>
-              </div>
-            </article>
-
-            <article class="card" draggable="true">
-              <p>✅ Final Report Proof</p>
-              <div class="card-footer">
-                <span>Complete</span>
-                <span class="avatar small">K</span>
-              </div>
-            </article>
-          </div>
-
-          <button class="add-card">+ Add a card</button>
-        </div>
-
+        <button class="add-card">+ Add Card</button>
       </section>
 
-      <nav class="bottom-nav">
-        <button>Inbox</button>
-        <button>Planner</button>
-        <button class="active">Board</button>
-        <button>Switch boards</button>
-      </nav>
+      <section class="column">
+        <div class="column-header">
+          <h2>In Progress</h2>
+          <div>
+            <button class="edit-btn">✎</button>
+            <button class="delete-btn">🗑</button>
+          </div>
+        </div>
+
+        <span class="count">2</span>
+
+        <div class="cards">
+          <article class="card" draggable="true">
+            <p>Implement drag and drop</p>
+            <span class="tag high">High Priority</span>
+          </article>
+
+          <article class="card" draggable="true">
+            <p>Save board using localStorage</p>
+            <span class="tag medium">Medium Priority</span>
+          </article>
+        </div>
+
+        <button class="add-card">+ Add Card</button>
+      </section>
+
+      <section class="column">
+        <div class="column-header">
+          <h2>Review</h2>
+          <div>
+            <button class="edit-btn">✎</button>
+            <button class="delete-btn">🗑</button>
+          </div>
+        </div>
+
+        <span class="count">1</span>
+
+        <div class="cards">
+          <article class="card" draggable="true">
+            <p>Check responsiveness on all devices</p>
+            <span class="tag low">Low Priority</span>
+          </article>
+        </div>
+
+        <button class="add-card">+ Add Card</button>
+      </section>
+
+      <section class="column">
+        <div class="column-header">
+          <h2>Done</h2>
+          <div>
+            <button class="edit-btn">✎</button>
+            <button class="delete-btn">🗑</button>
+          </div>
+        </div>
+
+        <span class="count">3</span>
+
+        <div class="cards">
+          <article class="card" draggable="true">
+            <p>Setup project repository</p>
+            <span class="tag complete">Complete</span>
+          </article>
+
+          <article class="card" draggable="true">
+            <p>Create colour palette</p>
+            <span class="tag complete">Complete</span>
+          </article>
+
+          <article class="card" draggable="true">
+            <p>Link HTML, CSS and JavaScript</p>
+            <span class="tag complete">Complete</span>
+          </article>
+        </div>
+
+        <button class="add-card">+ Add Card</button>
+      </section>
 
     </main>
+
   </div>
 </body>
 </html>
